@@ -1,0 +1,26 @@
+---
+title: Evaluating grammatical error corrections
+description: This "competition" contains different evaluation metrics commonly used for GEC and allows users to score their systems with these metrics on a common dataset.
+has_registration: False
+html:
+    overview: foo.html
+    evaluation: foo.html
+    terms: foo.html
+    data: foo.html
+phases:
+    1:
+        phasenumber: 1
+        label: Main
+        start_date: 2016-11-02
+        reference_data: reference.zip
+        scoring_program: program.zip
+leaderboard:
+    leaderboards:
+        Results: &Results
+            label: Results
+            rank: 1
+    columns:
+        Score:
+            leaderboard: *Results
+            label: Score
+            rank: 1
