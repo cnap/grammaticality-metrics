@@ -19,8 +19,12 @@ from gleu import GLEU
 from m2scorer.m2scorer import load_annotation as load_m2_annotation
 from imeasure.ieval import IMeasure
 
+print('PATH:', sys.path)
+cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
+print('SCRIPT DIR:', cwd)
+print('CONTENTS SCRIPT DIR', os.listdir(cwd))
 
-skip = False
+skip = True
 # GLOBAL VARIABLES
 REF_NAMES = ['NUCLE', 'EXPFLUENCY', 'EXPMIN', 'TURKMIN', 'TURKFLUENCY']
 ## lambdas are stored in the order: lambda_rho, lambda_r
@@ -75,14 +79,15 @@ def call_lt(_sentences):
     sys.stderr.write('Running LanguageTool...\n')
     detokenizer = Detokenizer()
     sentences = [detokenizer.detokenize(sent) for sent in _sentences]
-
+    print('LT dir:', os.listdir(os.path.join(cwd, 'LanguageTool-3.5')))
     process = Popen(['java', '-Dfile.encoding=utf-8',
-                     '-jar', 'LanguageTool-3.5/languagetool-commandline.jar', '-d',
+                     '-jar', os.path.join(cwd, 'LanguageTool-3.5/languagetool-commandline.jar'), '-d',
                      'COMMA_PARENTHESIS_WHITESPACE,WHITESPACE_RULE,' +
                      'EN_UNPAIRED_BRACKETS,EN_QUOTES',
                      '--line-by-line', '-l', 'en-US', '-c', 'utf-8'],
                     stdin=PIPE, stdout=PIPE, stderr=PIPE)
     ret = process.communicate(input=('\n\n'.join(sentences)).encode('utf-8'))
+    print('LT out:', ret)
     counts = [0] * len(sentences)
     for l in ret[0].split('\n'):
         if 'Rule ID' in l:
@@ -123,6 +128,7 @@ if __name__ == '__main__':
     # call metrics and colect scores
     scores = []
     lt_score = call_lt(predictions)
+    print('Reference dir:', [o for o in os.walk(reference_dir)])
 
     for ref in use_refs:
         im = compute_im(os.path.join(reference_dir, ref + '.m2.ieval.xml'),
