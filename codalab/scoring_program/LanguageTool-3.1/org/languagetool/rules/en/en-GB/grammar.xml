@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/print.xsl" ?>
+<?xml-stylesheet type="text/css" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.css"
+title="Easy editing stylesheet" ?>
+<!--
+British English Grammar and Typo Rules for LanguageTool
+See tagset.txt for the meaning of the POS tags
+Copyright (C) 2012 Marcin Miłkowski (http://www.languagetool.org)
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
+USA
+-->
+<rules lang="en-GB" xsi:noNamespaceSchemaLocation="../../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<category name="American English phrases" type="locale-violation">
+		<rule id="ZIP_CODE_POSTCODE" name="zip code/postcode">
+			<pattern>
+				<token>zip</token>
+				<token>code</token>
+			</pattern>
+			<message>This expression is common for American English. Did you mean <suggestion>postcode</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="postcode">Please enter your <marker>zip code</marker>.</example>
+		</rule>
+		<rule id="APARTMENT-FLAT" name="apartment/flat">
+			<pattern>
+				<token>apartment</token>
+			</pattern>
+			<message>This word is common for American English. Did you mean <suggestion>flat</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="flat">I just bought an <marker>apartment</marker>?</example>
+		</rule>
+		<rule id="BAND-AID_PLASTER" name="band-aid/plaster">
+			<pattern>
+				<token>band-aid</token>
+			</pattern>
+			<message>This word is common for American English. Did you mean <suggestion>plaster</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="plaster">Where's the <marker>band-aid</marker>?</example>
+		</rule>
+		<rule id="GROUND_VS_MINCED" name="ground beef/minced beef">
+			<pattern>
+				<marker>
+					<token>ground</token>
+				</marker>
+				<token>beef</token>
+			</pattern>
+			<message>This word is common for American English. Did you mean <suggestion>minced</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="minced">Do vegetarians eat <marker>ground</marker> beef?</example>
+		</rule>
+		<rule id="FIRST_GROUND_FLOOR" name="first floor/ground floor">
+			<pattern>
+				<marker>
+					<token>first</token>
+				</marker>
+				<token>floor</token>
+			</pattern>
+			<message>This word is common for American English. Did you mean <suggestion>ground</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="ground">The room is on the <marker>first</marker> floor.</example>
+		</rule>
+		<rule id="VACUUM_CLEANER_HOOVER" name="vacuum cleaner/hoover">
+			<pattern>
+				<token>vacuum</token>
+				<token inflected="yes">cleaner</token>
+			</pattern>
+			<message>This expression is common for American English. Did you mean <suggestion>hoover</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="hoover">Buy me a <marker>vacuum cleaner</marker>.</example>
+			<example>All I need is a hoover.</example>
+		</rule>
+		<rule id="MOVIE_THEATER_CINEMA" name="movie theater/cinema">
+			<pattern>
+				<token>movie</token>
+				<token inflected="yes">theater</token>
+			</pattern>
+			<message>This expression is common for American English. Did you mean <suggestion>cinema</suggestion>?</message>
+			<url>http://www.learnenglish.de/mistakes/USvsBrEnglish.html</url>
+			<example correction="cinema">Let's go to a <marker>movie theater</marker>.</example>
+			<example>Edward Norton – not appearing in a cinema near you.</example>
+		</rule>		
+		<rule id="GOT_GOTTEN" name="gotten/got">
+			<pattern>
+				<marker>
+					<token>gotten</token>
+				</marker>
+				<token><exception>up</exception></token>
+			</pattern>
+			<message>In the UK, the word 'gotten' is usually no longer used. Did you mean <suggestion>got</suggestion>?</message>
+			<url>http://public.wsu.edu/~brians/errors/got.html</url>
+			<example>He's gotten up on the wrong side of bed.</example>
+			<example correction="got">He has <marker>gotten</marker> some food.</example>
+		</rule>
+        <rule id="GAS_PETROL" name="gas/petrol" default="off"> <!-- This rule needs more exceptions to be usable -->
+            <pattern>
+                <marker>
+                    <token>gas<exception scope="previous">natural</exception></token>
+                </marker>
+            </pattern>
+            <message>With the meaning of "gasoline", in British English is more common to use <suggestion>petrol</suggestion>.</message>
+            <example>Natural gas.</example>
+            <example correction="petrol">More <marker>gas</marker>.</example>
+        </rule>
+	</category>
+</rules>

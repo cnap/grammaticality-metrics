@@ -79,9 +79,9 @@ def call_lt(_sentences):
     sys.stderr.write('Running LanguageTool...\n')
     detokenizer = Detokenizer()
     sentences = [detokenizer.detokenize(sent) for sent in _sentences]
-    print('LT dir:', os.listdir(os.path.join(cwd, 'LanguageTool-3.5')))
+    print('Java info:', os.system('which java'), os.system('java -version'))
     process = Popen(['java', '-Dfile.encoding=utf-8',
-                     '-jar', os.path.join(cwd, 'LanguageTool-3.5/languagetool-commandline.jar'), '-d',
+                     '-jar', os.path.join(cwd, 'LanguageTool-3.1/languagetool-commandline.jar'), '-d',
                      'COMMA_PARENTHESIS_WHITESPACE,WHITESPACE_RULE,' +
                      'EN_UNPAIRED_BRACKETS,EN_QUOTES',
                      '--line-by-line', '-l', 'en-US', '-c', 'utf-8'],

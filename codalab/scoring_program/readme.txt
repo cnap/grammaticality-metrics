@@ -21,6 +21,8 @@ Please include the following citation if you use this toolkit.
   url       = {https://aclweb.org/anthology/D16-1228}
 }
 
+The code for executing this evaluation program is also available from our git repository: [https://github.com/cnap/grammaticality-metrics].
+
 ==
 
 Usage:
@@ -56,19 +58,23 @@ Reference sets:
 Contents:
 
 
-├── LanguageTool-3.5/		from https://languagetool.org/
-├── detokenize.py			from https://github.com/ufal/mtmonkey
-├── evaluate.py				evaluation script
-├── gleu.py					adapted from https://github.com/cnap/gec-ranking
-├── imeasure/				adapted from https://github.com/mfelice/imeasure
-├── m2scorer/				adapted from http://www.comp.nus.edu.sg/~nlp/conll14st.html
+├── LanguageTool-3.1/  from [https://languagetool.org/]
+├── detokenize.py      from [https://github.com/ufal/mtmonkey]
+├── evaluate.py        evaluation script
+├── gleu.py            adapted from https://github.com/cnap/gec-ranking]
+├── imeasure/          adapted from [https://github.com/mfelice/imeasure]
+├── m2scorer/          adapted from [http://www.comp.nus.edu.sg/~nlp/conll14st.html]
 ├── metadata
 └── readme.txt
 
 The scripts for calculating GLEU, I-measure, and M2 were modified to return sentence-level
 scores and so that they can be called by an external program.
-
-I-measure can take several minutes to run.
+At this date, Codalab does not support Java 8, so we are using the most recent version of
+LanguageTool that supports Java 7 (3.1).
+I-measure takes several minutes to run and exceeds the time limit imposed by CodaLab on
+scoring programs. Therefore, it is not enabled in the online CodaLab competition, but you
+can run it from the original repository [https://github.com/mfelice/imeasure] or our git
+repository [https://github.com/cnap/grammaticality-metrics].
 
 ==
 
@@ -77,7 +83,7 @@ Requirements:
  - python2.7
  - numpy
  - scipy
-
+ - Java 7+
 ==
 
 References

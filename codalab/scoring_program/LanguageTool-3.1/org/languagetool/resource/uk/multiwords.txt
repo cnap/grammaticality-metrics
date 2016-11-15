@@ -1,0 +1,82 @@
+# Ukrainian multiwords file used for chunking
+# FR  frazeologism
+#
+да Вінчі	noun:m:nv
+до мажор	noun:m:nv
+до минор	noun:m:nv
+н. е.	noun:abbr
+Пальма де Мальорка	noun:f:nv
+
+без перестанку	adv
+від і до	adv
+від темна до темна	adv
+де можна	adv
+де тільки можна	adv
+до упаду	adv
+до впаду	adv
+для годиться	adv
+з давніх-давен	adv
+за дякую	adv
+за спасибі	adv
+за прости Біг	adv
+задля годиться	adv
+значною мірою	adv
+на дурняк	adv
+на дурняка	adv
+на галай-балай	adv
+на біса	adv
+на фіг	adv:slang
+на фіга	adv:slang
+на ти	adv
+на ви	adv
+на Ви	adv
+на дому	adv:bad
+на виплат	adv
+на виплат	adv
+на всіх і на вся	adv
+належним чином	adv
+особливим чином	adv
+головним чином	adv
+сумнівним чином	adv
+таким чином	adv
+справедливості заради	adv
+об'єктивності заради	adv
+певною мірою	adv
+повною мірою	adv
+поміж люди	adv
+тією мірою	adv
+час від часу	adv
+з самого малку	adv
+з малого малку	adv
+від малку	adv
+
+згідно з	prep:rv_oru
+
+без сумніву	insert
+дивна річ	insert
+до речі	insert
+#за словами ...	insert
+зверніть увагу	insert
+інакше кажучи	insert
+крім того	insert
+між іншим	insert
+на щастя	insert
+на диво	insert
+на жаль	insert
+на сором	insert
+на мою думку	insert
+#на думку ...	insert
+майте на увазі	insert
+між нами кажучи	insert
+може бути	insert
+певна річ	insert
+правду кажучи	insert
+слава Богу	insert
+таким чином	insert
+, чого доброго	insert
+уяви собі	insert
+як на зло	insert
+як навмисне	insert
+як на біду	insert
+як кажуть	insert
+як відомо	insert
