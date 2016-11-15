@@ -1,0 +1,28 @@
+# @author Ruud Baars (info@taaltik.nl)
+#format:error=alternative|alternative
+#
+ipv=i.p.v.|in plaats van
+ofzo=of zo
+idd=inderdaad
+zn=zijn|z'n
+mn=mijn|m'n
+voorzover=voor zover
+ondermeer=onder meer
+ivm=i.v.m.|in verband met
+eenderde=een derde
+tweederde=twee derde
+tengevolge=ten gevolge
+cq=c.q.
+dmv=d.m.v.|door middel van
+oid=o.i.d.|of iets dergelijks
+ff=even
+maargoed=maar goed
+stofgezogen=gestofzuigd
+normaalgesproken=normaal gesproken
+doormiddel=door middel
+limoen amandelcake=limoen-amandelcake
+limoenamandelcake=limoen-amandelcake
+USA=VS|Verenigde Staten
+terzake=ter zake
+ouder kind relatie=ouder-kindrelatie
+ouder-kind relatie=ouder-kindrelatie

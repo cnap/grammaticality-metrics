@@ -1,0 +1,69 @@
+#word1	word2	match1	match2	context1	context2	[explanation1	explanation2]
+#do not forget to add tests to CatalanWrongWordInContextRuleTest.java
+# rendible/rentable
+(?i)rendibles?	(?i)rentables?	ndib	ntab	(?i)valors?|valu[oó]s.*|cars?|cara|cares|barat.*|terminis?|interès|interess.*|result.*|produ.*|pag.*|cobr.*|negoci.*|fira|empres.*|ven.*|compr.*|companyi.*|econòm.*|econom.*|treball.*|project.*|inver.*|conre.*|culti.*	d,6	que rendeix econòmicament	que es pot rentar
+# escortar/escoltar (cal ampliar-ho...)
+#(?i)escort.*	(?i)escolt.*	ort	olt	(?i)militars?|cavallers?|polici.*|guàrdi.*|vigil.*|enxamp.*|atrap.*|deté.*|deten.*|detin.*|presó|presoner.*|calabós|quarters?	(?i)notíci.+|atent.*|atenció|parl.*|veus?|ràdios?|concerts?|peça|peces|simfoni.*|cants?|cant[aàé].*|canç.+|telèfons?|telefòn.*|il·legal.*|convers.*|delict.*	acompanyar	aplicar l'orella
+# escorta (jugador de bàsquet)/escolta
+#venda/bena
+#infligir/infringir
+(?i)inflig.*	(?i)infring.*	li	rin	(?i)revés|revessos|mals?|dolors?|patiments?|sofriments?|càstigs?|tortur.*|pena|penes|agressi.*|col?ps?|derrot(a|es)|destross(a|es)|ferid(a|es)|cicatrius?	(?i)mult.+|norma|normes|lleis?|[Cc]onstituci.*|pactes?|regla|regles|normativ(a|es)|patents?	aplicar	transgredir
+#veta/beta
+(?i)veta|vetes	(?i)beta|betes	v	b	(?i)aigua|aigües|subterran.+|minerals?|roca|pedra|tir[aeio]|tir[aeiàé].*|segu.+|cosi.+|cosí.+|cus.*|roba	(?i)versi.+|partícul.+|molècul.+|lletr.*|gre[gc].*|física|alfab.+|desintegr.+|emissi.*|emet.*	cinta, filó	lletra grega
+#fressat/fresat
+(?i)fress[aeioà].*|fresse([mun])?	(?i)fres[aioà].*|frese([mun])?	ess	es	(?i)camí|camins|territoris?|valls?|recorreguts?|send.+|sorolls?|pista|pistes|molest.*|queix.|queix.[^l].*|asfalt.*|ruta|rutes|desvia.+|trams?|esquell.+	(?i)llevat|farina|peix|peixos|ous?|amfibis?	trepitjar, fer soroll	pondre, mesclar, tallar
+#adobar/abonar
+(?i)adob[aeàé].*	(?i)abon[aeàé].*	dob	bon	(?i)terra|terres|terrenys?|camps?|sembrats?|planta|plantes|cultius?|conre.+	premis?|sous?|metàl·lic	femar, assaonar	pagar, prendre un abonament
+#addicció/addició //ambigu: consum.+
+(?i)addicci(ó|ons)	(?i)addici(ó|ons)	icci	ici	(?i)estudis?|ionquis?|drog.+|depend.+|xocolat.+|taba[qc].*|heroïna|cocaïna|abst[ei]n.+|placebos?|potencials?|ps[íi][cq].*|fisio.*|malalt.*|ordinadors?|internet|joc|casinos?|jug.+|tel[èe].*|mòbils?|alcoh.+|medicaments?|pastill(a|es)|píndol(a|es)	(?i)result.*|factors?|sacaros.*|sucs?|mosto?s?|sucres?|ferment.*|subtracci.*|productes?|multiplic.*|divisi.*|aritmèt.+|operaci.+|nombres?|fórmul(a|es)|lògi[cq].+|colorants?|additius?|alimentaris?|aliments?|conservants?|oxidants?|reacci.+|supressi.+|quími.+|vitamin.*|mineral.*|molècul.*	dependència	suma
+#adició/addició
+(?i)adici(ó|ons)	(?i)addici(ó|ons)	adi	addi	(?i)herènci(a|es)	sucres?|subtracci.*|productes?|multiplic.*|divisi.*|aritmèt.+|operaci.+|nombres?|fórmul(a|es)|lògi[cq]|colorants?|conservants?|oxidants?|reacci.+|supressi.+|quími.+|vitamin.*|mineral.*|molècul.*	acceptar una herència	suma
+#bordar/brodar
+#(?i)bord.+	(?i)brod.+	bord	brod	(?i)gos|gossos|amena[cç].*|perills?|lladr.*|ensum.*|olor.*	màquin.+|detalls?|ornaments?|embelliments?|tela|teles|teixits?|penó|flors?|lli|fibr(a|es)|punts?|bastidors?|paraula|paraules|punta|tija|cadeneta|emblem(a|es)|símbols?|rob(a|es)|.*llits?|cobertors?|estovall(a|es)inicials?|sastre.*|fils?|barrets?|capells?|bufand(a|es)|corbat(a|es)|fald(a|es)|pantal.+|camis(a|es)|brus(a|es)|mocadors?|agull(a|es)|cot(ó|ons)|faix(a|es)|madeix(a|es)|cabdells?|troca|troques	lladrar	ornamentar un teixit
+#cataracta/cascada
+(?i)cataract.*	(?i)cascad.*	taract	scad	(?i)congènit.*|vista	(?i)aigua|aigües|caigud(a|es)|Niàgara|Iguaçú|Livingstone|muntany(a|es)|terr(a|es)|volc[àa].*|salts?|saltants?|sallents?	afecció ocular	salt d'aigua
+#cabal/caudal
+(?i)cabals?	caudals?	aba	auda	(?i)fluids?|inund.+|turbulents?|hídri.+|cascad(a|es)|caix(a|es)|rius?|rier.+|riuad.*|aigua|aigües|aflu.+|bass(a|es)|séqui(a|es)|aportaci.*|curs|cursos|estiatges?|valls?|fonts?|desguass.+|desembo.+|canals?|desnivells?|secad(a|es)|sequer(a|es)|pluja|pluges|pant(à|ans)|canalitz.+|crescu.*|embass.+|màxims?|mínims?|conca|conques|mitj(à|ans)|anuals?|mar|oceà|oceans|relatius?|variables?|mensuals?|ecològi[cq].*|públics? 	(?i)extrem.*|alet(a|es)|regi(ó|ons)|v[èe]rtebr.*|cervicals?|toràci.*|lumbars?|dorsals?|peduncles?|direcci.*	quantitat de fluid o de diners	relatiu a la cua
+#cabal/cabdal
+#(?i)cabals?	cabdals?	aba	abda	(?i)fluids?|inund.+|turbulents?|hídri.+|cascad(a|es)|caix(a|es)|rius?|rier.+|riuad.*|aigua|aigües|aflu.+|bass(a|es)|séqui(a|es)|curs|cursos|estiatges?|valls?|fonts?|desguass.+|desembo.+|canals?|desnivells?|secad(a|es)|sequer(a|es)|pluja|pluges|pant(à|ans)|canalitz.+|crescu.*|embass.+|màxims?|mínims?|conca|conques|mitj(à|ans)|anuals?|mar|oceà|oceans|relatius?|variables?|mensuals?|ecològi[cq].*|públics? 	(?i)fets?|factors?|fit(a|es)|importància|figur(a|es)|obr(a|es)|punts?	quantitat de fluid o de diners	principal, eminent
+#deport/esport AMPLIAR...
+(?i)esports?	deports?	esp	dep	(?i)camps?|futbol.*|afici.+|practi[cq].*|bàsquet|handbol|natació|olimp.+|jugador.*|compet.*	d,6	exercici, competició	recreació, esbarjo
+#caneló/canaló
+(?i)canel(ó|ons)	(?i)canal(ó|ons)	nel	nal	(?i)men[jg].*|plats?|primers?|segons?|cuin.*|past.*|farc[ie].*|rost[ie].*|carns?|trinx.*|capol.*|pic.*|piqu.*|prepar.*|estils?|rossini|recept.+|.*calf.*|forns?|microones|focs?	(?i)ràfecs?|teulad.+|aigua|aigües|pluja|pluges|carrers?	menjar	canal petita
+#ampolla/empolla
+(?i)ampoll(a|es)	(?i)empoll(a|es)	am	em	(?i)bufar|vi|vins|cava|caves|xampanys?|licors?|mistel.*|aiguardents?|cassall.*|anís|anissos|absent.*|rosolis?|ratafi.*|brandis?|conyacs?|brisa|brises|vodk.*|gintònics?|ginebr.*|aigua|aigües|tòni.+|be[vucg].*|serv[iíe].*|fanta|coca-cola|refresc.*|ferment.*|cerves.*|vidres?|ingredients?|macer.*|olis?|ricí	(?i)examen|matemàti.*|lleng.*|llibres?	botella	v. empollar
+#pal·li/palis
+(?i)pal·lis?	(?i)palis?	al·li	ali	(?i)sota|process(ó|ons)|.*bisbes?|autoritats?|santíssim|sagrats?|sacerdots?|custòdi.*|esglési.*|fest.*|sants?|imatges?|rom[àa].*|còrtexs?|cerebr.*|cervells?|túni(ca|ques)|mantells?|corpus	(?i)llengua|llengües|budis.+|sànscrit.*	dosser	llengua del budisme primitiu
+#néts/nets
+#(?i)(nét|nét(a|s|es))	(?i)(net|net(a|s|es))	nét	net	(?i)avis?|àvia|àvies	(?i)brut.*	fill del fill	sense taques	
+#llosa/lossa
+(?i)llos(a|es)	(?-i)lloss(a|es)	os	oss	.+	d,6	pedra plana	cullera grossa
+#óssa/ossa
+óss(a|es)	oss(a|es)	ó	o	.+	d,6	ós femella	ossada
+Óss(a|es)	Oss(a|es)	Ó	O	.+	d,6	ós femella	ossada
+#ós/os
+(?i)ós(sos)?	(?i)os(sos)?	ós	os	(?i)cavern(a|es)|bru|grizzly	(?i)molls?|medul·l(a|es)	animal	part de l'anatomia
+#tron/tro
+#(?i)tron	(?i)tro	ron	ro	(?i)absolutisme|restauració|diamantí|reis?|rein(a|es)|prínceps?|princes(a|es)|pretendents?|acced[eií].+|dinasti(a|es)|ascend[eií].+|succe[eiïí].+|puj[aoà].*|pug[éei].*|usurp.+|monar[cq].+|Carles|hereus?|herev(a|es)|Lluís|Alfons|Ferran|Espanya|França|emperadors?|successi.*|duc|morir|Aragó|Castella|fill|Enric|dinastia|asseure|pretendents?|Salomó|Barcelona|justícia|Nàpols|Àustria|aC|renunciar|espanyol|altar|Judà|sobirà|govern|néts?|accés|reialme|segles?|Berenguer|Navarra|Ramon|renúncia|títol|descendents?|reclamar|regents?|reials?|Anjou|abdi[cq].*|arxiducs?|ascensió|ceptre|lleis?|recuper.*|regnats?|visirs?|Borbó!Borbons|descendència|primogènit.*|tractats?|Henry|Orelans|Rússia|aliança|matrimoni|possessi.+|pretensi.+|Escòcia|Itàlia|Viena	(?i)llamps?|llampecs?|espetecs?|retruny.*|estrèpits?|eixordador.*|ensordidor.*|arbres?|fum|esclat.*|resson[aàeé].*|bramuls?|ploure|queia|superfície|espeteg.*|so|sons|sorolls?|tempest(a|es)|sentir|esclafits?|explosi.*|canons|canó|descàrrega|firmament|xàfecs?|roques|turons|valls?	seient; dignitat	fenomen acústic
+#delfí/dofí
+delf(í|ins)	dof(í|ins)	delf	dof	ducs?|comtes?|senyors?|Alvèrnia|Vienès|ducats?|comtats?|prínceps?|Borbó|borbons|trons?|Lluís|França|reis?|reialesa?|rein(a|es)|Antonieta|presidents?|hereus?|herev(a|es)|matrimonis?|prìnceps?|princesa|princeses|regnes?|consagr.+|coron.+|títols?|reg[ií].+|possessi.+|territoris?|arm[aà].+|setges?|mausoleus?|catedrals?|París|revolt(a|es)|presó|presons|Anglaterra|derrot[aeàé].+|drets?	.+	hereu	animal cetaci
+#infantesa/infantessa
+(?i)infantes(a|es)	(?i)infantess(a|es)	es	ess	.+	d,6	infància	infanta
+#móra/mora
+(?i)mór(a|es)	(?i)mor(a|es)	ór	or	(?i)silvestres?|fruit.*|bai(a|es)|pastís|pastissos|melmelad.+|esbarzer.*|sars(a|es)|sarsaparrell(a|es)|arbusts?|punx(a|es)|menja.*|meng[eé].*	(?i)pagaments?|administrat.*	fruit	retard; musulmana
+#bóta/bota
+(?i)bót(a|es)	(?i)bot(a|es)	ót	ot	(?i)sardin(a|es)|congrenyada|bodega|bodegues|doga|dogues|cèrcols?|diàmetres?|barrils?|vaixells?|vi|vins|racó|racons|cellers?|nassos|olis?|ferment.*|envell[ieí].+	(?i)peus?|cal[çc][aeàé].+|muntar|enllustr.+|roba|robes|pataló|pantalons|mitjó|mitjons	recipient	calçat
+#arxivament/arxiu
+#(?i)arxivaments?	(?i)arxius?	ivament	iu	(?i)denúnci(a|es)|diligènci(a|es)|expedients?|investigació|caus(a|es)|procés|processos	(?i)històrics?|municipals?	acció o efecte d'arxivar	conjunt de documentació; edifici
+#colon/còlon
+(?i)colon	(?i)còlon	col	còl	(?i)jueus?|israel.*|palest[ií].*|pagès|pagesos|terratinents?|serfs?|senyors?	càncers?|tumors?|ganglis?|oper[aàée].*|extirp.*|histol.*|recte|intestí|mucosa	membre d'una colònia	part de l'intestí
+#vena/bena
+(?i)ven(a|es)	(?i)ben(a|es)	ve	be	(?i)sang.*|circul.*|subcostals?	(?i)ulls?|ferid(a|es)	vas sanguini	tira de teixit
+#constricció/contrició
+(?i)constricci(ó|ons)	(?i)contrici(ó|ons)	constricci	contrici	(?i)reflex|sanguinis?	(?i)pecats?|penitènci(a|es)|actes?	acció de cloure	penediment
+#roina/roïna
+(?i)roin(a|es)	(?i)roïn(a|es)	oin	oïn	(?i)plo[uv].*|pluja|plugim|plovisqueig|plovineig|ploviscó|plugina|gotellim|ruixim|xim-xim	.+	pluja fina	dolenta
+#comptabilitat,comptabilitzar/compatibilitat, compatibilitzar
+(?i)comptabilit.*	(?i)compatibilit.*	ptab	patib	(?i)factur.*|amortitzaci.*|despes(a|es)	(?i)formats?|program.*|fitxers?|versi(ó|ons)	derivat de comptable	derivat de compatible
+#compte/conte/comte
+#mil·liar,millar,miliar,miler

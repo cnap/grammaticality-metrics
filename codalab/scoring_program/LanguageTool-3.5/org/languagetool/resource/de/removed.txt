@@ -1,0 +1,38 @@
+# The opposite of added.txt: these readings will be removed.
+# Useful to remove incorrect readings from the binary dictionary without rebuilding it.
+# File Encoding: UTF-8
+# Format: fullform baseform postags (tab separated)
+USA	USA	SUB:DAT:SIN:FEM
+USA	USA	SUB:AKK:SIN:FEM
+USA	USA	SUB:NOM:SIN:FEM
+USA	USA	SUB:GEN:SIN:FEM
+USA	USA	SUB:DAT:PLU:FEM
+USA	USA	SUB:AKK:PLU:FEM
+USA	USA	SUB:NOM:PLU:FEM
+USA	USA	SUB:GEN:PLU:FEM
+Anmut	Anmut	SUB:AKK:SIN:MAS
+Anmut	Anmut	SUB:DAT:SIN:MAS
+Anmut	Anmut	SUB:NOM:SIN:MAS
+Partikel	Partikel	SUB:NOM:SIN:MAS
+Partikel	Partikel	SUB:AKK:SIN:MAS
+Partikel	Partikel	SUB:DAT:SIN:MAS
+Partikels	Partikel	SUB:GEN:SIN:MAS
+Partikel	Partikel	SUB:NOM:PLU:MAS
+Partikel	Partikel	SUB:AKK:PLU:MAS
+Partikeln	Partikel	SUB:DAT:PLU:MAS
+Partikel	Partikel	SUB:GEN:PLU:MAS
+Schneeflocke	Schneeflocke	SUB:NOM:SIG:FEM
+Schneeflocke	Schneeflocke	SUB:GEN:SIG:FEM
+Schneeflocke	Schneeflocke	SUB:DAT:SIG:FEM
+Schneeflocke	Schneeflocke	SUB:AKK:SIG:FEM
+Textkorpus	Textkorpus	SUB:AKK:SIN:MAS
+Textkorpus	Textkorpus	SUB:DAT:SIN:MAS
+Textkorpus	Textkorpus	SUB:GEN:SIN:MAS
+Textkorpus	Textkorpus	SUB:NOM:SIN:MAS
+Inspektoren	Inspektor	SUB:AKK:SIN:MAS
+Inspektoren	Inspektor	SUB:DAT:SIN:MAS
+Inspektoren	Inspektor	SUB:GEN:SIN:MAS
+Lasers	Laser	SUB:AKK:PLU:MAS
+Lasers	Laser	SUB:DAT:PLU:MAS
+Lasers	Laser	SUB:GEN:PLU:MAS
+Lasers	Laser	SUB:NOM:PLU:MAS 

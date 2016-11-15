@@ -1,0 +1,3577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../print.xsl" 
+title="Pretty print" ?>
+<?xml-stylesheet type="text/css" href="../rules.css" 
+title="Easy editing stylesheet" ?>
+<!--
+Portuguese (Portugal - prereform + postreform) - Grammar and Typo Rules for LanguageTool.
+Copyright (c) 2012-2016 Marco A.G.Pinto (www.marcoagpinto.com).
+Thanks to Juan Martorell, Daniel Naber and Yakov Reztsov who mentored the project.
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+
+$Id: grammar.xml,v 1.177 2016-09-15 10:17:00 marcoagpinto Exp $
+-->
+<rules lang="pt" xsi:noNamespaceSchemaLocation="../rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+<!--
+****************************************
+           POSSÍVEIS ERROS GRAMATICAIS
+****************************************
+-->
+
+<category id="MISC" name="Gramática Geral">
+
+    <!-- Concordance error plural - QUALQUER + PLURAL -->
+    <rule id="QUALQUER_PLURAL" name="Erro de concordância do plural QUALQUER + PLURAL">
+      <pattern>
+		<marker>
+			<token>qualquer</token>	  
+		</marker>
+		<token postag_regexp="yes"  postag="NCFP000|NCMP000"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>quaisquer</suggestion>
+     <example correction="quaisquer">Tratamos de <marker>qualquer</marker> assuntos.</example>	 	 
+    </rule> 
+
+	
+	
+    <!-- Concordance error plural - QUAISQUER + SINGULAR -->
+    <rule id="QUAISQUER_PLURAL" name="Erro de concordância do plural QUAISQUER + SINGULAR">
+      <pattern>
+		<marker>
+			<token>quaisquer</token>	  
+		</marker>
+		<token postag_regexp="yes"  postag="NCFS000|NCMS000"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>qualquer</suggestion>
+     <example correction="qualquer">Tratamos de <marker>quaisquer</marker> assunto.</example>	 	 
+    </rule> 	
+	
+
+
+    <!-- Concordance error plural - É + PLURAL -->
+    <rule id="É_PLURAL" name="Erro de concordância do plural É+PLURAL">
+      <pattern>
+		<marker>
+			<token>é</token>	  
+		</marker>
+		<token postag_regexp="yes"  postag="AQ0CP0|AQ0MP0|AQ0FP0|VMII2P0"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>são</suggestion>
+     <example correction="são">Os correctores gramaticais <marker>é</marker> funcionais.</example>	 	 
+    </rule> 
+
+	
+
+	<!-- Concordance error plural - A + FEMALE PLURAL + SINGULAR VERB -->
+    <rule id="A_FEMALE-PLURAL_SINGULAR-VERB" name="Erro de concordância do plural A + FEMALE SINGULAR + SINGULAR VERB">
+      <pattern>
+        <token>a</token>
+        <marker>
+            <token postag="NCFP000"></token>
+         </marker>
+         <token postag="VMIP3S0"></token>
+     </pattern>
+	 <message>Erro de concordância do plural: <suggestion><match no="2" postag_regexp= "yes" postag="NCFP000" postag_replace="NCFS000"/></suggestion></message>	 
+	 <example correction="vaca">A <marker>vacas</marker> está no pasto.</example>   
+    </rule> 
+
+	
+	
+	<!-- Concordance error plural - AS + FEMALE SINGULAR + PLURAL VERB -->
+    <rule id="AS_FEMALE-SINGULAR_PLURAL-VERB" name="Erro de concordância do plural AS + FEMALE PLURAL + PLURAL VERB">
+      <pattern>
+        <token>as</token>
+        <marker>
+            <token postag="NCFS000"></token>
+         </marker>
+         <token postag="VMIP3P0"></token>
+     </pattern>
+	 <message>Erro de concordância do plural: <suggestion><match no="2" postag_regexp= "yes" postag="NCFS000" postag_replace="NCFP000"/></suggestion></message>	 
+	 <example correction="vacas">As <marker>vaca</marker> estão no pasto.</example>   
+    </rule> 	
+
+	
+	
+	<!-- Concordance error plural - O + MALE PLURAL + SINGULAR VERB -->
+    <rule id="O_MALE-PLURAL_SINGULAR-VERB" name="Erro de concordância do plural O + MALE SINGULAR + SINGULAR VERB">
+      <pattern>
+        <token>o</token>
+        <marker>
+            <token postag="NCMP000"></token>
+         </marker>
+         <token postag="VMIP3S0"></token>
+     </pattern>
+     <message>Erro de concordância do plural: <suggestion><match no="2" postag_regexp= "yes" postag="NCMP000" postag_replace="NCMS000"/></suggestion></message>	 
+     <example correction="boi">O <marker>bois</marker> está no pasto.</example>   
+    </rule> 
+	
+	
+	
+	<!-- Concordance error plural - OS + MALE SINGULAR + PLURAL VERB -->
+    <rule id="OS_MALE-SINGULAR_PLURAL-VERB" name="Erro de concordância do plural OS + MALE PLURAL + PLURAL VERB">
+      <pattern>
+        <token>os</token>
+        <marker>
+            <token postag="NCMS000"></token>
+         </marker>
+         <token postag="VMIP3P0"></token>
+     </pattern>
+     <message>Erro de concordância do plural: <suggestion><match no="2" postag_regexp= "yes" postag="NCMS000" postag_replace="NCMP000"/></suggestion></message>	 
+     <example correction="bois">Os <marker>boi</marker> estão no pasto.</example>   
+    </rule> 	
+	
+	
+
+    <!-- Concordance error plural - OS + ADJ PLURAL -->
+    <rule id="O_ADJ-PLURAL" name="Erro de concordância do plural OS + ADJ PLURAL">
+      <pattern>
+		<marker>
+			<token>o</token>	  
+		</marker>
+		<token postag="AQ0CP0"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>os</suggestion>
+     <example correction="os">Incluindo <marker>o</marker> seguintes temas.</example>	 	 
+    </rule> 
+
+
+
+    <!-- Concordance error plural - O + ADJ SINGULAR -->
+    <rule id="OS_ADJ-SINGULAR" name="Erro de concordância do plural O + ADJ SINGULAR">
+      <pattern>
+		<marker>
+			<token>os</token>	  
+		</marker>
+		<token postag="AQ0CS0"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>o</suggestion>
+     <example correction="o">Incluindo <marker>os</marker> seguinte tema.</example>	 	 
+    </rule> 
+	
+	
+
+    <!-- Concordance error plural - AS > A -->
+    <rule id="AS_A" name="Erro de concordância do plural AS-A">
+      <pattern>
+        <marker>
+            <token postag="DA0FP0"></token>
+         </marker>
+         <token postag="NCFS000"></token>
+		 <token postag_regexp="yes"  postag="VMIP3S0|VMM03S0|VMII3S0|VMIS3S0"></token> 	
+     </pattern>
+     <message>Erro de concordância do plural.</message>
+     <suggestion>a</suggestion>
+     <example correction="A"><marker>As</marker> vaca está no pasto.</example>
+    </rule> 
+ 
+	
+	
+    <!-- Concordance error plural - A > AS -->
+    <rule id="A_AS" name="Erro de concordância do plural A-AS">
+      <pattern>
+        <marker>
+            <token postag="DA0FS0"></token>
+         </marker>
+         <token postag="NCFP000"></token>
+		 <token postag_regexp="yes"  postag="VMIP3P0|VMIM3P0|VMII3P0"></token> 	
+     </pattern>
+     <message>Erro de concordância do plural.</message>
+     <suggestion>as</suggestion>
+     <example correction="As"><marker>A</marker> vacas estão no pasto.</example>
+    </rule> 	
+
+	
+
+     <!-- Concordance error plural - OS > O -->
+    <rule id="OS_O" name="Erro de concordância do plural OS-O">
+      <pattern>
+        <marker>
+            <token postag="DA0MP0"></token>
+         </marker>
+         <token postag="NCMS000"></token>
+		 <token postag_regexp="yes" postag="VMIP3S0|VMM03S0|VMII3S0|VMIS3S0"></token> 
+     </pattern>
+     <message>Erro de concordância do plural.</message>
+     <suggestion>o</suggestion>
+     <example correction="O"><marker>Os</marker> cão está no pasto.</example>
+    </rule> 
+ 
+
+
+     <!-- Concordance error plural - O > OS -->
+    <rule id="O_OS" name="Erro de concordância do plural O-OS">
+      <pattern>
+        <marker>
+            <token postag="DA0MS0"></token>
+         </marker>
+         <token postag="NCMP000"></token>
+		 <token postag_regexp="yes" postag="VMIP3P0|VMIM3P0|VMII3P0"></token> 
+     </pattern>
+     <message>Erro de concordância do plural.</message>
+     <suggestion>os</suggestion>
+     <example correction="Os"><marker>O</marker> cães estão no pasto.</example>
+    </rule> 	
+	
+	
+	
+	<!-- Concordance error plural - A GENTE + PLURAL VERB > A GENTE + SINGULAR VERB -->
+    <rule id="A_GENTE-SINGULAR_PLURAL-VERB" name="Erro de concordância do plural A GENTE + SINGULAR VERB">
+      <pattern>
+        <token>a</token>
+		<token>gente</token>
+        <marker>
+            <token postag="VMIP1P0"></token>
+         </marker>
+     </pattern>
+     <message>Erro de concordância do plural: <suggestion><match no="3" postag_regexp= "yes" postag="VMIP1P0" postag_replace="VMIP3S0"/></suggestion></message>	 
+     <example correction="vai">A gente <marker>vamos</marker> à praia.</example>   
+    </rule> 		
+	
+	
+
+	<!-- Concordance error plural - PROCURA-SE > PROCURAM-SE -->
+    <rule id="PROCURA_SE-PROCURAM_SE" name="Erro de concordânica do plural PROCURA-SE > PROCURAM-SE">
+      <pattern>
+		<marker>
+			<token>procura-se</token>	  
+		</marker>
+		<token postag_regexp="yes"  postag="NCFP000|NCMP000|AQ0FP0|AQ0MP0"></token> 	
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>procuram-se</suggestion>
+     <example correction="procuram-se">Aqui <marker>procura-se</marker> pessoas sérias.</example>	 	 
+    </rule> 
+
+	
+	
+    <!-- Concordance gender - NECESSÁRIO > NECESSÁRIA -->
+    <rule id="NECESSÁRIO_NECESSÁRIA" name="Erro de concordância NECESSÁRIO-NECESSÁRIA">
+      <pattern>
+		<token regexp="yes">é|foi|era|fora|será|seria|seja|fosse|for</token>
+        <marker>
+			<token>necessário</token>	
+        </marker>
+		<token>uma</token>
+		<token postag="NCFS000"><exception postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCMS000"></exception><exception>uma</exception></token>
+     </pattern>
+	 <message>Erro de género. Usar: <suggestion>necessária</suggestion>.</message>
+     <example correction="necessária">É <marker>necessário</marker> uma festa.</example>
+    </rule> 	
+
+
+
+    <!-- Concordance gender - NECESSÁRIO > NECESSÁRIA + UMA + ADJ + NOUN -->
+    <rule id="NECESSÁRIO_NECESSÁRIA_ADJ_NOUN" name="Erro de concordância NECESSÁRIO-NECESSÁRIA + UMA + ADJ + NOUN">
+      <pattern>
+		<token regexp="yes">é|foi|era|fora|será|seria|seja|fosse|for</token>
+        <marker>
+            <token>necessário</token>
+        </marker>
+		<token>uma</token>
+		<token postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCFS000"><exception>uma</exception></token>
+		<token postag="NCFS000"><exception postag="NCMS000"></exception><exception>uma</exception></token>
+     </pattern>
+	 <message>Erro de género. Usar: <suggestion>necessária</suggestion>.</message>
+     <example correction="necessária">É <marker>necessário</marker> uma grande festa.</example>
+    </rule> 	
+	
+
+	
+    <!-- Concordance gender - UM > UMA -->
+    <rule id="UM_UMA" name="Erro de concordância UM-UMA">
+      <pattern>
+        <marker>
+            <token>um</token>
+        </marker>
+		<token postag="NCFS000"><exception postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCMS000"></exception><exception>uma</exception></token>
+     </pattern>
+     <message>Erro de concordância um/uma.</message>
+     <suggestion>uma</suggestion>
+     <example correction="uma">Quero <marker>um</marker> foto dela.</example>
+    </rule> 	
+
+	
+
+    <!-- Concordance gender - UMA > UM -->
+    <rule id="UMA_UM" name="Erro de concordância UMA-UM">
+      <pattern>
+        <marker>
+            <token>uma</token>
+        </marker>
+		<token postag="NCMS000"><exception postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCFS000"></exception><exception>a</exception></token>
+     </pattern>
+     <message>Erro de concordância uma/um.</message>
+     <suggestion>um</suggestion>
+     <example correction="um">Quero <marker>uma</marker> carro novo.</example>
+    </rule> 		
+	
+
+
+    <!-- Concordance gender - UM > UMA + ADJ + NOUN -->
+    <rule id="UM_UMA_ADJ_NOUN" name="Erro de concordância UM-UMA + ADJ + NOUN">
+      <pattern>
+        <marker>
+            <token>um</token>
+        </marker>
+		<token postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCFS000"><exception>uma</exception></token>
+		<token postag="NCFS000"><exception postag="NCMS000"></exception><exception>uma</exception></token>
+     </pattern>
+     <message>Erro de concordância um/uma.</message>
+     <suggestion>uma</suggestion>
+     <example correction="uma">Quero <marker>um</marker> bonita foto dela.</example>
+    </rule> 	
+
+	
+
+    <!-- Concordance gender - UMA > UM + ADJ + NOUN -->
+    <rule id="UMA_UM_ADJ_NOUN" name="Erro de concordância UMA-UM + ADJ + NOUN">
+      <pattern>
+        <marker>
+            <token>uma</token>
+        </marker>
+		<token postag_regexp="yes" postag="AQ0CS0|PI0FS000|PI0MS000|NCMS000"><exception>a</exception></token>
+		<token postag="NCMS000"><exception postag="NCFS000"></exception><exception>a</exception></token>
+     </pattern>
+     <message>Erro de concordância uma/um.</message>
+     <suggestion>um</suggestion>
+     <example correction="um">Quero <marker>uma</marker> bonito carro novo.</example>
+    </rule> 	
+	
+	
+	
+    <!-- CAPTURAR IMAGENS captar imagens -->
+    <rule id="CAPTURAR_IMAGENS" name="captar imagens">
+      <pattern>
+        <marker>	  
+			<token>capturar</token>
+		</marker>
+		<token min="0" max="1"/>
+		<token>imagens</token>
+      </pattern>
+      <message>Substituir «capturar» por <suggestion>captar</suggestion>.</message>
+      <example correction="captar">Vamos <marker>capturar</marker> imagens.</example>
+    </rule>
+	
+	
+	
+	<!-- DAÍ de aí -->
+    <rule id="DAÍ" name="de aí">
+      <pattern>
+        <token postag="VMN0000"></token>
+        <marker>
+            <token>daí</token>
+        </marker>
+        <token postag="VMN0000"></token>
+     </pattern>
+      <message>Substituir «daí» por <suggestion>de aí</suggestion>.</message>
+      <example correction="de aí">A partir <marker>daí</marker> deduzir o que fazer.</example>
+	</rule> 
+
+
+	
+    <!-- DE/DA MATRICULA de/da matrícula -->
+    <rule id="DE_DA_MATRICULA" name="de-da matrícula">
+      <pattern>
+        <token regexp="yes">de|da</token>
+		<marker>
+			<token>matricula</token>
+		</marker>  	
+      </pattern>
+      <message>Substituir «matricula» por <suggestion>matrícula</suggestion>.</message>
+      <example correction="matrícula">Não esquecer da <marker>matricula</marker> do Rui.</example>
+    </rule>
+
+
+
+    <!-- DE/DAS MATRICULAS de/das matrículas -->
+    <rule id="DE_DAS_MATRICULAS" name="de-das matrículas">
+      <pattern>
+        <token regexp="yes">de|das</token>
+		<marker>
+			<token>matriculas</token>
+		</marker>  	
+      </pattern>
+      <message>Substituir «matriculas» por <suggestion>matrículas</suggestion>.</message>
+      <example correction="matrículas">Não esquecer das <marker>matriculas</marker> amanhã.</example>
+    </rule>
+	
+
+
+    <!-- DE/DA/A SOBRE MESA de/da/a sobremesa -->
+    <rule id="DE_DA_A_SOBRE_MESA" name="de-da-a sobremesa">
+      <pattern>
+        <token regexp="yes">de|da|a</token>
+		<marker>
+			<token>sobre</token>
+			<token>mesa</token>
+		</marker>  	
+      </pattern>
+      <message>Substituir «sobre mesa» por <suggestion>sobremesa</suggestion>.</message>
+      <example correction="sobremesa">Gosto da <marker>sobre mesa</marker>.</example>
+    </rule>
+
+	
+	
+    <!-- DET_FEM_MAS words that use "o" instead of "a" -->
+    <rule id="DET_FEM_MAS_A_O" name="palavras a-o">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>a</token>
+         </marker>
+         <token regexp="yes">herpes|mármore|cônjuge|espécime|bracelete</token>
+      </pattern>
+      <message>Erro de género. Usar: <suggestion>o</suggestion>.</message>
+      <example correction="o">Temos de curar <marker>a</marker> herpes.</example>
+    </rule>
+
+
+
+    <!-- DET_FEM_MAS words that use "os" instead of "as" -->
+    <rule id="DET_FEM_MAS_AS_OS" name="palavras as-os">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>as</token>
+         </marker>
+         <token regexp="yes">mármores|cônjuges|espécimes|braceletes</token>
+      </pattern>
+      <message>Erro de género. Usar: <suggestion>os</suggestion>.</message>
+      <example correction="os">Temos de estudar <marker>as</marker> espécimes.</example>
+    </rule>
+
+
+
+    <!-- DET_MAS_FEM words that use "a" instead of "o" -->
+    <rule id="DET_MAS_FEM_O_A" name="palavras o-a">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>o</token>
+         </marker>
+         <token regexp="yes">mascote|celeuma|acne|entorse|síndrome|sentinela</token>
+      </pattern>
+      <message>Erro de género. Usar: <suggestion>a</suggestion>.</message>
+      <example correction="a">Temos de ver <marker>o</marker> mascote.</example>
+    </rule>
+
+
+
+    <!-- DET_MAS_FEM words that use "as" instead of "os" -->
+    <rule id="DET_MAS_FEM_OS_AS" name="palavras os-as">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>os</token>
+         </marker>
+         <token regexp="yes">mascotes|celeumas|entorses|síndromes|sentinelas</token>
+      </pattern>
+      <message>Erro de género. Usar: <suggestion>as</suggestion>.</message>
+      <example correction="as">Temos de ver <marker>os</marker> mascotes.</example>
+    </rule>
+
+
+
+    <!-- A APRENDIZ a aprendiza -->
+    <rule id="A_APRENDIZ" name="a aprendiza">
+      <pattern>
+        <token>a</token>
+        <token>aprendiz</token>
+      </pattern>
+      <message>Substituir «a aprendiz» por <suggestion>a aprendiza</suggestion>.</message>
+      <example correction="a aprendiza">Vamos ver <marker>a aprendiz</marker>.</example>
+    </rule>
+
+
+
+    <!-- À BOCADO há bocado -->
+    <rule id="À_BOCADO" name="há bocado">
+      <pattern>
+        <token>à</token>
+        <token>bocado</token>
+      </pattern>
+      <message>Substituir «à bocado» por <suggestion>há bocado</suggestion>.</message>
+      <example correction="há bocado">Cheguei <marker>à bocado</marker> do Algarve.</example>
+    </rule>
+
+
+
+    <!-- A COMO É AS/OS a como são as/os -->
+	<rule id="A_COMO_É_AS_OS" name="a como são as/os">
+	  <pattern>
+        <token>a</token>
+	    <token>como</token>
+        <marker>	              	  
+	    	<token>é</token>              
+        </marker>          
+	    <token regexp="yes">os|as</token>
+      </pattern>
+      <message>Substituir «é» por <suggestion>são</suggestion>.</message>
+      <example correction="são">A como <marker>é</marker> os tomates?</example>
+	</rule>
+
+
+
+    <!-- A DENTRO adentro -->
+    <rule id="A_DENTRO" name="adentro">
+      <pattern>
+        <token>a</token>
+        <token>dentro</token>
+      </pattern>
+      <message>Substituir «a dentro» por <suggestion>adentro</suggestion>.</message>
+      <example correction="adentro">Ele atreveu-se rio <marker>a dentro</marker>.</example>
+    </rule>
+
+
+
+    <!-- A DIZER VERDADE a dizer a verdade -->
+    <rule id="A_DIZER_VERDADE" name="a dizer a verdade">
+      <pattern>
+        <token>a</token>
+        <token>dizer</token>
+        <token>verdade</token>
+      </pattern>
+      <message>Substituir «a dizer verdade» por <suggestion>a dizer a verdade</suggestion>.</message>
+      <example correction="a dizer a verdade">Eles estão <marker>a dizer verdade</marker>.</example>
+    </rule>
+
+
+
+    <!-- A GUARDA-NOCTURNO a guarda-nocturna -->
+    <rule id="A_GUARDA-NOCTURNO" name="a guarda-nocturna">
+      <pattern>
+        <token>a</token>
+        <token>guarda-nocturno</token>
+      </pattern>
+      <message>Substituir «a guarda-nocturno» por <suggestion>a guarda-nocturna</suggestion>.</message>
+      <example correction="a guarda-nocturna">Vamos ver <marker>a guarda-nocturno</marker>.</example>
+    </rule>
+
+
+
+    <!-- À MAIS EM há mais em -->
+    <rule id="À_MAIS_EM" name="há mais em">
+      <pattern>
+        <token>à</token>
+        <token>mais</token>
+        <token>em</token>        
+      </pattern>
+      <message>Substituir «à mais em» por <suggestion>há mais em</suggestion>.</message>
+      <example correction="há mais em">Amanhã <marker>à mais em</marker> jogo.</example>
+    </rule>
+
+
+
+    <!-- À MARAVILHA às mil maravilhas -->
+    <rule id="À_MARAVILHA" name="às mil maravilhas">
+      <pattern>
+        <token>à</token>
+        <token>maravilha</token>
+      </pattern>
+      <message>Substituir «à maravilha» por <suggestion>às mil maravilhas</suggestion>.</message>
+      <example correction="às mil maravilhas">Isto correu <marker>à maravilha</marker>.</example>
+    </rule>
+
+
+	
+    <!-- À MEDIDA EM QUE à medida que -->
+    <rule id="À_MEDIDA_EM_QUE" name="à medida que">
+      <pattern>
+        <token>à</token>
+        <token>medida</token>
+        <token>em</token>
+		<token>que</token>
+      </pattern>
+      <message>Substituir «à medida em que» por <suggestion>à medida que</suggestion>.</message>
+      <example correction="à medida que">Faz a revisão <marker>à medida em que</marker> lês.</example>
+    </rule>
+	
+	
+	
+
+    <!-- À MEIA NOITE à meia-noite -->
+    <rule id="À_MEIA_NOITE" name="à meia-noite">
+      <pattern>
+        <token>à</token>
+        <token>meia</token>
+        <token>noite</token>        
+      </pattern>
+      <message>Substituir «à meia noite» por <suggestion>à meia-noite</suggestion>.</message>
+      <example correction="à meia-noite">O encontro é <marker>à meia noite</marker>.</example>
+    </rule>
+
+
+
+    <!-- À MUITO há muito -->
+    <rule id="À_MUITO" name="há muito">
+      <pattern>
+        <token>à</token>
+        <token>muito</token>
+      </pattern>
+      <message>Substituir «à muito» por <suggestion>há muito</suggestion>.</message>
+      <example correction="há muito">Ainda <marker>à muito</marker> a fazer.</example>
+    </rule>
+
+
+
+    <!-- A PREÇO PELO apreço pelo -->
+    <rule id="A_PREÇO_PELO" name="apreço pelo">
+      <pattern>
+        <token>a</token>
+        <token>preço</token>
+        <token>pelo</token>
+      </pattern>
+      <message>Substituir «a preço pelo» por <suggestion>apreço pelo</suggestion>.</message>
+      <example correction="apreço pelo">Tenho muito <marker>a preço pelo</marker> DVD.</example>
+    </rule>
+
+
+
+    <!-- A PREÇO POR apreço por -->
+    <rule id="A_PREÇO_POR" name="apreço por">
+      <pattern>
+        <token>a</token>
+        <token>preço</token>
+        <token>por</token>
+      </pattern>
+      <message>Substituir «a preço por» por <suggestion>apreço por</suggestion>.</message>
+      <example correction="apreço por">Tenho muito <marker>a preço por</marker> ele.</example>
+    </rule>
+	
+
+	
+    <!-- A POUCO E POUCO aos poucos informal -->
+	<rule id="A_POUCO_E_POUCO" name="aos poucos (informal)">
+	  <pattern>
+		<token>a</token>
+		<token>pouco</token>
+		<token>e</token>
+		<token>pouco</token>
+      </pattern>
+      <message>Linguagem informal. Pondera usar uma expressão alternativa.</message>
+      <example correction="">Vamos <marker>a pouco e pouco</marker> construindo o futuro.</example>	  
+	  <example>Vamos <marker>aos poucos</marker> construindo o futuro.</example>	
+	</rule>
+	
+
+
+    <!-- A QUANDO aquando -->
+    <rule id="A_QUANDO" name="aquando">
+      <pattern>
+        <token>a</token>
+        <token>quando</token>
+      </pattern>
+      <message>Substituir «a quando» por <suggestion>aquando</suggestion>.</message>
+      <example correction="aquando">Vamos tratar disso <marker>a quando</marker> da ida do Rui.</example>
+    </rule>
+
+
+
+    <!-- À QUE há que -->
+    <rule id="À_QUE" name="há que">
+      <pattern>
+        <token>à</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «à que» por <suggestion>há que</suggestion>.</message>
+      <example correction="há que">Mas <marker>à que</marker> saber estudar.</example>
+    </rule>
+
+
+
+    <!-- A QUE SERVE ISTO/ISSO para que serve isto/isso -->
+	<rule id="A_QUE_SERVE_ISTO_ISSO" name="para que serve isto/isso">
+	  <pattern>
+        <marker>	              	  
+	        <token>a</token>
+        </marker>          
+	    <token>que</token>
+	   	<token>serve</token>              
+	    <token regexp="yes">isto|isso</token>
+      </pattern>
+      <message>Substituir «a» por <suggestion>para</suggestion>.</message>
+      <example correction="Para"><marker>A</marker> que serve isto?</example>
+	</rule>
+
+
+
+    <!-- À SÓS a sós -->
+    <rule id="À_SÓS" name="a sós">
+      <pattern>
+        <token>à</token>
+        <token>sós</token>
+      </pattern>
+      <message>Substituir «à sós» por <suggestion>a sós</suggestion>.</message>
+      <example correction="a sós">Fazemos <marker>à sós</marker> ou em grupo?</example>
+    </rule>
+
+
+
+    <!-- A TRÁS atrás -->
+    <rule id="A_TRÁS" name="atrás">
+      <pattern>
+        <token>a</token>
+        <token>trás</token>
+      </pattern>
+      <message>Substituir «a trás» por <suggestion>atrás</suggestion>.</message>
+      <example correction="atrás">Vê <marker>a trás</marker> da porta.</example>
+    </rule>
+    
+
+
+    <!-- ATREVIMENTO A atrevimento para -->
+    <rule id="ATREVIMENTO_A" name="atrevimento para">
+      <pattern>
+        <token>atrevimento</token>
+        <token>a</token>
+      </pattern>
+      <message>Substituir «atrevimento a» por <suggestion>atrevimento para</suggestion>.</message>
+      <example correction="atrevimento para">É muito <marker>atrevimento a</marker> falar assim.</example>
+    </rule>
+
+
+
+    <!-- À ÚLTIMA DA HORA à última hora -->
+    <rule id="À_ÚLTIMA_DA_HORA" name="à última hora">
+      <pattern>
+        <token>à</token>
+        <token>última</token>
+        <token>da</token>
+        <token>hora</token>
+      </pattern>
+      <message>Substituir «à última da hora» por <suggestion>à última hora</suggestion>.</message>
+      <example correction="à última hora">Eles decidiram tudo <marker>à última da hora</marker>.</example>
+    </rule>
+
+
+
+    <!-- A UM CONSERTO a um concerto -->
+    <rule id="A_UM_CONSERTO" name="a um concerto">
+      <pattern>
+        <token>a</token>
+        <token>um</token>
+        <token>conserto</token>
+      </pattern>
+      <message>Substituir «a um conserto» por <suggestion>a um concerto</suggestion>.</message>
+      <example correction="a um concerto">Vou <marker>a um conserto</marker>.</example>
+    </rule>
+
+
+
+    <!-- A XXX DE VOCÊS a vossa XXX -->
+	<rule id="A_XXX_DE_VOCÊS" name="a XXX de vocês -> a vossa XXX">
+	  <pattern>
+	    <token>a</token>
+	    <token><exception regexp="yes">um|dois|três|maioria|minoria|fim</exception></token>
+		<token>de</token>
+	    <token>vocês</token>
+	  </pattern>
+	  <message>Querias dizer <suggestion>\1 vossa \2</suggestion>?</message>
+	  <example correction="A vossa opinião"><marker>A opinião de vocês</marker> é importante.</example>
+	  <example>A maioria de vocês.</example>
+	</rule>
+
+
+
+    <!-- ÀS CUSTAS DA/DAS/DO/DOS à custa da/das/do/dos -->
+	<rule id="ÀS_CUSTAS_DA_DAS_DO_DOS" name="à custa da/das/do/dos">
+	  <pattern>
+        <marker>	              	  
+	        <token>às</token>
+	        <token>custas</token>	        
+        </marker>          
+	    <token regexp="yes">da|das|do|dos</token>
+      </pattern>
+      <message>Substituir «às custas» por <suggestion>à custa</suggestion>.</message>
+      <example correction="à custa">Ele fê-lo <marker>às custas</marker> do filho.</example>
+	</rule>
+
+
+
+    <!-- ABANDONAR O LEITO deixar a cama -->
+    <rule id="ABANDONAR_O_LEITO" name="deixar a cama">
+      <pattern>
+        <token>abandonar</token>
+        <token>o</token>
+        <token>leito</token>
+      </pattern>
+      <message>Substituir «abandonar o leito» por <suggestion>deixar a cama</suggestion>.</message>
+      <example correction="deixar a cama">Vou <marker>abandonar o leito</marker>.</example>
+    </rule>
+
+
+
+    <!-- ADESÃO aderência -->
+    <rule id="ADESÃO" name="aderência">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>adesão</token>
+         </marker>
+         <token regexp="yes">das?|dos?</token>
+         <token regexp="yes">rodas?|pneus?</token>
+      </pattern>
+      <message>Substituir «adesão» por <suggestion>aderência</suggestion>.</message>
+      <example correction="aderência">A <marker>adesão</marker> do pneu é boa.</example>
+    </rule>
+
+
+
+    <!-- AINDA NUNCA ainda não -->
+    <rule id="AINDA_NUNCA" name="ainda não">
+      <pattern>            	        
+	  	<token>ainda</token>
+	    <token>nunca</token>             	        
+      </pattern>
+      <message>Substituir «ainda nunca» por <suggestion>ainda não</suggestion>.</message>
+      <example correction="ainda não">Eu <marker>ainda nunca</marker> li o livro.</example>
+    </rule>
+
+
+
+    <!-- AJUDAR QUE SE FAÇA ajudar a que se faça -->
+    <rule id="AJUDAR_QUE_SE_FAÇA" name="ajudar a que se faça">
+      <pattern>            	        
+	  	<token>ajudar</token>
+		<marker>
+			<token>que</token>             	        
+		</marker>	
+		<token>se</token>  
+		<token>faça</token>  
+      </pattern>
+      <message>Substituir «que» por <suggestion>a que</suggestion>.</message>
+      <example correction="a que">Devemos ajudar <marker>que</marker> se faça justiça.</example>
+    </rule>
+	
+	
+
+    <!-- ALERTAR PARA COM alertar para -->
+    <rule id="ALERTAR_PARA_COM" name="alertar para">
+      <pattern>
+        <token>alertar</token>
+        <token>para</token>
+        <token>com</token>
+      </pattern>
+      <message>Substituir «alertar para com» por <suggestion>alertar para</suggestion>.</message>
+      <example correction="alertar para">Obrigado por me <marker>alertar para com</marker> o perigo.</example>
+    </rule>
+
+
+
+    <!-- AMOR PELA LÍNGUA amor à língua -->
+    <rule id="AMOR_PELA_LÍNGUA" name="amor à língua">
+      <pattern>            	        
+	  	<token>amor</token>
+		<marker>
+			<token>pela</token>             	        
+		</marker>	
+		<token>língua</token>  
+      </pattern>
+      <message>Substituir «pela» por <suggestion>à</suggestion>.</message>
+      <example correction="à">Tenho amor <marker>pela</marker> língua materna.</example>
+    </rule>
+	
+
+    <!-- ANALISE análise -->
+    <rule id="ANALISE" name="análise">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>analise</token>
+         </marker>
+         <token regexp="yes">dos?|das?</token>
+      </pattern>
+      <message>Substituir «analise» por <suggestion>análise</suggestion>.</message>
+      <example correction="análise">Quero uma <marker>analise</marker> do problema.</example>
+    </rule>
+
+	
+
+    <!-- ANDARES-MODELOS andares-modelo -->
+    <rule id="ANDARES-MODELOS" name="andares-modelo">
+      <pattern>
+        <token>andares-modelos</token>
+      </pattern>
+      <message>Substituir «andares-modelos» por <suggestion>andares-modelo</suggestion>.</message>
+      <example correction="andares-modelo">Vamos ver os <marker>andares-modelos</marker>.</example>
+    </rule>
+	
+	
+
+    <!-- APELAR À LUTA/FÉ apelar para a luta/fé -->
+    <rule id="APELAR_À_LUTA-FÉ" name="apelar para a luta-fé">
+      <pattern>
+	    <token>apelar</token>
+		<marker>
+            <token>à</token>
+         </marker>
+         <token regexp="yes">luta|fé</token>
+      </pattern>
+      <message>Substituir «à» por <suggestion>para a</suggestion>.</message>
+      <example correction="para a">Vamos apelar <marker>à</marker> fé.</example>
+    </rule>
+
+
+
+    <!-- APOSTAR EM COMO apostar que -->
+    <rule id="APOSTAR_EM_COMO" name="apostar que">
+      <pattern>
+        <token>apostar</token>
+        <marker>	              	  
+	        <token>em</token>
+	        <token>como</token>
+        </marker>          
+      </pattern>
+      <message>Substituir «em como» por <suggestion>que</suggestion>.</message>
+      <example correction="que">Vou apostar <marker>em como</marker> irei ganhar.</example>
+    </rule>
+
+
+
+    <!-- AO MEIO DIA ao meio-dia -->
+    <rule id="AO_MEIO_DIA" name="ao meio-dia">
+      <pattern>
+        <token>ao</token>
+        <token>meio</token>
+        <token>dia</token>
+      </pattern>
+      <message>Substituir «ao meio dia» por <suggestion>ao meio-dia</suggestion>.</message>
+      <example correction="ao meio-dia">O encontro é amanhã <marker>ao meio dia</marker>.</example>
+    </rule>
+
+
+
+    <!-- AO SEREM USADO ao serem usados -->
+    <rule id="AO_SEREM_USADO" name="ao serem usados">
+      <pattern>
+        <token>ao</token>
+        <token>serem</token>
+        <token>usado</token>
+      </pattern>
+      <message>Substituir «ao serem usado» por <suggestion>ao serem usados</suggestion>.</message>
+      <example correction="ao serem usados">Há produtos que <marker>ao serem usado</marker> fazem-nos sentir bem.</example>
+    </rule>
+
+
+
+    <!-- AS MILHARES os milhares -->
+    <rule id="AS_MILHARES" name="os milhares">
+      <pattern>
+        <token>as</token>
+        <token>milhares</token>
+      </pattern>
+      <message>Substituir «as milhares» por <suggestion>os milhares</suggestion>.</message>
+      <example correction="os milhares">Vejam <marker>as milhares</marker> de mulheres.</example>
+    </rule>
+
+
+
+    <!-- ABORDO DA a bordo da -->
+    <rule id="ABORDO_DA" name="a bordo da">
+      <pattern>
+        <token>abordo</token>
+        <token>da</token>
+      </pattern>
+      <message>Substituir «abordo da» por <suggestion>a bordo da</suggestion>.</message>
+      <example correction="a bordo da">Vai uma pessoa importante <marker>abordo da</marker> fragata.</example>
+    </rule>
+
+
+
+    <!-- ABORDO DO a bordo do -->
+    <rule id="ABORDO_DO" name="a bordo do">
+      <pattern>
+        <token>abordo</token>
+        <token>do</token>
+      </pattern>
+      <message>Substituir «abordo do» por <suggestion>a bordo do</suggestion>.</message>
+      <example correction="a bordo do">Vai uma pessoa importante <marker>abordo do</marker> avião.</example>
+    </rule>
+
+
+
+    <!-- ABRIR-MOS abrirmos -->
+    <rule id="ABRIR-MOS" name="abrirmos">
+      <pattern>
+        <token>abrir-mos</token>
+      </pattern>
+      <message>Substituir «abrir-mos» por <suggestion>abrirmos</suggestion>.</message>
+      <example correction="abrirmos">Pediram para <marker>abrir-mos</marker> a porta.</example>
+    </rule>
+
+
+
+    <!-- ADIVINHA DISSO QUE advinha disso que -->
+    <rule id="ADIVINHA_DISSO_QUE" name="advinha disso que">
+      <pattern>
+        <marker>	              	  
+	        <token>adivinha</token>
+        </marker>                
+        <token>disso</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «adivinha» por <suggestion>advinha</suggestion>.</message>
+      <example correction="advinha">A mensagem <marker>adivinha</marker> disso que ele revelou.</example>
+    </rule>
+
+
+
+    <!-- AFIM DE a fim de -->
+    <rule id="AFIM_DE" name="a fim de">
+      <pattern>
+        <token>afim</token>
+        <token>de</token>
+      </pattern>
+      <message>Substituir «afim de» por <suggestion>a fim de</suggestion>.</message>
+      <example correction="a fim de">Isto é feito <marker>afim de</marker> proteger as testemunhas.</example>
+    </rule>
+
+
+
+    <!-- ANTES DE QUE antes que -->
+    <rule id="ANTES_DE_QUE" name="antes que">
+      <pattern>
+        <token>antes</token>
+        <token>de</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «antes de que» por <suggestion>antes que</suggestion>.</message>
+      <example correction="antes que">Tratar de algo <marker>antes de que</marker> seja tarde.</example>
+    </rule>
+
+
+
+    <!-- ANTI VÍRUS antivírus -->
+    <rule id="ANTI_VÍRUS" name="antivírus">
+      <pattern>
+        <token>anti</token>
+        <token>vírus</token>
+      </pattern>
+      <message>Substituir «anti vírus» por <suggestion>antivírus</suggestion>.</message>
+      <example correction="antivírus">Actualiza sempre o <marker>anti vírus</marker>.</example>
+    </rule>
+
+
+
+    <!-- AO MEU VER a meu ver -->
+    <rule id="AO_MEU_VER" name="a meu ver">
+      <pattern>
+        <token>ao</token>
+        <token>meu</token>
+        <token>ver</token>
+      </pattern>
+      <message>Substituir «ao meu ver» por <suggestion>a meu ver</suggestion>.</message>
+      <example correction="a meu ver">Isto é, <marker>ao meu ver</marker>, muito importante.</example>
+    </rule>
+
+
+
+    <!-- AS BRACELETES os braceletes -->
+    <rule id="AS_BRACELETES" name="os braceletes">
+      <pattern>
+        <token>as</token>
+        <token>braceletes</token>
+      </pattern>
+      <message>Substituir «as braceletes» por <suggestion>os braceletes</suggestion>.</message>
+      <example correction="os braceletes">Coloca <marker>as braceletes</marker>.</example>
+    </rule>
+
+
+
+    <!-- ASSERTO DE CONTAS acerto de contas -->
+    <rule id="ASSERTO_DE_CONTAS" name="acerto de contas">
+      <pattern>
+        <marker>	              	  
+	        <token>asserto</token>
+        </marker>                
+        <token>de</token>
+        <token>contas</token>
+      </pattern>
+      <message>Substituir «asserto» por <suggestion>acerto</suggestion>.</message>
+      <example correction="acerto">Temos de fazer um <marker>asserto</marker> de contas.</example>
+    </rule>
+
+
+
+    <!-- ASSUNTO/ASSUNTOS A ESCLARECER assunto/assuntos para esclarecer -->
+    <rule id="ASSUNTO_ASSUNTOS_A_ESCLARECER" name="assunto/assuntos para esclarecer">
+      <pattern>
+		 <token regexp="yes">assunto|assuntos</token>      
+		 <marker>
+            <token>a</token>
+         </marker>         
+        <token>esclarecer</token>
+      </pattern>
+      <message>Substituir «a» por <suggestion>para</suggestion>.</message>
+      <example correction="para">Temos vários assuntos <marker>a</marker> esclarecer.</example>
+    </rule>
+
+
+
+    <!-- ATAQUES EM MASSA ataques em grande escala -->
+    <rule id="ATAQUES_EM_MASSA" name="ataques em grande escala">
+      <pattern>
+        <token>ataques</token>
+        <token>em</token>
+        <token>massa</token>
+      </pattern>
+      <message>Substituir «ataques em massa» por <suggestion>ataques em grande escala</suggestion>.</message>
+      <example correction="ataques em grande escala">As botnets fazem <marker>ataques em massa</marker>.</example>
+    </rule>
+
+
+
+    <!-- ATÉ AI até aí -->
+    <rule id="ATÉ_AI" name="até aí">
+      <pattern>
+        <token>até</token>
+        <token>ai</token>
+      </pattern>
+      <message>Substituir «até ai» por <suggestion>até aí</suggestion>.</message>
+      <example correction="até aí">E <marker>até ai</marker> tudo estava bem.</example>
+    </rule>
+
+
+
+    <!-- ATÉ MANHÃ até amanhã -->
+    <rule id="ATÉ_MANHÃ" name="até amanhã">
+      <pattern>
+        <token>até</token>
+        <token>manhã</token>
+      </pattern>
+      <message>Substituir «até manhã» por <suggestion>até amanhã</suggestion>.</message>
+      <example correction="até amanhã">Boa noite e <marker>até manhã</marker> cedo.</example>
+    </rule>
+
+
+
+    <!-- AUTO-FALANTE altifalante -->
+    <rule id="AUTO-FALANTE" name="altifalante">
+      <pattern>
+        <token>auto-falante</token>
+      </pattern>
+      <message>Substituir «auto-falante» por <suggestion>altifalante</suggestion>.</message>
+      <example correction="altifalante">O <marker>auto-falante</marker> está avariado.</example>
+    </rule>
+
+
+
+    <!-- AUTO-FALANTES altifalantes -->
+    <rule id="AUTO-FALANTES" name="altifalantes">
+      <pattern>
+        <token>auto-falantes</token>
+      </pattern>
+      <message>Substituir «auto-falantes» por <suggestion>altifalantes</suggestion>.</message>
+      <example correction="altifalantes">Os <marker>auto-falantes</marker> estão avariados.</example>
+    </rule>
+
+
+
+    <!-- BEM DITO DEUS/SATANÁS bem dito Deus/Satanás -->
+    <rule id="BEM_DITO_DEUS-SATANÁS" name="bem dito Deus-Satanás">
+      <pattern>
+		<marker>
+            <token>bem</token>
+            <token>dito</token>
+         </marker>
+         <token regexp="yes">Deus|Satanás</token>
+      </pattern>
+      <message>Substituir «bem dito» por <suggestion>bendito</suggestion>.</message>
+      <example correction="bendito">És a vida, <marker>bem dito</marker> Deus.</example>
+    </rule>
+
+
+
+    <!-- BICHA DE ESPERA fila de espera -->
+	<rule id="BICHA_DE_ESPERA" name="fila de espera">
+	  <pattern>
+        <marker>	              	  
+	        <token>bicha</token>
+        </marker>          
+	    <token>de</token>
+	   	<token>espera</token>              
+      </pattern>
+      <message>Substituir «bicha» por <suggestion>fila</suggestion>.</message>
+      <example correction="fila">Estou na <marker>bicha</marker> de espera.</example>
+	</rule>
+
+
+	
+    <!-- BOLOS-REI bolos-reis -->
+    <rule id="BOLOS-REI" name="bolos-reis">
+      <pattern>
+        <token>bolos-rei</token>
+      </pattern>
+      <message>Substituir «bolos-rei» por <suggestion>bolos-reis</suggestion>.</message>
+      <example correction="bolos-reis">Vamos comprar os <marker>bolos-rei</marker>.</example>
+    </rule>
+	
+
+
+    <!-- DEZENAS/CENTENAS DE MILHAR dezenas/centenas de milhares -->
+    <rule id="DEZENAS_CENTENAS_DE_MILHAR" name="dezenas/centenas de milhares">
+      <pattern>
+		<token regexp="yes">dezenas|centenas</token>
+        <token>de</token>
+		<marker>
+			<token>milhar</token>
+		</marker>
+      </pattern>
+      <message>Substituir «milhar» por <suggestion>milhares</suggestion>.</message>
+      <example correction="milhares">Existem várias centenas de <marker>milhar</marker> de militantes.</example>
+    </rule>
+
+
+
+    <!-- CHEGARAM A SABEREM chegaram a saber -->
+	<rule id="CHEGARAM_A_SABEREM" name="chegaram a saber">
+	  <pattern>
+        <token>chegaram</token>
+	    <token>a</token>
+        <marker>	              	  
+	    	<token>saberem</token>              
+        </marker>          
+      </pattern>
+      <message>Substituir «saberem» por <suggestion>saber</suggestion>.</message>
+      <example correction="saber">Eles chegaram a <marker>saberem</marker> os resultados?</example>
+	</rule>
+
+
+
+    <!-- COM VOSSA com a vossa -->
+    <rule id="COM_VOSSA" name="com a vossa">
+      <pattern>
+        <marker>
+            <token>com</token>
+            <token>vossa</token>
+        </marker>
+        <token><exception regexp="yes">majestade|realeza|divindade|excelência|eminência</exception></token>
+      </pattern>
+      <message>Querias dizer <suggestion>com a vossa</suggestion>?</message>
+      <example correction="com a vossa">Usei o texto <marker>com vossa</marker> permissão.</example>
+      <example>Queria falar <marker>com vossa</marker> majestade.</example>
+    </rule>
+
+
+
+    <!-- COMER O ALMOÇO almoçar -->
+    <rule id="COMER_O_ALMOÇO" name="almoçar">
+      <pattern>
+        <token>comer</token>
+        <token>o</token>
+        <token>almoço</token>
+      </pattern>
+      <message>Substituir «comer o almoço» por <suggestion>almoçar</suggestion>.</message>
+      <example correction="almoçar">Vou <marker>comer o almoço</marker> daqui a pouco.</example>
+    </rule>
+
+
+
+    <!-- COMER tomar -->
+    <rule id="COMER_O_OS_MEDICAMENTO_S" name="tomar o(s) medicamento(s)">
+      <pattern case_sensitive="no">
+		 <marker>
+            <token>comer</token>
+         </marker>
+         <token regexp="yes">os?</token>
+         <token regexp="yes">medicamentos?</token>
+      </pattern>
+      <message>Substituir «comer» por <suggestion>tomar</suggestion>.</message>
+      <example correction="tomar">Vai <marker>comer</marker> os medicamentos.</example>
+    </rule>
+
+	
+
+    <!-- CONTRA CAPA contracapa -->
+    <rule id="CONTRA_CAPA" name="contracapa">
+      <pattern>
+        <token>contra</token>
+		<token>capa</token>
+      </pattern>
+      <message>Substituir «contra capa» por <suggestion>contracapa</suggestion>.</message>
+      <example correction="contracapa">O livro é composto por: capa, <marker>contra capa</marker> e lombada.</example>
+    </rule>
+
+
+
+    <!-- CONTRA PARTIDA contrapartida -->
+    <rule id="CONTRA_PARTIDA" name="contrapartida">
+      <pattern>
+        <token>contra</token>
+        <token>partida</token>
+      </pattern>
+      <message>Substituir «contra partida» por <suggestion>contrapartida</suggestion>.</message>
+      <example correction="contrapartida">A <marker>contra partida</marker> é grande.</example>
+    </rule>
+
+
+
+    <!-- CUJO O cujo -->
+    <rule id="CUJO_O" name="cujo">
+      <pattern>
+        <token>cujo</token>
+        <token>o</token>
+      </pattern>
+      <message>Substituir «cujo o» por <suggestion>cujo</suggestion>.</message>
+      <example correction="cujo">O autor <marker>cujo o</marker> livro foi um best-seller.</example>
+    </rule>
+
+
+	
+    <!-- DA dá -->
+    <rule id="DA" name="dá">
+      <pattern>
+		<marker>
+			<token>da</token>        
+		</marker>	      
+		<token postag="SPS00"><exception>de</exception></token>
+	  </pattern>
+      <message>Substituir «da» por <suggestion>dá</suggestion>.</message>
+      <example correction="dá">Não <marker>da</marker> para acreditar.</example>
+    </rule>	
+	
+
+
+    <!-- DAR OS BONS DIAS dar os bons-dias -->
+    <rule id="DAR_OS_BONS_DIAS" name="dar os bons-dias">
+      <pattern>
+        <token>dar</token>
+        <token>os</token>
+        <token>bons</token>
+        <token>dias</token>
+      </pattern>
+      <message>Substituir «dar os bons dias» por <suggestion>dar os bons-dias</suggestion>.</message>
+      <example correction="dar os bons-dias">Vou <marker>dar os bons dias</marker> ao Miguel.</example>
+    </rule>
+
+	
+	
+    <!-- DE/DO/UM/NUM NEGOCIO de/do/um/num negócio -->
+	<rule id="DE_DO_UM_NUM_NEGOCIO" name="de/do/um/num negócio">
+	  <pattern>
+	    <token regexp="yes">de|do|um|num</token>
+        <marker>	              	  
+	        <token>negocio</token>	        
+        </marker>          	    
+      </pattern>
+      <message>Substituir «negocio» por <suggestion>negócio</suggestion>.</message>
+      <example correction="negócio">Qual o modelo de <marker>negocio</marker> adequado?</example>
+	</rule>
+		
+
+
+    <!-- DE ALMA E CORAÇÃO informal -->
+	<rule id="DE_ALMA_E_CORAÇÃO" name="de alma e coração (informal)">
+	  <pattern>
+		<token>de</token>
+		<token>alma</token>
+		<token>e</token>
+		<token>coração</token>
+      </pattern>
+      <message>Linguagem informal. Pondera usar uma expressão alternativa.</message>
+      <example correction="">Sou um gestor <marker>de alma e coração</marker>.</example>
+      <example>Sou um gestor <marker>com determinação</marker>.</example>
+	</rule>
+
+	
+	
+    <!-- DE CALCULO de cálculo -->
+    <rule id="DE_CALCULO" name="de cálculo">
+      <pattern>
+        <token>de</token>
+		<marker>
+			<token>calculo</token>
+		</marker>  	
+      </pattern>
+      <message>Substituir «calculo» por <suggestion>cálculo</suggestion>.</message>
+      <example correction="cálculo">Isto é de <marker>calculo</marker> difícil.</example>
+    </rule>
+
+
+
+    <!-- DE CERTO decerto -->
+    <rule id="DE_CERTO" name="decerto">
+      <pattern>
+	      <marker>
+	        <token>de</token>
+	        <token>certo</token>
+	      </marker>  
+        <token><exception regexp="yes">valor|montante|assunto|tema|produto|modo|indivíduo|período</exception></token>
+      </pattern>
+      <message>Substituir «de certo» por <suggestion>decerto</suggestion>.</message>
+      <example correction="decerto">Isso irá <marker>de certo</marker> lesar os trabalhadores.</example>
+    </rule>
+
+	
+
+    <!-- DE CIMA/ALTO ABAIXO de cima/alto a baixo -->
+    <rule id="DE_CIMA-ALTO_ABAIXO" name="de cima/alto a baixo">
+      <pattern>
+		<token>de</token>
+		<token regexp="yes">cima|alto</token>
+		 <marker>
+            <token>abaixo</token>
+         </marker>
+      </pattern>
+      <message>Substituir «abaixo» por <suggestion>a baixo</suggestion>.</message>
+      <example correction="a baixo">Ela observou o Rui de alto <marker>abaixo</marker>.</example>
+    </rule>
+	
+	
+	
+    <!-- DE FORMA A QUE para que -->
+    <rule id="DE_FORMA_A_QUE" name="para que">
+      <pattern>
+        <token>de</token>
+        <token>forma</token>
+        <token>a</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «de forma a que» por <suggestion>para que</suggestion>.</message>
+      <example correction="para que">Isto é feito <marker>de forma a que</marker> os cidadãos possam ser livres.</example>
+    </rule>
+
+
+	
+    <!-- DE IMPACTO ECOLÓGICA de impacto ecológico -->
+    <rule id="DE_IMPACTO_ECOLÓGICA" name="de impacto ecológico">
+      <pattern>
+        <token>de</token>
+        <token>impacto</token>
+		<marker>
+			<token>ecológica</token>
+		</marker>
+      </pattern>
+      <message>Substituir «ecológica» por <suggestion>ecológico</suggestion>.</message>
+      <example correction="ecológico">Temos riscos de impacto <marker>ecológica</marker>.</example>
+    </rule>
+
+	
+
+     <!-- DE MANEIRA A QUE de maneira que -->
+    <rule id="DE_MANEIRA_A_QUE" name="de maneira que">
+      <pattern>
+        <token>de</token>
+        <token>maneira</token>
+        <token>a</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «de maneira a que» por <suggestion>de maneira que</suggestion>.</message>
+      <example correction="de maneira que">Isto é feito <marker>de maneira a que</marker> os cidadãos possam ser livres.</example>
+    </rule>
+
+
+
+    <!-- DE MODO A QUE de modo que -->
+    <rule id="DE_MODO_A_QUE" name="de modo que">
+      <pattern>
+        <token>de</token>
+        <token>modo</token>
+        <token>a</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «de modo a que» por <suggestion>de modo que</suggestion>.</message>
+      <example correction="de modo que">Isto é feito <marker>de modo a que</marker> os cidadãos possam ser livres.</example>
+    </rule>
+
+
+
+    <!-- DE VÊS EM QUANDO de vez em quando -->
+    <rule id="DE_VÊS_EM_QUANDO" name="de vez em quando">
+      <pattern>
+        <token>de</token>
+        <token>vês</token>
+        <token>em</token>
+        <token>quando</token>
+      </pattern>
+      <message>Substituir «de vês em quando» por <suggestion>de vez em quando</suggestion>.</message>
+      <example correction="de vez em quando">Ela aparece <marker>de vês em quando</marker>.</example>
+    </rule>
+
+
+
+    <!-- DECRETO DE LEI decreto-lei -->
+    <rule id="DECRETO_DE_LEI" name="decreto-lei">
+      <pattern>
+        <token>decreto</token>
+        <token>de</token>
+        <token>lei</token>
+      </pattern>
+      <message>Substituir «decreto de lei» por <suggestion>decreto-lei</suggestion>.</message>
+      <example correction="decreto-lei">Saiu um novo <marker>decreto de lei</marker>.</example>
+    </rule>
+
+
+	
+    <!-- DECRETOS-LEI decretos-leis -->
+    <rule id="DECRETOS-LEI" name="decretos-leis">
+      <pattern>
+        <token>decretos-lei</token>
+      </pattern>
+      <message>Substituir «decretos-lei» por <suggestion>decretos-leis</suggestion>.</message>
+      <example correction="decretos-leis">Vamos analisar os <marker>decretos-lei</marker>.</example>
+    </rule>
+
+	
+
+    <!-- DÊS DO desde o -->
+    <rule id="DÊS_DO" name="desde o">
+      <pattern>
+        <token>dês</token>
+        <token>do</token>        
+      </pattern>
+      <message>Substituir «dês do» por <suggestion>desde o</suggestion>.</message>
+      <example correction="desde o">Isto acontece <marker>dês do</marker> mês passado.</example>
+    </rule>
+
+
+
+    <!-- DÊS DOS desde os -->
+    <rule id="DÊS_DOS" name="desde os">
+      <pattern>
+        <token>dês</token>
+        <token>dos</token>        
+      </pattern>
+      <message>Substituir «dês dos» por <suggestion>desde os</suggestion>.</message>
+      <example correction="desde os">Isto acontece <marker>dês dos</marker> tempos da minha avó.</example>
+    </rule>
+
+
+
+    <!-- DEPOIS DE após -->
+    <rule id="DEPOIS_DE" name="após">
+      <pattern>
+  	    <marker>
+  	    <token>depois</token>
+  	    <token>de</token>
+  	    </marker>
+  	    <token><exception>amanhã</exception></token> 
+      </pattern>
+      <message>Substituir «depois de» por <suggestion>após</suggestion>.</message>
+      <example correction="após">Faz isso <marker>depois de</marker> saber os resultados.</example>
+    </rule>
+
+	
+
+    <!-- DESDE QUE HAJAM desde que haja -->
+    <rule id="DESDE_QUE_HAJAM" name="desde que haja">
+      <pattern>
+        <token>desde</token>
+        <token>que</token>
+		<marker>
+			<token>hajam</token>
+		</marker>	
+      </pattern>
+      <message>Substituir «hajam» por <suggestion>haja</suggestion>.</message>
+      <example correction="haja">Isso é possível desde que <marker>hajam</marker> condições.</example>
+    </rule>
+
+
+	
+    <!-- DEVE DE deve -->
+    <rule id="DEVE_DE" name="deve">
+      <pattern>
+        <token>deve</token>
+        <token>de</token>
+      </pattern>
+      <message>Substituir «deve de» por <suggestion>deve</suggestion>.</message>
+      <example correction="deve">Ele <marker>deve de</marker> vir mais tarde.</example>
+    </rule>
+
+
+
+    <!-- DEVEM DE devem -->
+    <rule id="DEVEM_DE" name="devem">
+      <pattern>
+        <token>devem</token>
+        <token>de</token>
+      </pattern>
+      <message>Substituir «devem de» por <suggestion>devem</suggestion>.</message>
+      <example correction="devem">Eles <marker>devem de</marker> vir mais tarde.</example>
+    </rule>
+
+
+
+    <!-- DUM de um -->
+    <rule id="DUM" name="de um">
+      <pattern>
+        <token>dum</token>
+      </pattern>
+      <message>Substituir «dum» por <suggestion>de um</suggestion>.</message>
+      <example correction="de um">A venda <marker>dum</marker> apartamento.</example>
+    </rule>
+
+
+
+    <!-- DUMA de uma -->
+    <rule id="DUMA" name="de uma">
+      <pattern>
+        <token>duma</token>
+      </pattern>
+      <message>Substituir «duma» por <suggestion>de uma</suggestion>.</message>
+      <example correction="de uma">A venda <marker>duma</marker> casa.</example>
+    </rule>
+
+
+
+    <!-- É SUPOSTO QUE supõe-se que -->
+    <rule id="É_SUPOSTO_QUE" name="supõe-se que">
+      <pattern>
+        <token>é</token>
+        <token>suposto</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «é suposto que» por <suggestion>supõe-se que</suggestion>.</message>
+      <example correction="supõe-se que">Assim, <marker>é suposto que</marker> aconteça.</example>
+    </rule>
+
+
+
+    <!-- E MAS TARDE e mais tarde -->
+    <rule id="E_MAS_TARDE" name="e mais tarde">
+      <pattern>
+        <token>e</token>
+        <token>mas</token>
+        <token>tarde</token>
+      </pattern>
+      <message>Substituir «e mas tarde» por <suggestion>e mais tarde</suggestion>.</message>
+      <example correction="e mais tarde">As mulheres engravidam menos <marker>e mas tarde</marker>.</example>
+    </rule>
+
+
+
+    <!-- ELAS TEM elas têm -->
+    <rule id="ELAS_TEM" name="elas têm">
+      <pattern>
+        <token>elas</token>
+        <token>tem</token>
+      </pattern>
+      <message>Substituir «elas tem» por <suggestion>elas têm</suggestion>.</message>
+      <example correction="elas têm">Há palavras que <marker>elas tem</marker> medo de ouvir.</example>
+    </rule>
+
+
+
+    <!-- ELES TEM eles têm -->
+    <rule id="ELES_TEM" name="eles têm">
+      <pattern>
+        <token>eles</token>
+        <token>tem</token>
+      </pattern>
+      <message>Substituir «eles tem» por <suggestion>eles têm</suggestion>.</message>
+      <example correction="eles têm">Há palavras que <marker>eles tem</marker> medo de ouvir.</example>
+    </rule>
+
+
+    <!-- EM ANEXAS/ANEXOS em anexo -->
+	<rule id="CONFUSÃO_EM_ANEXAS_ANEXOS" name="confusão anexas/anexos">
+	  <pattern>
+        <token>em</token>	  
+        <token regexp="yes">anexas|anexos</token>
+      </pattern>
+      <message>A expressão «em anexo» é invariável.</message>
+      <example correction="">Os documentos seguem <marker>em anexas</marker>.</example>
+      <example correction="">Os documentos seguem <marker>em anexos</marker>.</example>
+      <example>Os documentos seguem <marker>em anexo</marker>.</example>
+	</rule>
+
+
+
+    <!-- EM UM num -->
+    <rule id="EM_UM" name="num">
+      <pattern>
+        <token>em</token>
+        <token>um</token>
+      </pattern>
+      <message>Substituir «em um» por <suggestion>num</suggestion>.</message>
+      <example correction="num">Está <marker>em um</marker> armário.</example>
+    </rule>
+
+
+
+    <!-- EM UMA numa -->
+    <rule id="EM_UMA" name="numa">
+      <pattern>
+        <token>em</token>
+        <token>uma</token>
+      </pattern>
+      <message>Substituir «em uma» por <suggestion>numa</suggestion>.</message>
+      <example correction="numa">Está <marker>em uma</marker> gaveta.</example>
+    </rule>
+
+
+
+    <!-- EM VÊS DE/DA/DAS/DO/DOS em vez de/da/das/do/dos -->
+    <rule id="EM_VÊS_DE_DA_DAS_DO_DOS" name="em vez de-da-das-do-dos">
+      <pattern>
+        <token>em</token>
+		<marker>
+			<token>vês</token>
+		</marker>		
+        <token regexp="yes">de|das?|dos?</token>
+      </pattern>
+      <message>Substituir «vês» por <suggestion>vez</suggestion>.</message>
+      <example correction="vez">Ele falou em <marker>vês</marker> de escrever.</example>
+    </rule>
+
+
+
+    <!-- ENQUANTO QUE enquanto -->
+    <rule id="ENQUANTO_QUE" name="enquanto">
+      <pattern>
+        <token>enquanto</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «enquanto que» por <suggestion>enquanto</suggestion>.</message>
+      <example correction="enquanto">O Miguel estudava <marker>enquanto que</marker> os amigos brincavam.</example>
+    </rule>
+
+
+
+    <!-- EQUIPE: NA/EM/NUMA/SUA/NOSSA/VOSSA/TUA EQUIPE -> equipa -->
+    <rule id="EQUIPE" name="equipa">
+      <pattern>
+        <token regexp="yes">na|em|numa|sua|nossa|vossa|tua</token>
+        <marker>
+        	<token>equipe</token>
+        </marker>
+      </pattern>
+      <message>Grafia do Brasil. Substituir «equipe» por <suggestion>equipa</suggestion>.</message>
+      <example correction="equipa">Devemos trabalhar em <marker>equipe</marker>.</example>
+    </rule>
+
+
+
+    <!-- EQUIPES: NAS/EM/NUMAS/SUAS/NOSSAS/VOSSAS/TUAS EQUIPES -> equipas -->
+    <rule id="EQUIPES" name="equipas">
+      <pattern>
+        <token regexp="yes">nas|em|numas|suas|nossas|vossas|tuas</token>
+        <marker>
+        	<token>equipes</token>
+        </marker>
+      </pattern>
+      <message>Grafia do Brasil. Substituir «equipes» por <suggestion>equipas</suggestion>.</message>
+      <example correction="equipas">As nossas <marker>equipes</marker> são boas.</example>
+    </rule>
+
+
+
+    <!-- ENCRENCA/ENCRENCAS informal -->
+	<rule id="ENCRENCA_ENCRENCAS" name="encrenca(s) (informal)">
+	  <pattern>
+		<token regexp="yes">encrencas?</token>
+      </pattern>
+      <message>Linguagem informal. Pondera usar uma expressão alternativa.</message>
+      <example correction="">Que grande <marker>encrenca</marker>.</example>
+      <example>Que grande <marker>sarilho</marker>.</example>
+	</rule>
+
+
+    <!-- ENTRAS TE entraste -->
+	<rule id="ENTRAS_TE" name="entraste">
+	  <pattern>
+		<token>entras</token>
+		<token>te</token>
+      </pattern>
+      <message>Substituir «entras te» por <suggestion>entraste</suggestion>.</message>
+      <example correction="entraste">Então <marker>entras te</marker> bem o ano.</example>
+	</rule>	
+	
+
+    <!-- ESQUECEU-SE/ESQUECERAM-SE/ESQUECI-ME/ESQUECER-SE QUE esqueceu-se de que -->
+    <rule id="ESQUECEU-SE_QUE" name="esqueceu-se de que">
+      <pattern>
+        <token regexp="yes">esqueceu-se|esqueceram-se|esqueci-me|esquecer-se</token>
+        <marker>
+        	<token>que</token>
+        </marker>
+      </pattern>
+      <message>Substituir «que» por <suggestion>de que</suggestion>.</message>
+      <example correction="de que">O Rui esqueceu-se <marker>que</marker> tinha um exame.</example>
+    </rule>
+
+
+
+    <!-- ESTA MELHOR está melhor -->
+    <rule id="ESTA_MELHOR" name="está melhor">
+      <pattern>
+        <token>esta</token>
+        <token>melhor</token>
+      </pattern>
+      <message>Substituir «esta melhor» por <suggestion>está melhor</suggestion>.</message>
+      <example correction="está melhor">Assim <marker>esta melhor</marker> que no passado.</example>
+    </rule>
+
+
+
+    <!-- ESTÁ TÉCNICA esta técnica -->
+    <rule id="ESTÁ_TÉCNICA" name="esta técnica">
+      <pattern>
+        <token>está</token>
+        <token>técnica</token>
+      </pattern>
+      <message>Substituir «está técnica» por <suggestion>esta técnica</suggestion>.</message>
+      <example correction="esta técnica">Os primeiros a usar <marker>está técnica</marker> foram eles.</example>
+    </rule>
+
+
+
+    <!-- ESTAS MELHOR estás melhor -->
+    <rule id="ESTAS_MELHOR" name="estás melhor">
+      <pattern>
+        <token>estas</token>
+        <token>melhor</token>
+      </pattern>
+      <message>Substituir «estas melhor» por <suggestion>estás melhor</suggestion>.</message>
+      <example correction="estás melhor">Assim <marker>estas melhor</marker>.</example>
+    </rule>
+
+
+
+    <!-- EU CRIA eu queria -->
+    <rule id="EU_CRIA" name="eu queria">
+      <pattern>
+        <token>eu</token>
+        <token>cria</token>
+      </pattern>
+      <message>Substituir «eu cria» por <suggestion>eu queria</suggestion>.</message>
+      <example correction="eu queria">É o que <marker>eu cria</marker> dizer.</example>
+    </rule>
+
+
+
+    <!-- EXISTE MUITAS existem muitas -->
+    <rule id="EXISTE_MUITAS" name="existem muitas">
+      <pattern>
+        <token>existe</token>
+        <token>muitas</token>
+      </pattern>
+      <message>Substituir «existe muitas» por <suggestion>existem muitas</suggestion>.</message>
+      <example correction="existem muitas">Na vida <marker>existe muitas</marker> coisas boas.</example>
+    </rule>
+
+	
+	
+    <!-- FAZEM n SEGUNDOS/MINUTOS/HORAS/DIAS/SEMANAS/MESES/ANOS > FAZ -->
+    <rule id="FAZEM" name="faz">
+      <pattern>
+		<marker>
+			<token>fazem</token>
+		</marker>
+		<token></token>
+        <token regexp="yes">segundos?|minutos?|horas?|dias?|semanas?|mês|meses|anos?</token>
+      </pattern>
+      <message>Substituir «fazem» por <suggestion>faz</suggestion>.</message>
+      <example correction="faz">Rui, <marker>fazem</marker> duas semanas que não falamos.</example>
+    </rule>
+	
+
+
+    <!-- FALARAM-SE DE falou-se de -->
+    <rule id="FALARAM-SE_DE" name="falou-se de">
+      <pattern>
+        <token>falaram-se</token>
+        <token>de</token>
+      </pattern>
+      <message>Substituir «falaram-se de» por <suggestion>falou-se de</suggestion>.</message>
+      <example correction="falou-se de">Hoje <marker>falaram-se de</marker> de vários problemas.</example>
+    </rule>
+
+
+
+    <!-- FAZER AS COISAS DIREITAS fazer as coisas direito -->
+    <rule id="FAZER_AS_COISAS_DIREITAS" name="fazer as coisas direito">
+      <pattern>
+        <token>fazer</token>
+        <token>as</token>
+        <token>coisas</token>
+		<marker>
+			<token>direitas</token>
+		</marker>
+      </pattern>
+      <message>Substituir «direitas» por <suggestion>direito</suggestion>.</message>
+      <example correction="direito">Preciso fazer as coisas <marker>direitas</marker>.</example>
+    </rule>
+
+
+
+    <!-- FOI ACEITADA foi aceite -->
+    <rule id="FOI_ACEITADA" name="foi aceite">
+      <pattern>
+        <token>foi</token>
+        <token>aceitada</token>
+      </pattern>
+      <message>Substituir «foi aceitada» por <suggestion>foi aceite</suggestion>.</message>
+      <example correction="foi aceite">A proposta <marker>foi aceitada</marker> hoje.</example>
+    </rule>
+
+
+
+    <!-- FOI ACEITADO foi aceite -->
+    <rule id="FOI_ACEITADO" name="foi aceite">
+      <pattern>
+        <token>foi</token>
+        <token>aceitado</token>
+      </pattern>
+      <message>Substituir «foi aceitado» por <suggestion>foi aceite</suggestion>.</message>
+      <example correction="foi aceite">O acordo <marker>foi aceitado</marker> hoje.</example>
+    </rule>
+
+
+
+    <!-- FOI SOU UM/UMA foi só um/uma -->
+    <rule id="FOI_SOU_UM-UMA" name="foi só um/uma">
+      <pattern>
+        <token>foi</token>
+		<marker>
+			<token>sou</token>
+		</marker>	
+		<token regexp="yes">um|uma</token>
+      </pattern>
+      <message>Substituir «sou» por <suggestion>só</suggestion>.</message>
+      <example correction="só">Na realidade foi <marker>sou</marker> um esquecimento.</example>
+    </rule>
+
+	
+
+    <!-- FORMAS INOVADORES formas inovadoras -->
+    <rule id="FORMAS_INOVADORES" name="formas inovadoras">
+      <pattern>        
+        <token>formas</token>
+        <token>inovadores</token>
+      </pattern>
+      <message>Substituir «formas inovadores» por <suggestion>formas inovadoras</suggestion>.</message>
+      <example correction="formas inovadoras">Tudo são <marker>formas inovadores</marker>.</example>
+    </rule>
+
+
+
+    <!-- FURTO DE IDENTIDADE usurpação de identidade -->
+    <rule id="FURTO_DE_IDENTIDADE" name="usurpação de identidade">
+      <pattern>
+        <token>furto</token>
+        <token>de</token>
+        <token>identidade</token>
+      </pattern>
+      <message>Substituir «furto de identidade» por <suggestion>usurpação de identidade</suggestion>.</message>
+      <example correction="usurpação de identidade">É comum ser alvo de <marker>furto de identidade</marker> na Internet.</example>
+    </rule>
+
+	
+
+    <!-- GAJA/S informal -->
+	<rule id="GAJA_GAJAS" name="gaja/gajas (informal)">
+	  <pattern>
+		<token regexp="yes">gaja|gajas</token>
+      </pattern>
+      <message>Linguagem informal. Pondera usar uma expressão alternativa.</message>
+      <example correction="">Onde está a <marker>gaja</marker>?</example>
+      <example>Onde está a <marker>senhora</marker>?</example>
+	</rule>
+	
+	
+
+    <!-- GAJO/S informal -->
+	<rule id="GAJO_GAJOS" name="gajo/gajos (informal)">
+	  <pattern>
+		<token regexp="yes">gajo|gajos</token>
+      </pattern>
+      <message>Linguagem informal. Pondera usar uma expressão alternativa.</message>
+      <example correction="">Onde está o <marker>gajo</marker>?</example>
+      <example>Onde está o <marker>senhor</marker>?</example>
+	</rule>	
+
+	
+	
+    <!-- GOSTO DE QUE gosto que -->
+    <rule id="GOSTO_DE_QUE" name="gosto que">
+      <pattern>
+        <token>gosto</token>
+        <token>de</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «gosto de que» por <suggestion>gosto que</suggestion>.</message>
+      <example correction="gosto que">Nem sempre <marker>gosto de que</marker> me ensinem.</example>
+    </rule>
+
+	
+	
+    <!-- GUARDAS-CHUVAS guarda-chuvas -->
+    <rule id="GUARDAS-CHUVAS" name="guarda-chuvas">
+      <pattern>
+        <token>guardas-chuvas</token>
+      </pattern>
+      <message>Substituir «guardas-chuvas» por <suggestion>guarda-chuvas</suggestion>.</message>
+      <example correction="guarda-chuvas">Abram os <marker>guardas-chuvas</marker>.</example>
+    </rule>
+
+
+
+    <!-- HÁ n SEGUNDOS/MINUTOS/HORAS/DIAS/SEMANAS/MESES/ANOS ATRÁS (remove "ATRÁS") -->
+    <rule id="HÁ-ATRÁS" name="há n tempo atrás">
+      <pattern>
+        <token skip="-1">há</token>
+        <token regexp="yes">segundos?|minutos?|horas?|dias?|semanas?|mês|meses|anos?</token>
+        <token>atrás</token>
+      </pattern>
+      <message>Com o verbo haver não é necessário usar "atrás": <suggestion><match no="1" include_skipped="all"/> <match no="2"/></suggestion>.</message>
+      <example correction="Há n segundos"><marker>Há n segundos atrás</marker>.</example>
+    </rule>
+
+
+
+    <!-- À QUASE há quase -->
+    <rule id="À_QUASE" name="há quase">
+      <pattern>
+		<marker>
+			<token>à</token>		
+		</marker>			
+		<token skip="-1">quase</token>		
+        <token regexp="yes">segundos?|minutos?|horas?|dias?|semanas?|mês|meses|anos?</token>
+      </pattern>
+	  <message>Substituir «à» por <suggestion>há</suggestion>.</message>
+	  <example correction="há">Conheço a Ana <marker>à</marker> quase 30 anos.</example>
+    </rule>	
+
+
+
+    <!-- HÁS VEZES às vezes -->
+    <rule id="HÁS_VEZES" name="às vezes">
+      <pattern>
+        <token>hás</token>
+        <token>vezes</token>
+      </pattern>
+      <message>Substituir «hás vezes» por <suggestion>às vezes</suggestion>.</message>
+      <example correction="às vezes">É que <marker>hás vezes</marker> temos de tomar decisões.</example>
+    </rule>
+
+	
+
+    <!-- HOUVERAM MUITOS houve muitos -->
+    <rule id="HOUVERAM_MUITOS" name="houve muitos">
+      <pattern>
+        <token>houveram</token>
+        <token>muitos</token>
+      </pattern>
+      <message>Substituir «houveram muitos» por <suggestion>houve muitos</suggestion>.</message>
+      <example correction="houve muitos">No passado <marker>houveram muitos</marker> muitos acidentes.</example>
+    </rule>
+
+
+
+    <!-- ARREAR A/AS VELA/S BANDEIRA/S arriar a/as vela/s bandeira/s -->
+    <rule id="ARREAR_A_AS_VELA_S_BANDEIRA_S" name="arriar a/as vela/s bandeira/s">
+      <pattern>
+		 <marker>
+            <token>arrear</token>
+         </marker>         
+		 <token regexp="yes">a|as</token>      
+		 <token regexp="yes">vela|velas|bandeira|bandeiras</token>      
+      </pattern>
+      <message>Substituir «arrear» por <suggestion>arriar</suggestion>.</message>
+      <example correction="arriar">Vamos <marker>arrear</marker> a vela.</example>
+    </rule>
+
+
+
+    <!-- IR NA PRAIA ir à praia -->
+    <rule id="IR_NA_PRAIA" name="ir à praia">
+      <pattern>
+        <token>ir</token>
+        <token>na</token>
+        <token>praia</token>
+      </pattern>
+      <message>Substituir «na» por <suggestion>à</suggestion>.</message>
+      <example correction="à">Tenho de <marker>ir na praia</marker>.</example>
+      <example>Tenho de <marker>ir à praia</marker>.</example>
+    </rule>
+
+
+
+    <!-- IR NO GINÁSIO ir ao ginásio -->
+    <rule id="IR_NO_GINÁSIO" name="ir ao ginásio">
+      <pattern>
+        <token>ir</token>
+        <token>no</token>
+        <token>ginásio</token>
+      </pattern>
+      <message>Substituir «no» por <suggestion>ao</suggestion>.</message>
+      <example correction="ao">Tenho de <marker>ir no ginásio</marker>.</example>
+      <example>Tenho de <marker>ir ao ginásio</marker>.</example>
+    </rule>
+
+
+
+    <!-- HÁ SUA à sua -->
+    <rule id="HÁ_SUA" name="à sua">
+      <pattern>
+        <token>há</token>
+        <token>sua</token>
+      </pattern>
+      <message>Substituir «há sua» por <suggestion>à sua</suggestion>.</message>
+      <example correction="à sua">Ele deu uma mãozinha <marker>há sua</marker> família.</example>
+    </rule>
+
+
+
+    <!-- HÁ TUA à tua -->
+    <rule id="HÁ_TUA" name="à tua">
+      <pattern>
+        <token>há</token>
+        <token>tua</token>
+      </pattern>
+      <message>Substituir «há tua» por <suggestion>à tua</suggestion>.</message>
+      <example correction="à tua">Dá uma mãozinha <marker>há tua</marker> família.</example>
+    </rule>
+    
+
+
+    <!-- MAIOR maiores -->
+    <rule id="MAIOR" name="maiores">
+      <pattern>
+		 <marker>
+            <token>maior</token>
+         </marker>
+         <token regexp="yes">as|os|são</token>
+      </pattern>
+      <message>Substituir «maior» por <suggestion>maiores</suggestion>.</message>
+      <example correction="maiores">São <marker>maior</marker> as hipóteses.</example>
+    </rule>
+
+
+
+    <!-- MAIS BOM melhor -->
+    <rule id="MAIS_BOM" name="melhor">
+      <pattern>
+        <token>mais</token>
+        <token>bom</token>
+      </pattern>
+      <message>Substituir «mais bom» por <suggestion>melhor</suggestion>.</message>
+      <example correction="melhor">Aquele artigo é <marker>mais bom</marker> que o outro.</example>
+    </rule>
+
+
+
+    <!-- MAIS GRANDE maior -->
+    <rule id="MAIS_GRANDE" name="maior">
+      <pattern>
+        <token>mais</token>
+        <token>grande</token>
+      </pattern>
+      <message>Substituir «mais grande» por <suggestion>maior</suggestion>.</message>
+      <example correction="maior">Aquele artigo é <marker>mais grande</marker> que o outro.</example>
+    </rule>
+
+
+	
+    <!-- MANDATO DE BUSCA mandado de busca -->
+    <rule id="MANDATO_DE_BUSCA" name="mandado de busca">
+      <pattern>
+        <token>mandato</token>
+        <token>de</token>
+        <token>busca</token>        
+      </pattern>
+      <message>Substituir «mandato de busca» por <suggestion>mandado de busca</suggestion>.</message>
+      <example correction="mandado de busca">A polícia tem um <marker>mandato de busca</marker>.</example>
+    </rule>
+
+
+
+    <!-- MAS E SIM mas é sim -->
+    <rule id="MAS_E_SIM" name="mas é sim">
+      <pattern>
+        <token>mas</token>
+        <token>e</token>
+        <token>sim</token>
+      </pattern>
+      <message>Substituir «mas e sim» por <suggestion>mas é sim</suggestion>.</message>
+      <example correction="mas é sim">Muitos desconfiavam, <marker>mas e sim</marker> possível.</example>
+    </rule>
+
+
+
+    <!-- MEIA BARALHADA meio baralhada -->
+    <rule id="MEIA_BARALHADA" name="meio baralhada">
+      <pattern>
+        <token>meia</token>
+        <token>baralhada</token>
+      </pattern>
+      <message>Substituir «meia baralhada» por <suggestion>meio baralhada</suggestion>.</message>
+      <example correction="meio baralhada">Ela está <marker>meia baralhada</marker>.</example>
+    </rule>
+
+
+
+    <!-- MEIA CHEIA meio cheia -->
+    <rule id="MEIA_CHEIA" name="meio cheia">
+      <pattern>
+        <token>meia</token>
+        <token>cheia</token>
+      </pattern>
+      <message>Substituir «meia cheia» por <suggestion>meio cheia</suggestion>.</message>
+      <example correction="meio cheia">A tigela está <marker>meia cheia</marker>.</example>
+    </rule>
+
+	
+	
+    <!-- MEIO-IRMÃ meia-irmã -->
+    <rule id="MEIO-IRMÃ" name="meia-irmã">
+      <pattern>
+        <token>meio-irmã</token>
+      </pattern>
+      <message>Substituir «meio-irmã» por <suggestion>meia-irmã</suggestion>.</message>
+      <example correction="meia-irmã">A Ana é <marker>meio-irmã</marker> dele.</example>
+    </rule>
+
+	
+
+    <!-- MEIA LOUCA meio louca -->
+    <rule id="MEIA_LOUCA" name="meio louca">
+      <pattern>
+        <token>meia</token>
+        <token>louca</token>
+      </pattern>
+      <message>Substituir «meia louca» por <suggestion>meio louca</suggestion>.</message>
+      <example correction="meio louca">A Ana é <marker>meia louca</marker>.</example>
+    </rule>
+
+
+
+    <!-- MUITA > muito -->
+    <rule id="MUITA" name="muito">
+      <pattern>
+		<marker>
+			<token>muita</token>
+		</marker>       
+		<token postag="AQ0MS0"></token>	
+     </pattern>
+     <message>Substituir «muita» por <suggestion>muito</suggestion>.</message>
+     <example correction="muito">Eu sou <marker>muita</marker> bom.</example>
+    </rule> 	
+
+
+
+    <!-- MUITO PELO É muito pêlo é -->
+    <rule id="MUITO_PELO_É" name="muito pêlo é">
+      <pattern>
+        <token>muito</token>
+        <token>pelo</token>
+        <token>é</token>
+      </pattern>
+      <message>Substituir «muito pelo é» por <suggestion>muito pêlo é</suggestion>.</message>
+      <example correction="muito pêlo é">Para quem tem animais com <marker>muito pelo é</marker> bom.</example>
+    </rule>
+
+
+
+    <!-- MULHER CARTEIRO carteira -->
+    <rule id="MULHER_CARTEIRO" name="carteira">
+      <pattern>
+        <token>mulher</token>
+        <token>carteiro</token>
+      </pattern>
+      <message>Substituir «mulher carteiro» por <suggestion>carteira</suggestion>.</message>
+      <example correction="carteira">A Ana é <marker>mulher carteiro</marker>.</example>
+    </rule>
+
+
+
+    <!-- MULHER MÚSICO música -->
+    <rule id="MULHER_MÚSICO" name="música">
+      <pattern>
+        <token>mulher</token>
+        <token>músico</token>
+      </pattern>
+      <message>Substituir «mulher músico» por <suggestion>música</suggestion>.</message>
+      <example correction="música">A Ana é uma <marker>mulher músico</marker>.</example>
+    </rule>
+
+
+
+    <!-- NA MEDIDA DO POSSÍVEL informal -->
+	<rule id="NA_MEDIDA_DO_POSSÍVEL" name="na medida do possível (informal)">
+	  <pattern>
+		<token>na</token>
+		<token>medida</token>
+		<token>do</token>
+		<token>possível</token>
+      </pattern>
+      <message>Linguagem informal. Pondera usar uma expressão alternativa.</message>
+      <example correction="">Isto deve ser feito <marker>na medida do possível</marker>.</example>
+      <example>Isto deve ser feito <marker>dentro do possível</marker>.</example>
+	</rule>
+
+
+
+    <!-- NA PRATICA na prática -->
+    <rule id="NA_PRATICA" name="na prática">
+      <pattern>		
+		<token>na</token>	  
+		<marker>	  
+			<token>pratica</token>
+		</marker>	  
+      </pattern>
+      <message>Substituir «pratica» por <suggestion>prática</suggestion>.</message>
+      <example correction="prática">Vamos ver na <marker>pratica</marker>.</example>
+    </rule>
+
+
+	
+    <!-- NÃO ESTA FÁCIL não está fácil -->
+    <rule id="NÃO_ESTA_FÁCIL" name="não está fácil">
+      <pattern>
+        <token>não</token>
+        <token>esta</token>
+        <token>fácil</token>
+      </pattern>
+      <message>Substituir «não esta fácil» por <suggestion>não está fácil</suggestion>.</message>
+      <example correction="não está fácil">A vida <marker>não esta fácil</marker> para a população mundial.</example>
+    </rule>
+
+
+
+    <!-- NÃO VEZ QUE não vês que -->
+    <rule id="NÃO_VEZ_QUE" name="não vês que">
+      <pattern>
+        <token>não</token>
+        <token>vez</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «não vez que» por <suggestion>não vês que</suggestion>.</message>
+      <example correction="não vês que">Pai, <marker>não vez que</marker> eles estão errados?</example>
+    </rule>
+
+
+
+    <!-- NESTA CASO neste caso -->
+    <rule id="NESTA_CASO" name="neste caso">
+      <pattern>
+        <token>nesta</token>
+        <token>caso</token>
+      </pattern>
+      <message>Substituir «nesta caso» por <suggestion>neste caso</suggestion>.</message>
+      <example correction="neste caso">Quem está errado <marker>nesta caso</marker> é o Miguel.</example>
+    </rule>
+
+
+
+    <!-- NO FAZ FALTA não faz falta -->
+    <rule id="NO_FAZ_FALTA" name="não faz falta">
+      <pattern>
+        <token>no</token>
+        <token>faz</token>
+        <token>falta</token>
+      </pattern>
+      <message>Substituir «no faz falta» por <suggestion>não faz falta</suggestion>.</message>
+      <example correction="não faz falta">Isso <marker>no faz falta</marker> às pessoas.</example>
+    </rule>
+
+
+
+    <!-- NO EUA nos EUA -->
+    <rule id="NO_EUA" name="nos EUA">
+      <pattern>
+        <token>no</token>
+        <token>EUA</token>
+      </pattern>
+      <message>Substituir «no EUA» por <suggestion>nos EUA</suggestion>.</message>
+      <example correction="nos EUA">Um evento realizado <marker>no EUA</marker>.</example>
+    </rule>
+
+	
+    <!-- NOS + VERB - nós + verb -->
+    <rule id="NOS_VERBO" name="Nós + verbo">
+      <pattern>
+		<marker>
+			<token case_sensitive="yes">Nos</token>	  
+		</marker>
+		<token postag="VMIP1P0"></token> 	
+     </pattern>	 	 
+     <message>Substituir «Nos» por <suggestion>Nós</suggestion>.</message>
+     <example correction="Nós"><marker>Nos</marker> sabemos a resposta.</example>	 	 
+    </rule> 
+
+
+    <!-- NUM SEI não sei -->
+    <rule id="NUM_SEI" name="não sei">
+      <pattern>
+        <token>num</token>
+        <token>sei</token>
+      </pattern>
+      <message>Substituir «num sei» por <suggestion>não sei</suggestion>.</message>
+      <example correction="não sei">Como podes ver, <marker>num sei</marker> a resposta.</example>
+    </rule>
+
+
+	
+	<!-- CONTROLE/CONTROLO *START* -->
+	<!-- ************************* -->
+	
+	
+    <!-- O/DE/DO CONTROLE o/de/do controlo -->
+    <rule id="O_DE_DO_CONTROLE" name="o/de/do controlo">
+      <pattern>
+		<token regexp="yes">o|de|do</token>
+		<marker>
+			<token>controle</token>
+		</marker>
+		<token regexp="yes">das?|dos?|de</token>
+      </pattern>
+      <message>Grafia do Brasil. Substituir «controle» por <suggestion>controlo</suggestion>.</message>
+      <example correction="controlo">Perdeu o <marker>controle</marker> da situação.</example>
+    </rule>
+
+	
+    <!-- SOB CONTROLE sob controlo -->
+    <rule id="SOB_CONTROLE" name="sob controlo">
+      <pattern>
+		<token>sob</token>
+		<marker>
+			<token>controle</token>
+		</marker>
+      </pattern>
+      <message>Grafia do Brasil. Substituir «controle» por <suggestion>controlo</suggestion>.</message>
+      <example correction="controlo">Está tudo sob <marker>controle</marker>.</example>
+    </rule>
+	
+	
+	<!-- CONTROLE/CONTROLO *END* -->
+	<!-- *********************** -->
+	
+	
+	
+	<!-- O FACTO DA/DAS/DO/DOS *START* -->
+	<!-- ***************************** -->
+	
+    <!-- O FACTO DA o facto de a -->
+    <rule id="O_FACTO_DA" name="o facto de a">
+      <pattern>
+        <token>o</token>
+        <token>facto</token>
+        <token>da</token>
+      </pattern>
+      <message>Substituir «o facto da» por <suggestion>o facto de a</suggestion>.</message>
+      <example correction="o facto de a">Ter em conta <marker>o facto da</marker> aluna não saber.</example>
+    </rule>
+
+    <!-- O FACTO DAS o facto de as -->
+    <rule id="O_FACTO_DAS" name="o facto de as">
+      <pattern>
+        <token>o</token>
+        <token>facto</token>
+        <token>das</token>
+      </pattern>
+      <message>Substituir «o facto das» por <suggestion>o facto de as</suggestion>.</message>
+      <example correction="o facto de as">Ter em conta <marker>o facto das</marker> alunas não saberem.</example>
+    </rule>
+	
+    <!-- O FACTO DO o facto de o -->
+    <rule id="O_FACTO_DO" name="o facto de o">
+      <pattern>
+        <token>o</token>
+        <token>facto</token>
+        <token>do</token>
+      </pattern>
+      <message>Substituir «o facto do» por <suggestion>o facto de o</suggestion>.</message>
+      <example correction="o facto de o">Ter em conta <marker>o facto do</marker> aluno não saber.</example>
+    </rule>	
+
+    <!-- O FACTO DOS o facto de os -->
+    <rule id="O_FACTO_DOS" name="o facto de os">
+      <pattern>
+        <token>o</token>
+        <token>facto</token>
+        <token>dos</token>
+      </pattern>
+      <message>Substituir «o facto dos» por <suggestion>o facto de os</suggestion>.</message>
+      <example correction="o facto de os">Ter em conta <marker>o facto dos</marker> alunos não saberem.</example>
+    </rule>	
+	
+	<!-- O FACTO DA/DAS/DO/DOS *END* -->
+	<!-- ***************************** -->
+	
+	
+
+     <!-- O MAS o mais -->
+    <rule id="O_MAS" name="o mais">
+      <pattern>
+		<token>o</token>
+        <marker>
+			<token>mas</token>
+		</marker>	
+		 <token postag_regexp="yes" postag="RG|AQ0MS0|AQ0CS0"></token> 
+     </pattern>
+      <message>Substituir «mas» por <suggestion>mais</suggestion>.</message>
+      <example correction="mais">Quero resultados o <marker>mas</marker> rapidamente possível</example>
+    </rule>	
+
+
+
+    <!-- O MESMO DO QUE o mesmo que -->
+    <rule id="O_MESMO_DO_QUE" name="o mesmo que">
+      <pattern>
+        <token>o</token>
+        <token>mesmo</token>
+        <token>do</token>
+        <token>que</token>        
+      </pattern>
+      <message>Substituir «o mesmo do que» por <suggestion>o mesmo que</suggestion>.</message>
+      <example correction="o mesmo que">Beber não é <marker>o mesmo do que</marker> comer.</example>
+    </rule>
+
+
+
+    <!-- O MEU MUITO OBRIGADA o meu muito obrigado -->
+    <rule id="O_MEU_MUITO_OBRIGADA" name="o meu muito obrigado">
+      <pattern>
+        <token>o</token>
+		<token>meu</token>
+		<token>muito</token>
+		<marker>
+			<token>obrigada</token>
+		</marker>  	
+      </pattern>
+      <message>Substituir «obrigada» por <suggestion>obrigado</suggestion>.</message>
+      <example correction="obrigado">O meu muito <marker>obrigada</marker> por tudo.</example>
+    </rule>
+	
+
+
+    <!-- OVELHA RANHOSA ovelha ronhosa -->
+    <rule id="OVELHA_RANHOSA" name="ovelha ronhosa">
+      <pattern>
+         <token>ovelha</token>	  
+		 <marker>
+            <token>ranhosa</token>
+         </marker>         
+      </pattern>
+      <message>Substituir «ranhosa» por <suggestion>ronhosa</suggestion>.</message>
+      <example correction="ronhosa">Ele é a ovelha <marker>ranhosa</marker> da família.</example>
+    </rule>
+
+	
+
+    <!-- PAIS NATAL pais natais -->
+    <rule id="PAIS_NATAL" name="pais natais">
+      <pattern>
+        <token>pais</token>
+		<token>natal</token>
+      </pattern>
+      <message>Substituir «pais natal» por <suggestion>pais natais</suggestion>.</message>
+      <example correction="pais natais">Havia muitos <marker>pais natal</marker> na festa.</example>
+    </rule>
+		
+	
+
+    <!-- PALAVRAS-CHAVES palavras-chave -->
+    <rule id="PALAVRAS-CHAVES" name="palavras-chave">
+      <pattern>
+        <token>palavras-chaves</token>
+      </pattern>
+      <message>Substituir «palavras-chaves» por <suggestion>palavras-chave</suggestion>.</message>
+      <example correction="palavras-chave">Estas são as <marker>palavras-chaves</marker> da tese.</example>
+    </rule>
+
+
+	
+    <!-- PALAVRAS DE ORDENS palavras de ordem -->
+    <rule id="PALAVRAS_DE_ORDENS" name="palavras de ordem">
+      <pattern>
+        <token>palavras</token>
+		<token>de</token>
+		<token>ordens</token>
+      </pattern>
+      <message>Substituir «palavras de ordens» por <suggestion>palavras de ordem</suggestion>.</message>
+      <example correction="palavras de ordem">Manifestantes gritam <marker>palavras de ordens</marker>.</example>
+    </rule>	
+
+
+	
+    <!-- O ANOS/ONUS/ÂNUS DA PROVA o ónus da prova -->
+	<rule id="O_ANOS-ONUS-ÂNUS_DA_PROVA" name="o ónus da prova">
+		<pattern>
+			<token>o</token>
+			<marker>
+				<token regexp="yes">anos|onus|ânus</token>  
+			</marker>
+			<token>da</token>
+			<token>prova</token>      
+		</pattern>
+		<message>Usar: <suggestion>ónus</suggestion>.</message>   
+		<example type="correct">O <marker>ónus</marker> da prova é nosso.</example>
+		<example correction="ónus" type="incorrect">O <marker>anos</marker> da prova é nosso.</example>  
+	</rule>
+
+	
+	
+    <!-- O MAIS + ADJ-PLURAL + POSSÍVEIS - o mais adj-plural possível -->
+    <rule id="O_MAIS_ADJ-PLURAL_POSSÍVEIS" name="Erro de concordância do plural - possíveis-possível">
+      <pattern>
+		<token>o</token>	
+		<token>mais</token>	
+		<token postag="AQ0CP0"></token>	
+		<marker>
+			<token>possíveis</token>	  
+		</marker>
+     </pattern>	 	 
+     <message>Erro de concordância do plural.</message>
+     <suggestion>possível</suggestion>
+     <example correction="possível">Faz perguntas o mais abrangentes <marker>possíveis</marker>.</example>	 	 
+    </rule> 	
+	
+	
+	
+    <!-- PARA ALÉM DISSO além disso -->
+    <rule id="PARA_ALÉM_DISSO" name="além disso">
+      <pattern>
+        <token>para</token>
+        <token>além</token>
+        <token>disso</token>
+      </pattern>
+      <message>Substituir «para além disso» por <suggestion>além disso</suggestion>.</message>
+      <example correction="além disso">O que devo fazer <marker>para além disso</marker>?</example>
+    </rule>
+
+
+
+    <!-- PARA DE pára de -->
+    <rule id="PARA_DE" name="pára de">
+      <pattern>
+        <marker>      
+	        <token>para</token>
+	        <token>de</token>                
+        </marker>
+        <token><exception regexp="yes">mim|eles|elas|nós</exception></token> 
+      </pattern>
+      <message>Substituir «para de» por <suggestion>pára de</suggestion>.</message>
+      <example correction="pára de">Por favor <marker>para de</marker> me aborrecer.</example>
+    </rule>
+
+
+
+    <!-- PARA FICA para ficar -->
+    <rule id="PARA_FICA" name="para ficar">
+      <pattern>
+        <token>para</token>
+        <token>fica</token>
+      </pattern>
+      <message>Substituir «para fica» por <suggestion>para ficar</suggestion>.</message>
+      <example correction="para ficar">Esforça-te <marker>para fica</marker> bem.</example>
+    </rule>
+
+
+
+    <!-- PEDIR UM CONCELHO pedir um conselho -->
+    <rule id="PEDIR_UM_CONCELHO" name="pedir um conselho">
+      <pattern>
+        <token>pedir</token>
+        <token>um</token>
+        <token>concelho</token>
+      </pattern>
+      <message>Substituir «pedir um concelho» por <suggestion>pedir um conselho</suggestion>.</message>
+      <example correction="pedir um conselho">Devemos <marker>pedir um concelho</marker> ao padre.</example>
+    </rule>
+
+    
+
+    <!-- PENSO DE QUE penso que -->
+    <rule id="PENSO_DE_QUE" name="penso que">
+      <pattern>
+        <token>penso</token>
+        <token>de</token>
+		<token>que</token>
+      </pattern>
+      <message>Substituir «penso de que» por <suggestion>penso que</suggestion>.</message>
+      <example correction="penso que">Eu <marker>penso de que</marker> é verdade.</example>
+    </rule>
+
+
+
+    <!-- PIOR EDUCADO mais mal-educado -->
+    <rule id="PIOR_EDUCADO" name="mais mal-educado">
+      <pattern>
+        <token>pior</token>
+        <token>educado</token>
+      </pattern>
+      <message>Substituir «pior educado» por <suggestion>mais mal-educado</suggestion>.</message>
+      <example correction="mais mal-educado">O Jorge é <marker>pior educado</marker> do que parecia.</example>
+    </rule>
+
+
+
+    <!-- PODERIAM-SE poder-se-iam -->
+    <rule id="PODERIAM-SE" name="poder-se-iam">
+      <pattern>
+        <token>poderiam-se</token>
+      </pattern>
+      <message>Substituir «poderiam-se» por <suggestion>poder-se-iam</suggestion>.</message>
+      <example correction="poder-se-iam">Assim <marker>poderiam-se</marker> escrever livros sobre o assunto.</example>
+    </rule>
+
+
+	
+    <!-- POR AI por aí -->
+    <rule id="POR_AI" name="por aí">
+      <pattern>
+        <token>por</token>
+		<marker>
+			<token>ai</token>
+        </marker>
+      </pattern>
+      <message>Substituir «ai» por <suggestion>aí</suggestion>.</message>
+      <example correction="aí">Vou por <marker>ai</marker> fora a cantar.</example>
+    </rule>
+
+
+	
+    <!-- POR CAUSA QUE porque -->
+    <rule id="POR_CAUSA_QUE" name="porque">
+      <pattern>
+        <token>por</token>
+        <token>causa</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «por causa que» por <suggestion>porque</suggestion>.</message>
+      <example correction="porque">Fiquei contente <marker>por causa que</marker> ninguém se feriu.</example>
+    </rule>
+
+
+
+    <!-- POR DINHEIRO E PUDER por dinheiro e poder -->
+    <rule id="POR_DINHEIRO_E_PUDER" name="por dinheiro e poder">
+      <pattern>
+        <token>por</token>
+        <token>dinheiro</token>
+        <token>e</token>
+        <token>puder</token>
+      </pattern>
+      <message>Substituir «por dinheiro e puder» por <suggestion>por dinheiro e poder</suggestion>.</message>
+      <example correction="por dinheiro e poder">Eles fazem tudo <marker>por dinheiro e puder</marker>.</example>
+    </rule>
+
+
+
+    <!-- POR FORMA A QUE para que -->
+    <rule id="POR_FORMA_A_QUE" name="para que">
+      <pattern>
+        <token>por</token>
+        <token>forma</token>
+        <token>a</token>
+        <token>que</token>
+      </pattern>
+      <message>Substituir «por forma a que» por <suggestion>para que</suggestion>.</message>
+      <example correction="para que">Isto é feito <marker>por forma a que</marker> os cidadãos possam ser livres.</example>
+    </rule>
+
+
+
+    <!-- PRAZER EM CONVIDAR gosto em convidar -->
+    <rule id="PRAZER_EM_CONVIDAR" name="gosto em convidar">
+      <pattern>
+		 <marker>
+            <token>prazer</token>
+         </marker>
+         <token>em</token>
+         <token regexp="yes">convidá-los?|convidar-vos|convidar-te|convidar</token>
+      </pattern>
+      <message>Substituir «prazer» por <suggestion>gosto</suggestion>.</message>
+      <example correction="gosto">Terei o maior <marker>prazer</marker> em convidá-los para a festa.</example>
+    </rule>
+
+
+
+    <!-- PREÇOS ECONÓMICOS preços baixos -->
+    <rule id="PREÇOS_ECONÓMICOS" name="preços baixos">
+      <pattern>
+		<token>preços</token>
+		<marker>
+            <token>económicos</token>
+        </marker>         
+      </pattern>
+      <message>Substituir «económicos» por <suggestion>baixos</suggestion>.</message>
+      <example correction="baixos">Temos muitos preços <marker>económicos</marker> na loja.</example>
+    </rule>
+
+
+
+    <!-- PREÇOS + ADJ + ECONÓMICOS preços + adj + baixos -->
+    <rule id="PREÇOS_ADJ_ECONÓMICOS" name="preços + adj + baixos">
+      <pattern>
+		<token>preços</token>
+		<token postag="RG"></token> 
+		<marker>
+            <token>económicos</token>
+        </marker>         
+      </pattern>
+      <message>Substituir «económicos» por <suggestion>baixos</suggestion>.</message>
+      <example correction="baixos">Temos preços bastante <marker>económicos</marker> na loja.</example>
+    </rule>
+
+
+
+    <!-- PRESTE A prestes a -->
+    <rule id="PRESTE_A" name="prestes a">
+      <pattern>
+        <token>preste</token>
+        <token>a</token>
+      </pattern>
+      <message>Substituir «preste a» por <suggestion>prestes a</suggestion>.</message>
+      <example correction="prestes a">Está <marker>preste a</marker> acontecer.</example>
+    </rule>
+
+
+
+    <!-- QUANDO PODER quando puder -->
+    <rule id="QUANDO_PODER" name="quando puder">
+      <pattern>
+        <token>quando</token>
+        <token>poder</token>
+      </pattern>
+      <message>Substituir «quando poder» por <suggestion>quando puder</suggestion>.</message>
+      <example correction="quando puder">Irei lanchar <marker>quando poder</marker>.</example>
+    </rule>
+
+
+
+    <!-- QUEM NÃO ESTA quem não está -->
+    <rule id="QUEM_NÃO_ESTA" name="quem não está">
+      <pattern>
+        <token>quem</token>
+        <token>não</token>
+        <token>esta</token>
+      </pattern>
+      <message>Substituir «quem não esta» por <suggestion>quem não está</suggestion>.</message>
+      <example correction="quem não está">Excelente para <marker>quem não esta</marker> doente.</example>
+    </rule>
+
+
+
+    <!-- RIU-ME rio-me -->
+    <rule id="RIU-ME" name="rio-me">
+      <pattern>
+        <token>riu-me</token>
+      </pattern>
+      <message>Substituir «riu-me» por <suggestion>rio-me</suggestion>.</message>
+      <example correction="rio-me">Eu <marker>riu-me</marker> das tuas piadas.</example>
+    </rule>
+
+
+
+    <!-- SEXTA DE VIME cesta de vime -->
+    <rule id="SEXTA_DE_VIME" name="cesta de vime">
+      <pattern>
+        <marker>
+        	<token>sexta</token>
+        </marker>
+        <token>de</token>
+      	<token>vime</token>
+      </pattern>
+      <message>Substituir «sexta» por <suggestion>cesta</suggestion>.</message>
+      <example correction="cesta">Ela tem uma <marker>sexta</marker> de vime.</example>
+    </rule>
+
+
+
+    <!-- SUA a sua -->
+    <rule id="A_SUA" name="a sua">
+      <pattern>
+        <marker>
+          <token>sua<exception scope="previous" regexp="yes">a|à|da|de|por|pela|na|em</exception></token>
+        </marker>
+        <token><exception regexp="yes">majestade|realeza|divindade|excelência|eminência</exception></token>
+      </pattern>
+      <message>Querias dizer <suggestion>a sua</suggestion>?</message>
+      <example correction="a sua">Tudo bem, mas <marker>sua</marker> mãe está zangada.</example>
+      <example>Tudo bem, mas a <marker>sua</marker> mãe está zangada.</example>
+      <example>Tudo bem, mas <marker>sua</marker> majestade está zangada.</example>
+    </rule>
+
+
+
+    <!-- TAL VEZ talvez -->
+    <rule id="TAL_VEZ" name="talvez">
+      <pattern>
+        <token>tal</token>
+        <token>vez</token>
+      </pattern>
+      <message>Substituir «tal vez» por <suggestion>talvez</suggestion>.</message>
+      <example correction="talvez">Amanhã <marker>tal vez</marker> seja possível.</example>
+    </rule>
+
+
+
+    <!-- TE DE te dê -->
+    <rule id="TE_DE" name="te dê">
+      <pattern>
+        <token>te</token>
+        <token>de</token>
+      </pattern>
+      <message>Substituir «te de» por <suggestion>te dê</suggestion>.</message>
+      <example correction="te dê">Talvez <marker>te de</marker> mais novidades.</example>
+    </rule>
+
+
+
+    <!-- TOMARÁ LUGAR terá lugar -->
+    <rule id="TOMARÁ_LUGAR" name="terá lugar">
+      <pattern>
+        <token>tomará</token>
+        <token>lugar</token>
+      </pattern>
+      <message>Substituir «tomará lugar» por <suggestion>terá lugar</suggestion>.</message>
+      <example correction="terá lugar">O evento <marker>tomará lugar</marker> em Lisboa.</example>
+    </rule>
+
+
+
+    <!-- UM BAIXO-ASSINADO um abaixo-assinado -->
+    <rule id="UM_BAIXO-ASSINADO" name="um abaixo-assinado">
+      <pattern>
+        <token>um</token>
+        <token>baixo-assinado</token>
+      </pattern>
+      <message>Substituir «um baixo-assinado» por <suggestion>um abaixo-assinado</suggestion>.</message>
+      <example correction="um abaixo-assinado">As pessoas fizeram <marker>um baixo-assinado</marker>.</example>
+    </rule>
+
+
+
+    <!-- UM TERRÍVEL DOR uma terrível dor -->
+    <rule id="UM_TERRÍVEL_DOR" name="uma terrível dor">
+      <pattern>
+        <token>um</token>
+        <token>terrível</token>
+        <token>dor</token>
+      </pattern>
+      <message>Substituir «um terrível dor» por <suggestion>uma terrível dor</suggestion>.</message>
+      <example correction="uma terrível dor">Tenho <marker>um terrível dor</marker> de cabeça.</example>
+    </rule>
+
+
+
+    <!-- VESTIR calçar -->
+	<rule id="CONFUSÃO_VESTIR_CALÇAR" name="confusão vestir/calçar">
+	  <pattern>
+        <token regexp="yes">vestir|vestiu|veste|vestiste</token>
+        <token regexp="yes">os?|as?|um|uns|umas?</token>
+        <token regexp="yes">sapatos?|chinelos?|meias?|luvas?|botas?|peúgas?|ténis|sapatilhas?</token>
+      </pattern>
+      <message>Usa o verbo calçar</message>
+      <example correction=""><marker>Vestir os sapatos</marker>.</example>
+	  <example><marker>Calçar os sapatos</marker>.</example>
+	</rule>
+
+
+
+    <!-- VÍDEO CONFERÊNCIA videoconferência -->
+    <rule id="VÍDEO_CONFERÊNCIA" name="videoconferência">
+      <pattern>
+        <token>vídeo</token>
+        <token>conferência</token>
+      </pattern>
+      <message>Substituir «vídeo conferência» por <suggestion>videoconferência</suggestion>.</message>
+      <example correction="videoconferência">Vou realizar uma <marker>vídeo conferência</marker> no Skype.</example>
+    </rule>
+    
+
+
+    <!-- VISANDO A CONSEGUIR visando conseguir -->
+    <rule id="VISANDO_A_CONSEGUIR" name="visando conseguir">
+      <pattern>
+        <token>visando</token>
+        <token>a</token>
+        <token>conseguir</token>
+      </pattern>
+      <message>Substituir «visando a conseguir» por <suggestion>visando conseguir</suggestion>.</message>
+      <example correction="visando conseguir">Ele assinou um documento <marker>visando a conseguir</marker> dividendos.</example>
+    </rule>
+
+
+
+<!-- DORAVANTE - THREE POSSIBLE REPLACEMENT SUGGESTIONS ****START**** -->
+<!-- **************************************************************** -->
+    <!-- DAQUI EM DIANTE doravante -->
+    <rule id="DAQUI_EM_DIANTE" name="doravante">
+      <pattern>
+        <token>daqui</token>
+        <token>em</token>
+        <token>diante</token>        
+      </pattern>
+      <message>Substituir «daqui em diante» por <suggestion>doravante</suggestion>.</message>
+      <example correction="doravante">Isto deve ser feito <marker>daqui em diante</marker>.</example>
+    </rule>
+
+
+    <!-- DE HOJE PARA O FUTURO doravante -->
+    <rule id="DE_HOJE_PARA_O_FUTURO" name="doravante">
+      <pattern>
+        <token>de</token>
+        <token>hoje</token>
+        <token>para</token>
+        <token>o</token>
+        <token>futuro</token>   
+      </pattern>
+      <message>Substituir «de hoje para o futuro» por <suggestion>doravante</suggestion>.</message>
+      <example correction="doravante">Isto deve ser feito <marker>de hoje para o futuro</marker>.</example>
+    </rule>
+
+    <!-- DE ORA AVANTE doravante -->
+    <rule id="DE_ORA_AVANTE" name="doravante">
+      <pattern>
+        <token>de</token>
+        <token>ora</token>
+        <token>avante</token>        
+      </pattern>
+      <message>Substituir «de ora avante» por <suggestion>doravante</suggestion>.</message>
+      <example correction="doravante">Isto deve ser feito <marker>de ora avante</marker>.</example>
+    </rule>
+<!-- DORAVANTE - THREE POSSIBLE REPLACEMENT SUGGESTIONS ****END**** -->
+<!-- ************************************************************** -->
+
+
+
+
+<!-- RULES TU/TI -> EU/MIM *START* -->
+<!-- ***************************** -->
+    <!-- A TU a ti -->
+    <rule id="A_TU" name="a ti">
+      <pattern>
+        <token>a</token>
+        <token>tu</token>
+      </pattern>
+      <message>Substituir «a tu» por <suggestion>a ti</suggestion>.</message>
+      <example correction="a ti">Isto deve-se <marker>a tu</marker>.</example>
+    </rule>
+
+
+
+    <!-- DE EU de mim -->
+    <rule id="DE_EU" name="de mim">
+      <pattern>
+        <token>de</token>
+        <token>eu</token>
+      </pattern>
+      <message>Substituir «de eu» por <suggestion>de mim</suggestion>.</message>
+      <example correction="de mim">Isto é <marker>de eu</marker> para o Rui.</example>
+    </rule>
+
+
+
+    <!-- ENTRE EU entre mim -->
+    <rule id="ENTRE_EU" name="entre mim">
+      <pattern>
+        <token>entre</token>
+        <token>eu</token>
+      </pattern>
+      <message>Substituir «entre eu» por <suggestion>entre mim</suggestion>.</message>
+      <example correction="entre mim">O que se passou <marker>entre eu</marker> e o Rui?</example>
+    </rule>
+
+
+
+    <!-- ENTRE TU E EU entre ti e mim -->
+    <rule id="ENTRE_TU_E_EU" name="entre ti e mim">
+      <pattern>
+        <token>entre</token>
+        <token>tu</token>
+        <token>e</token>
+        <token>eu</token>        
+      </pattern>
+      <message>Substituir «entre tu e eu» por <suggestion>entre ti e mim</suggestion>.</message>
+      <example correction="entre ti e mim">O que se passou <marker>entre tu e eu</marker>?</example>
+    </rule>
+
+
+
+    <!-- PARA TU para ti -->
+    <rule id="PARA_TU" name="para ti">
+      <pattern>
+        <token>para</token>
+        <token>tu</token>
+      </pattern>
+      <message>Substituir «para tu» por <suggestion>para ti</suggestion>.</message>
+      <example correction="para ti">Isto é <marker>para tu</marker>.</example>
+    </rule>
+
+
+
+    <!-- SEM TU sem ti -->
+    <rule id="SEM_TU" name="sem ti">
+      <pattern>
+        <token>sem</token>
+        <token>tu</token>
+      </pattern>
+      <message>Substituir «sem tu» por <suggestion>sem ti</suggestion>.</message>
+      <example correction="sem ti">Isto não é o mesmo <marker>sem tu</marker>.</example>
+    </rule>
+<!-- *************************** -->
+<!-- RULES TU/TI -> EU/MIM *END* -->
+
+
+
+<!-- XEQUE/CHEQUE - POSSIBLE REPLACEMENT SUGGESTIONS ****START**** -->
+<!-- ************************************************************* -->
+    <!-- XEQUE AVULSO CARECA CRUZADO VISADO cheque avulso careca cruzado visado -->
+	<rule id="XEQUE_AVULSO_CARECA_CRUZADO_VISADO" name="cheque avulso careca cruzado visado">
+	  <pattern case_sensitive="no">
+	    <marker>
+          <token>xeque</token>         
+        </marker>
+        <token regexp="yes">avulso|careca|cruzado|visado</token>
+      </pattern>        
+      <message>Substituir «xeque» por <suggestion>cheque</suggestion>.</message>
+      <example correction="cheque">É um <marker>xeque</marker> cruzado.</example>
+	</rule>
+
+
+
+    <!-- XEQUES_AVULSO CARECAS CRUZADOS VISADOS cheques avulso carecas cruzados visados -->
+	<rule id="XEQUES_AVULSO_CARECAS_CRUZADOS_VISADOS" name="cheques avulso carecas cruzados visados">
+	  <pattern case_sensitive="no">
+	    <marker>
+          <token>xeques</token>         
+        </marker>
+        <token regexp="yes">avulso|carecas|cruzados|visados</token>
+      </pattern>        
+      <message>Substituir «xeques» por <suggestion>cheques</suggestion>.</message>
+      <example correction="cheques">São <marker>xeques</marker> visados.</example>
+	</rule>
+
+
+
+    <!-- XEQUE SEM COBERTURA cheque sem cobertura -->
+	<rule id="XEQUE_SEM_COBERTURA" name="cheque sem cobertura">
+	  <pattern case_sensitive="no">
+	    <marker>
+          <token>xeque</token>            
+        </marker>
+        <token>sem</token>         
+	    <token>cobertura</token>
+ 	  </pattern>           
+      <message>Substituir «xeque» por <suggestion>cheque</suggestion>.</message>
+      <example correction="cheque">É um <marker>xeque</marker> sem cobertura.</example>
+	</rule>
+
+
+
+    <!-- XEQUES SEM COBERTURA cheques sem cobertura -->
+	<rule id="XEQUES_SEM_COBERTURA" name="cheques sem cobertura">
+	  <pattern case_sensitive="no">
+	    <marker>
+          <token>xeques</token>         
+        </marker>  
+	  <token>sem</token>         
+	  <token>cobertura</token>         
+	  </pattern> 	  
+      <message>Substituir «xeques» por <suggestion>cheques</suggestion>.</message>
+      <example correction="cheques">São <marker>xeques</marker> sem cobertura.</example>
+	</rule>
+
+
+
+    <!-- XEQUE EM BRANCO cheque em branco -->
+	<rule id="XEQUE_EM_BRANCO" name="cheque em branco">
+	  <pattern case_sensitive="no">
+	    <marker>
+          <token>xeque</token>         
+  	    </marker>
+	  <token>em</token>         
+	  <token>branco</token>         
+	  </pattern> 
+      <message>Substituir «xeque» por <suggestion>cheque</suggestion>.</message>
+      <example correction="cheque">É um <marker>xeque</marker> em branco.</example>
+	</rule>
+
+
+
+    <!-- XEQUES EM BRANCO cheques em branco -->
+	<rule id="XEQUES_EM_BRANCO" name="cheques em branco">
+	  <pattern case_sensitive="no">
+  	    <marker>	  
+          <token>xeques</token>         
+  	    </marker>          
+	  <token>em</token>         
+	  <token>branco</token>         
+	  </pattern>   
+      <message>Substituir «xeques» por <suggestion>cheques</suggestion>.</message>
+      <example correction="cheques">São <marker>xeques</marker> em branco.</example>
+	</rule>
+
+<!-- XEQUE/CHEQUE - POSSIBLE REPLACEMENT SUGGESTIONS ****END**** -->
+<!-- *********************************************************** -->
+
+
+
+<!-- TIVER/ESTIVER AND DERIVATES - POSSIBLE REPLACEMENT SUGGESTIONS ****START**** -->
+<!-- **************************************************************************** -->
+
+    <!-- TIVER + A + INF-VERB estiver + a + inf-verb-->
+    <rule id="TIVER_A_INF-VERB" name="estiver + a + inf-verb">
+		<pattern>
+			<marker>
+				<token>tiver</token>	  
+			</marker>
+			<token>a</token>
+			<token postag="VMN0000"></token> 	
+		</pattern>	 	 
+		<message>Substituir «tiver» por <suggestion>estiver</suggestion>.</message>
+		<example correction="estiver">Quando <marker>tiver</marker> a ver TV.</example>	 	 
+    </rule> 
+
+
+	
+    <!-- TIVERES + A + INF-VERB estiveres + a + inf-verb-->
+    <rule id="TIVERES_A_INF-VERB" name="estiveres + a + inf-verb">
+		<pattern>
+			<marker>
+				<token>tiveres</token>	  
+			</marker>
+			<token>a</token>
+			<token postag="VMN0000"></token> 	
+		</pattern>	 	 
+		<message>Substituir «tiveres» por <suggestion>estiveres</suggestion>.</message>
+		<example correction="estiveres">Quando <marker>tiveres</marker> a ver TV.</example>	 	 
+    </rule> 
+
+	
+	
+    <!-- TIVEREM + A + INF-VERB estiverem + a + inf-verb-->
+    <rule id="TIVEREM_A_INF-VERB" name="estiverem + a + inf-verb">
+		<pattern>
+			<marker>
+				<token>tiverem</token>	  
+			</marker>
+			<token>a</token>
+			<token postag="VMN0000"></token> 	
+		</pattern>	 	 
+		<message>Substituir «tiverem» por <suggestion>estiverem</suggestion>.</message>
+		<example correction="estiverem">Quando <marker>tiverem</marker> a ver TV.</example>	 	 
+    </rule> 
+
+	
+	
+    <!-- TIVERMOS + A + INF-VERB estivermos + a + inf-verb-->
+    <rule id="TIVERMOS_A_INF-VERB" name="estivermos + a + inf-verb">
+		<pattern>
+			<marker>
+				<token>tivermos</token>	  
+			</marker>
+			<token>a</token>
+			<token postag="VMN0000"></token> 	
+		</pattern>	 	 
+		<message>Substituir «tivermos» por <suggestion>estivermos</suggestion>.</message>
+		<example correction="estivermos">Quando <marker>tivermos</marker> a ver TV.</example>	 	 
+    </rule> 
+
+
+	
+    <!-- TIVERAM + A + INF-VERB estiveram + a + inf-verb-->
+    <rule id="TIVERAM_A_INF-VERB" name="estiveram + a + inf-verb">
+		<pattern>
+			<marker>
+				<token>tiveram</token>	  
+			</marker>
+			<token>a</token>
+			<token postag="VMN0000"></token> 	
+		</pattern>	 	 
+		<message>Substituir «tiveram» por <suggestion>estiveram</suggestion>.</message>
+		<example correction="estiveram">Quando <marker>tiveram</marker> a ver TV.</example>	 	 
+    </rule> 
+	
+<!-- TIVER/ESTIVER AND DERIVATES - POSSIBLE REPLACEMENT SUGGESTIONS *****END***** -->
+<!-- **************************************************************************** -->
+
+
+
+    <!-- TRADUZIR EM > TRADUZIR PARA -->
+    <rule id="TRADUZIR_EM" name="Traduzir para">
+      <pattern>
+		<token>traduzir</token>
+		<marker>
+			<token>em</token>
+		</marker>       
+        <or>		
+		<token postag="AQ0MS0"></token>	
+		<token>Latim</token>
+		</or>
+     </pattern>
+     <message>Substituir «em» por <suggestion>para</suggestion>.</message>
+     <suggestion>para</suggestion>
+     <example correction="para">Temos de traduzir <marker>em</marker> Inglês.</example>
+    </rule> 	
+
+
+
+</category>
+
+
+<category id="PUNCTUATION" name="Pontuação">
+
+
+    <!-- OU SEJA ou seja, -->
+    <rule id="OU_SEJA" name="ou seja">
+      <pattern>
+		<marker>
+			<token>ou</token>
+			<token>seja</token>
+		</marker>
+		<token negate="yes">,</token>
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1 \2,</suggestion></message>
+      <example correction="ou seja,">Pensa primeiro, <marker>ou seja</marker> escolhe acertadamente.</example>
+    </rule>
+
+
+
+    <!-- COMMA BEFORE/AFTER WORDS #1 -->
+    <rule id="COMMA_1" name="Vírgula antes #1">
+      <pattern>	  
+		<marker>
+			<token><exception regexp="yes">[,;:–—\(]</exception><exception>o</exception></token>	
+		</marker>
+		<token regexp="yes">mas|porém|contudo|entretanto|todavia</token>
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1,</suggestion></message>
+	  <example correction="chocolate,">Eu adoro <marker>chocolate</marker> mas faz engordar.</example>
+    </rule>
+
+
+	
+    <!-- COMMA BEFORE/AFTER WORDS #2 -->
+    <rule id="COMMA_2" name="Vírgula antes #2">
+      <pattern>	  
+		<marker>
+			<token><exception regexp="yes">[,;:–—\(]</exception></token>
+	    </marker>
+		<token>no</token>
+		<token>entanto</token>	 
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1,</suggestion></message>
+	  <example correction="chocolate,">Eu adoro <marker>chocolate</marker> no entanto faz engordar.</example>
+    </rule>	
+	
+	
+	
+    <!-- COMMA BEFORE/AFTER WORDS #3a -->	
+    <rule id="COMMA_3a" name="Vírgula antes #3a">
+      <pattern> 
+       <marker>
+            <token>é</token>
+            <token>pois</token>
+        </marker>
+        <token><exception regexp="yes">[!.,;:–—\(]</exception></token>
+		<token></token>
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1, \2,</suggestion></message>
+      <example correction="é, pois,">Ela <marker>é pois</marker> do Norte.</example>
+    </rule>  
+	
+	
+	
+    <!-- COMMA BEFORE/AFTER WORDS #3aa -->	
+    <rule id="COMMA_3aa" name="Vírgula antes #3aa">
+      <pattern> 
+       <marker>
+            <token>É</token>
+        </marker>
+        <token>pois</token>
+        <token regexp="yes">[!.]</token>        
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1,</suggestion></message>
+      <example correction="É,">Será verdade? <marker>É</marker> pois!</example>
+    </rule>
+	
+	
+	
+	<!-- COMMA BEFORE/AFTER WORDS #3b -->
+    <rule id="COMMA_3b" name="Vírgula antes #3b">
+      <pattern> 
+       <marker>
+            <token>é</token>
+            <token>,</token>
+            <token>pois</token>
+        </marker>
+        <token><exception regexp="yes">[!.,;:–—\(]</exception></token>
+		<token></token>
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1, \3,</suggestion></message>
+      <example correction="é, pois,">Ela <marker>é, pois</marker> do Norte.</example>
+    </rule>    
+	
+	
+	
+	<!-- COMMA BEFORE/AFTER WORDS #3c -->
+	<rule id="COMMA_3c" name="Vírgula antes #3c">
+      <pattern> 
+       <marker>
+            <token>é</token>
+            <token>pois</token>
+        </marker>
+        <token>,</token>
+		<token></token>
+      </pattern>
+      <message>Usar vírgula: <suggestion>\1, \2</suggestion></message>
+      <example correction="é, pois">Ela <marker>é pois</marker>, do Norte.</example>
+    </rule>	
+	
+	
+</category>
+
+
+
+<category id="REDUNDANCY" name="Redundância">
+
+    <!-- ANTES PREFIRO prefiro -->
+    <rule id="ANTES_PREFIRO" name="prefiro">
+      <pattern>
+        <token>antes</token>
+		<token>prefiro</token>
+      </pattern>
+      <message>Substituir «antes prefiro» por <suggestion>prefiro</suggestion>.</message>
+      <example correction="prefiro">Eu <marker>antes prefiro</marker> a outra solução.</example>
+    </rule>
+
+
+	
+    <!-- CEREJAL DE CEREJEIRAS cerejal -->
+    <rule id="CEREJAL_DE_CEREJEIRAS" name="cerejal">
+      <pattern>
+        <token>cerejal</token>
+        <token>de</token>
+		<token>cerejeiras</token>
+      </pattern>
+      <message>Substituir «cerejal de cerejeiras» por <suggestion>cerejal</suggestion>.</message>
+      <example correction="cerejal">Que grande <marker>cerejal de cerejeiras</marker>.</example>
+    </rule>
+
+
+
+	<!-- Verb EXPORTAR + PARA FORA > Verb exportar -->	
+	<rule id="EXPORTAR_PARA_FORA" name="exportar">
+		<pattern>
+			<token regexp="yes">exportei|exportaste|exportou|exportar|exportaram|exportarem|exportámos|exportamos|exportam|exportarmos</token>
+			<token>para</token>
+			<token>fora</token>
+		</pattern>
+		<message>Substituir «\1 para fora»  por <suggestion>\1</suggestion>.</message>
+ 		<example correction="exportou">O país <marker>exportou para fora</marker> menos este ano.</example>
+ 	</rule>
+
+
+
+    <!-- HEMORRAGIA DE SANGUE hemorragia -->
+    <rule id="HEMORRAGIA_DE_SANGUE" name="hemorragia">
+      <pattern>
+        <token>hemorragia</token>
+        <token>de</token>
+		<token>sangue</token>
+      </pattern>
+      <message>Substituir «hemorragia de sangue» por <suggestion>hemorragia</suggestion>.</message>
+      <example correction="hemorragia">Uma <marker>hemorragia de sangue</marker> pode ser fatal.</example>
+    </rule>
+
+
+	
+    <!-- MAIS MELHOR melhor -->
+    <rule id="MAIS_MELHOR" name="melhor">
+      <pattern>
+        <token>mais</token>
+        <token>melhor</token>
+      </pattern>
+      <message>Substituir «mais melhor» por <suggestion>melhor</suggestion>.</message>
+      <example correction="melhor">Esta escola é <marker>mais melhor</marker>.</example>
+    </rule>
+
+
+  
+    <!-- MAIS PIOR pior -->
+    <rule id="MAIS_PIOR" name="pior">
+      <pattern>
+        <token>mais</token>
+        <token>pior</token>
+      </pattern>
+      <message>Substituir «mais pior» por <suggestion>pior</suggestion>.</message>
+      <example correction="pior">Esta escola é <marker>mais pior</marker>.</example>
+    </rule>
+	
+
+
+    <!-- QUADRILHA DE LADRÕES quadrilha -->
+    <rule id="QUADRILHA_DE_LADRÕES" name="quadrilha">
+      <pattern>
+        <token>quadrilha</token>
+        <token>de</token>
+        <token>ladrões</token>
+      </pattern>
+      <message>Redundância. Usar apenas <suggestion>quadrilha</suggestion>.</message>
+      <example correction="quadrilha">É uma perigosa <marker>quadrilha de ladrões</marker>.</example>
+    </rule>
+	
+</category>
+
+
+
+<category id="CONFUSED_WORDS" name="Confusão Palavras">
+
+	<!-- Confusion CONTANTO > CONTANDO -->
+    <rule id="CONTANTO_CONTANDO" name="Confusão contanto-contando">
+		<pattern>			
+			<marker>
+				<token>contanto</token>	  
+			</marker>			
+			<token>com</token>	  
+		</pattern>	 	 
+		<message>Substituir «contanto» por <suggestion>contando</suggestion>.</message>
+		<example correction="contando">Isto já <marker>contanto</marker> com o jantar.</example>	 	 
+    </rule> 
+
+
+	
+<!-- TRÁS/TRAZ - POSSIBLE REPLACEMENT SUGGESTIONS ****START**** -->
+<!-- ********************************************************** -->
+    <!-- Confusion TRAZ > TRÁS -->
+    <rule id="TRAZ_TRÁS" name="Confusão traz-trás">
+		<pattern>
+			<token regexp="yes">de|para|por</token>
+			<marker>
+				<token>traz</token>	  
+			</marker>			
+		</pattern>	 	 
+		<message>Substituir «traz» por <suggestion>trás</suggestion>.</message>
+		<example correction="trás">A Ana deve viajar no banco de <marker>traz</marker>.</example>	 	 
+    </rule> 
+	
+
+	
+    <!-- Confusion TRÁS > TRAZ -->
+    <rule id="TRÁS_TRAZ" name="Confusão trás-traz">
+		<pattern>
+			<token negate="yes" regexp="yes">de|para|por</token>
+			<marker>
+				<token>trás</token>	  
+			</marker>			
+		</pattern>	 	 
+		<message>Substituir «trás» por <suggestion>traz</suggestion>.</message>
+		<example correction="traz">O Rui <marker>trás</marker> o material.</example>	 	 
+    </rule> 	
+
+<!-- TRÁS/TRAZ - POSSIBLE REPLACEMENT SUGGESTIONS *****END***** -->
+<!-- ********************************************************** -->	
+
+</category>
+
+</rules>

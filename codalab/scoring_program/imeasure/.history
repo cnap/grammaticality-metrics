@@ -1,0 +1,72 @@
+2016-11-04.15-03-31.delightplant-lm 2016-11-04 15:03:31 - cd imeasure/
+2016-11-04.15-03-32.delightplant-lm 2016-11-04 15:03:31 - cd imeasure/
+2016-11-04.15-03-33.delightplant-lm 2016-11-04 15:03:33 - ls
+2016-11-04.15-03-38.delightplant-lm 2016-11-04 15:03:38 - git st
+2016-11-04.15-03-43.delightplant-lm 2016-11-04 15:03:43 - git branch codalab
+2016-11-04.15-03-46.delightplant-lm 2016-11-04 15:03:46 - git co codalab
+2016-11-04.15-03-47.delightplant-lm 2016-11-04 15:03:47 - git st
+2016-11-04.15-04-02.delightplant-lm 2016-11-04 15:04:02 - git commit -a -m 'returns sentence-leel scores'
+2016-11-04.15-04-05.delightplant-lm 2016-11-04 15:04:05 - git co master
+2016-11-04.15-04-07.delightplant-lm 2016-11-04 15:04:07 - git st
+2016-11-04.15-04-12.delightplant-lm 2016-11-04 15:04:07 - git st
+2016-11-04.15-04-24.delightplant-lm 2016-11-04 15:04:13 - less ieval.py
+2016-11-04.15-04-38.delightplant-lm 2016-11-04 15:04:30 - less README.md 
+2016-11-04.15-04-39.delightplant-lm 2016-11-04 15:04:39 - python ieval.py -hyp:system_output_file -ref:gold_standard_file
+2016-11-04.15-04-42.delightplant-lm 2016-11-04 15:04:42 - ls
+2016-11-04.15-04-44.delightplant-lm 2016-11-04 15:04:44 - ls example/
+2016-11-04.15-04-58.delightplant-lm 2016-11-04 15:04:58 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml 
+2016-11-04.15-05-09.delightplant-lm 2016-11-04 15:05:09 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-04.15-05-23.delightplant-lm 2016-11-04 15:05:23 - cat example/sys.txt 
+2016-11-04.15-05-32.delightplant-lm 2016-11-04 15:05:23 - cat example/sys.txt 
+2016-11-04.15-05-34.delightplant-lm 2016-11-04 15:05:34 - cat example/sys.txt example/sys.txt
+2016-11-04.15-05-40.delightplant-lm 2016-11-04 15:05:40 - cat example/sys.txt example/sys.txt > example/long.txt
+2016-11-04.15-05-51.delightplant-lm 2016-11-04 15:05:50 - less example/gold.xml 
+2016-11-04.15-05-59.delightplant-lm 2016-11-04 15:05:59 - cp example/gold.xml example/long.xml
+2016-11-04.15-06-33.delightplant-lm 2016-11-04 15:06:00 - emacs example/long.xml
+2016-11-04.15-06-44.delightplant-lm 2016-11-04 15:06:43 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv
+2016-11-04.15-09-26.delightplant-lm 2016-11-04 15:09:26 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv
+2016-11-04.15-09-35.delightplant-lm 2016-11-04 15:09:35 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv
+2016-11-04.15-09-39.delightplant-lm 2016-11-04 15:09:39 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv | grep BRS
+2016-11-04.15-09-56.delightplant-lm 2016-11-04 15:09:56 - git co codalab
+2016-11-04.15-10-11.delightplant-lm 2016-11-04 15:10:11 - mv ieval.py ieval.py.ex
+2016-11-04.15-10-14.delightplant-lm 2016-11-04 15:10:14 - git co codalab
+2016-11-04.15-12-11.delightplant-lm 2016-11-04 15:12:11 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv | grep BRS
+2016-11-04.15-12-27.delightplant-lm 2016-11-04 15:12:27 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv | grep BRS
+2016-11-04.15-12-33.delightplant-lm 2016-11-04 15:12:33 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv | grep BRS
+2016-11-04.15-12-46.delightplant-lm 2016-11-04 15:12:46 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv | grep BRS
+2016-11-04.15-12-50.delightplant-lm 2016-11-04 15:12:50 - python ieval.py -hyp:example/long.txt -ref:example/long.xml  -vv
+2016-11-04.15-18-43.delightplant-lm 2016-11-04 15:18:43 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml  -vv
+2016-11-04.15-18-52.delightplant-lm 2016-11-04 15:18:52 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml  -vv
+2016-11-04.15-18-58.delightplant-lm 2016-11-04 15:18:58 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml  -vv | pbcopy
+2016-11-14.21-15-20.delightplant-lm 2016-11-04 16:18:58 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml  -vv | pbcopy
+2016-11-14.21-15-30.delightplant-lm 2016-11-14 21:15:29 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml  -vv | pbcopy
+2016-11-14.21-15-51.delightplant-lm 2016-11-14 21:15:29 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml  -vv | pbcopy
+2016-11-14.21-15-52.delightplant-lm 2016-11-14 21:15:52 - git st
+2016-11-14.21-15-54.delightplant-lm 2016-11-14 21:15:52 - git st
+2016-11-14.22-12-23.delightplant-lm 2016-11-14 22:12:23 - cd imeasure/
+2016-11-14.22-12-24.delightplant-lm 2016-11-14 22:12:24 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-12-32.delightplant-lm 2016-11-14 22:12:32 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-12-57.delightplant-lm 2016-11-14 22:12:57 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-13-09.delightplant-lm 2016-11-14 22:13:09 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-13-31.delightplant-lm 2016-11-14 22:13:31 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-13-40.delightplant-lm 2016-11-14 22:13:39 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-14.22-13-44.delightplant-lm 2016-11-14 22:13:44 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-13-49.delightplant-lm 2016-11-14 22:13:49 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-14-23.delightplant-lm 2016-11-14 22:14:23 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-14-37.delightplant-lm 2016-11-14 22:14:37 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-14-44.delightplant-lm 2016-11-14 22:14:44 - python ieval.py.ex -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-14-48.delightplant-lm 2016-11-14 22:14:48 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-15-16.delightplant-lm 2016-11-14 22:15:16 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-15-20.delightplant-lm 2016-11-14 22:15:20 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-15-41.delightplant-lm 2016-11-14 22:15:41 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-16-22.delightplant-lm 2016-11-14 22:16:21 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-18-35.delightplant-lm 2016-11-14 22:18:34 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-18-42.delightplant-lm 2016-11-14 22:18:34 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-18-49.delightplant-lm 2016-11-14 22:18:49 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-19-02.delightplant-lm 2016-11-14 22:19:01 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-14.22-19-09.delightplant-lm 2016-11-14 22:19:09 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-14.22-21-05.delightplant-lm 2016-11-14 22:21:05 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml
+2016-11-14.22-21-38.delightplant-lm 2016-11-14 22:21:37 - python ieval-new.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-14.22-21-54.delightplant-lm 2016-11-14 22:21:54 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-14.22-22-26.delightplant-lm 2016-11-14 22:22:26 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml -vv
+2016-11-14.22-22-50.delightplant-lm 2016-11-14 22:22:26 - python ieval.py -hyp:example/sys.txt -ref:example/gold.xml -vv
