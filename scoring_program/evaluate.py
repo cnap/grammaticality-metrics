@@ -27,7 +27,7 @@ if debug:
     sys.stderr.write('CONTENTS SCRIPT DIR: %s\n' % os.listdir(cwd))
 
 # GLOBAL VARIABLES
-REF_NAMES = ['NUCLE', 'EXPFLUENCY', 'EXPMIN', 'TURKMIN', 'TURKFLUENCY']
+REF_NAMES = ['NUCLE', 'EXPFLUENCY', 'EXPMIN']  # 'TURKMIN', 'TURKFLUENCY']
 ## lambdas are stored in the order: lambda_rho, lambda_r
 LAMBDAS = {'GLEU': (0.04, 0.09),
            'I-measure': (0.01, 0.01),
