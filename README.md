@@ -1,14 +1,16 @@
-# Grammaticality metrics used in the EMNLP 2016 paper *There’s No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction*
+# Grammaticality metrics used in the EMNLP 2016 paper [_There’s No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction_](https://www.aclweb.org/anthology/D/D16/D16-1228.pdf).
 
 ```
-@InProceedings{no-comparison-2016,
-  author    = {Napoles, Courtney and Sakaguchi, Keisuke and Tetreault, Joel and Post, Matt},
-  title     = {There’s No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction},
+@InProceedings{napoles-sakaguchi-tetreault:2016:EMNLP2016,
+  author    = {Napoles, Courtney  and  Sakaguchi, Keisuke  and  Tetreault, Joel},
+  title     = {There's No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction},
   booktitle = {Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing},
   month     = {November},
   year      = {2016},
   address   = {Austin, Texas},
   publisher = {Association for Computational Linguistics},
+  pages     = {2109--2115},
+  url       = {https://aclweb.org/anthology/D16-1228}
 }
 ```
 
