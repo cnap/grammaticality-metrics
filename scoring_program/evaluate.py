@@ -5,7 +5,7 @@ A scoring program for evaluating GEC system output on the CoNLL-2014 Shared Task
 __author__ = 'Courtney Napoles'
 __date__ = '2016-11-16'
 __email__ = 'napoles@cs.jhu.edu'
-__usage__ = 'python evaluate.py input-dir output-dir [--im] [-d] [--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN]'
+__usage__ = 'python evaluate.py input-dir output-dir [--im] [-d] [--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL]'
 
 import sys
 import os
@@ -17,7 +17,7 @@ from gleu import GLEU
 from m2scorer.m2scorer import load_annotation as load_m2_annotation
 from imeasure.ieval import IMeasure
 
-skip_im = True
+use_im = False
 debug = False
 
 cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
@@ -27,7 +27,7 @@ if debug:
     sys.stderr.write('CONTENTS SCRIPT DIR: %s\n' % os.listdir(cwd))
 
 # GLOBAL VARIABLES
-REF_NAMES = ['NUCLE', 'EXPFLUENCY', 'EXPMIN']  # 'TURKMIN', 'TURKFLUENCY']
+REF_NAMES = ['ALL']
 ## lambdas are stored in the order: lambda_rho, lambda_r
 LAMBDAS = {'GLEU': (0.04, 0.09),
            'I-measure': (0.01, 0.01),
@@ -98,7 +98,7 @@ def call_lt(sentences):
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        sys.stderr.write('Usage: python evaluate.py input-dir output-dir [--im] [--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN] [-d]\n')
+        sys.stderr.write('Usage: python evaluate.py input-dir output-dir [--im] [--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL] [-d]\n')
         sys.exit(0)
 
     # set paths and load predictions
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 3:
         for arg in sys.argv[3:]:
             if arg == '--im':
-                skip_im = False
+                use_im = True
             elif arg.startswith('--ref'):
                 use_refs = [arg.split(':')[1]]
             elif arg == '-d':
@@ -132,12 +132,21 @@ if __name__ == '__main__':
         sys.stderr.write('Reference dir: %s\n' % str([o for o in os.walk(reference_dir)]))
 
     for ref in use_refs:
-        if not skip_im:
+        # get paths of reference text files for GLEU
+        reference_files = []
+        for f in os.listdir(reference_dir):
+            if '.' in f:
+                continue
+            if ref == 'ALL' and f != 'source':
+                reference_files.append(f)
+            elif f.startswith(ref):
+                reference_files.append(f)
+        if use_im:
             im = compute_im(os.path.join(reference_dir, ref + '.m2.ieval.xml'),
                             prediction_path)
             scores.append(('I-measure', ref, im))
         gleu = compute_gleu(os.path.join(reference_dir, 'source'),
-                            [os.path.join(reference_dir, ref + anno) for anno in 'AB'],
+                            [os.path.join(reference_dir, f) for f in reference_files],
                             prediction_path)
         scores.append(('GLEU', ref, gleu))
         m2 = compute_m2(os.path.join(reference_dir, ref + '.m2'),

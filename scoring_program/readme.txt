@@ -27,14 +27,15 @@ The code for executing this evaluation program is also available from our git re
 
 Usage:
 
-  python evaluate.py input-dir output-dir
+  python evaluate.py input-dir output-dir [-d] [--im] [--ref NUCLE|ALL|EXPFLUENCY|EXPMIN|TURKFLUENCY|TURKMIN|BN]
 
 This scoring program was created following the Codalab competition guidelines.
 System output should be included in the file input-dir/res/answer.txt and the metrics are
 written to output-dir/scores.txt.
 
-In total, it calculates 7 metrics over 4 different reference sets. More details can be
-found in our paper.
+In total, it calculates 10 metrics over 7 different reference sets. More details can be
+found in our paper. The default behavior on CodaLab is to return GLEU, M2, and GLEU inerpolated
+with LT, using all available references.
 
 Metrics:
   - Reference-based metrics (RBMs)
@@ -52,11 +53,11 @@ Reference sets:
   - non-expert minimal edits [5]
   - expert fluency edits [5]
   - expert minimal edits [5]
+  - 10 references provided by Bryant and Ng, 2015 [6]
 
 ==
 
 Contents:
-
 
 ├── LanguageTool-3.1/  from [https://languagetool.org/]
 ├── detokenize.py      from [https://github.com/ufal/mtmonkey]
@@ -71,19 +72,20 @@ The scripts for calculating GLEU, I-measure, and M2 were modified to return sent
 scores and so that they can be called by an external program.
 At this date, Codalab does not support Java 8, so we are using the most recent version of
 LanguageTool that supports Java 7 (3.1).
-I-measure takes several minutes to run and exceeds the time limit imposed by CodaLab on
-scoring programs. Therefore, it is not enabled in the online CodaLab competition, but you
-can run it from the original repository [https://github.com/mfelice/imeasure] or our git
-repository [https://github.com/cnap/grammaticality-metrics].
+I-measure takes several minutes to run and therefore we have disabled it from the online CodaLab
+site so that it doesn't time out, but you can run it from the original repository
+[https://github.com/mfelice/imeasure] or from the git repository for this scoring suite
+[https://github.com/cnap/grammaticality-metrics].
 
 ==
 
 Requirements:
 
- - python2.7
+ - python 2.7
  - numpy
  - scipy
  - Java 7+
+
 ==
 
 References
@@ -95,8 +97,10 @@ References
 4. Dahlmeier and Ng (2012) Better evaluation for grammatical error correction
 5. Sakaguchi et al. (2015) Reassessing the goals of grammatical error correction: Fluency
    instead of grammaticality
+6. Bryant and Ng (2015) How Far are We from Fully Automatic High Quality Grammatical Error
+   Correction?
 
 ==
 
 Contact: Courtney Napoles <napoles@cs.jhu.edu>
-2016-11-04
+2016-11-17
