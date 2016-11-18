@@ -1,2 +1,2 @@
-command: python $program/evaluate.py $input $output --ref ALL
+command: python $program/evaluate.py $input $output
 description: scores the input (answers.txt) against all available reference sets using GLEU, LT, M2, and interpolated metrics

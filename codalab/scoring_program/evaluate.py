@@ -99,7 +99,7 @@ if __name__ == '__main__':
     parser.add_argument('--im', dest='use_im', default=False, action='store_true',
                         help='score using I-measure (default False)')
     parser.add_argument('--ref', nargs='*', default=['ALL', 'EXPFLUENCY', 'BN', 'NUCLE'],
-                        help='reference set(s) to use. options:', ', '.join(LEGAL_REFERENCE_NAMES))
+                        help='reference set(s) to use. options: ' + ', '.join(LEGAL_REFERENCE_NAMES))
     parser.add_argument('-d', '--debug', default=False, action='store_true',
                         help='print debugging messages')
     args = parser.parse_args()
@@ -129,6 +129,7 @@ if __name__ == '__main__':
 
     for ref in use_refs:
         # get paths of reference text files for GLEU
+        sys.stderr.write('Using %s as reference...\n' % ref)
         reference_files = []
         for f in os.listdir(reference_dir):
             if '.' in f:
