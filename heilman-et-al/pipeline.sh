@@ -3,7 +3,7 @@
 # Calls a pipeline to extract features and train a model for predicting grammaticality
 
 # check for environmental variables
-if [ -v $STANFORDHOME ]; then
+if [ -z $STANFORDHOME ]; then
     echo "set STANFORDHOME to point to the root directory of the Stanford parser"
     exit
 fi
@@ -56,7 +56,9 @@ parser_cmd="java -cp $STANFORDHOME/*: edu.stanford.nlp.parser.lexparser.Lexicali
 
 feat_cmd="python $homedir/feature_extractor.py \
     -p $wkdir/parsed/ \
-    -d features"
+    -d features \
+    --giga $nativelm \
+    --toefl $learnerlm"
 
 mkdir $wkdir/parsed 2> /dev/null
 mkdir $wkdir/features 2> /dev/null

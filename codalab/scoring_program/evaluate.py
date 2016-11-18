@@ -18,7 +18,8 @@ from imeasure.ieval import IMeasure
 cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 # GLOBAL VARIABLES
-REF_NAMES = ['ALL']
+LEGAL_REFERENCE_NAMES = set(
+    ['ALL', 'BN', 'EXPFLUENCY', 'EXPMIN', 'NUCLE', 'TURKFLUENCY', 'TURKMIN'])
 # lambdas are stored in the order: lambda_rho, lambda_r
 LAMBDAS = {'GLEU': (0.04, 0.09),
            'I-measure': (0.01, 0.01),
@@ -97,9 +98,8 @@ if __name__ == '__main__':
                         help='required argument pointing to the codalab output dir')
     parser.add_argument('--im', dest='use_im', default=False, action='store_true',
                         help='score using I-measure (default False)')
-    parser.add_argument('--ref', nargs='*', default=['ALL'],
-                        help='reference set(s) to use. options: ALL, BN, EXPFLUENT, EXPMIN, NUCLE, '
-                        'TURKMIN, TURKFLUENT. default: ALL')
+    parser.add_argument('--ref', nargs='*', default=['ALL', 'EXPFLUENCY', 'BN', 'NUCLE'],
+                        help='reference set(s) to use. options:', ', '.join(LEGAL_REFERENCE_NAMES))
     parser.add_argument('-d', '--debug', default=False, action='store_true',
                         help='print debugging messages')
     args = parser.parse_args()

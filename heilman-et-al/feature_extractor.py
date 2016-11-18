@@ -9,7 +9,7 @@ import json
 import argparse
 import traceback
 import itertools
-#import kenlm
+import kenlm
 import enchant
 from math import log
 from collections import Counter

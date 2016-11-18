@@ -74,14 +74,14 @@ class FluencyModel:
 
     def load_test_data(self, path):
         """load non-GUG test data"""
-        features = []
+        all_features = []
         with open(path) as f:
             for line in f:
                 features = json.loads(line)
-                features.append(features)
+                all_features.append(features)
                 del features['id']
                 del features['length']
-        return self.scaler.transform(self.vectorizer.transform(features))
+        return self.scaler.transform(self.vectorizer.transform(all_features))
 
     def predict(self, clf, train=None, test=None, binary=False):
         """make predictions for ordinal or binary task"""
