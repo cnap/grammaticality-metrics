@@ -5,13 +5,14 @@ A scoring program for evaluating GEC system output on the CoNLL-2014 Shared Task
 __author__ = 'Courtney Napoles'
 __date__ = '2016-11-16'
 __email__ = 'napoles@cs.jhu.edu'
-__usage__ = 'python evaluate.py input-dir output-dir [--im] [-d] [--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL]'
+__usage__ = 'python evaluate.py input-dir output-dir [--im] [-d] ' \
+            '[--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL]'
 
 import sys
 import os
 import codecs
-from subprocess import Popen, PIPE
 import numpy as np
+from subprocess import Popen, PIPE
 import m2scorer.scripts.levenshtein as ld
 from gleu import GLEU
 from m2scorer.m2scorer import load_annotation as load_m2_annotation
@@ -28,7 +29,7 @@ if debug:
 
 # GLOBAL VARIABLES
 REF_NAMES = ['ALL']
-## lambdas are stored in the order: lambda_rho, lambda_r
+# lambdas are stored in the order: lambda_rho, lambda_r
 LAMBDAS = {'GLEU': (0.04, 0.09),
            'I-measure': (0.01, 0.01),
            'M2': (0, 0)}
@@ -77,7 +78,8 @@ def call_lt(sentences):
     """counts errors with an external call to LanguageTool"""
     sys.stderr.write('Running LanguageTool...\n')
     if debug:
-        sys.stderr.write('Java info: %s %s\n' % (os.system('which java'), os.system('java -version')))
+        sys.stderr.write('Java info: %s %s\n' %
+                         (os.system('which java'), os.system('java -version')))
     process = Popen(['java', '-Dfile.encoding=utf-8',
                      '-jar', os.path.join(cwd, 'LanguageTool-3.1/languagetool-commandline.jar'),
                      '-d', 'COMMA_PARENTHESIS_WHITESPACE,WHITESPACE_RULE,' +
@@ -98,7 +100,9 @@ def call_lt(sentences):
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        sys.stderr.write('Usage: python evaluate.py input-dir output-dir [--im] [--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL] [-d]\n')
+        sys.stderr.write('Usage: python evaluate.py input-dir output-dir [--im] '
+                         '[--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL] '
+                         '[-d]\n')
         sys.exit(0)
 
     # set paths and load predictions
@@ -155,8 +159,8 @@ if __name__ == '__main__':
 
     with open(os.path.join(output_dir, 'scores.txt'), 'wb') as fout:
         outstr = 'LT:%f' % np.mean(lt_score)
-        fout.write(outstr + '\t')
-        print(outstr + '\n')
+        fout.write(outstr + '\n')
+        print(outstr)
         for metric_name, reference_name, sentence_scores in scores:
             outstr = '%s,%s:%f' % (metric_name, reference_name, np.mean(sentence_scores))
             fout.write(outstr + '\n')

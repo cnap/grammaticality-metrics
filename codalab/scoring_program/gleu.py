@@ -88,30 +88,30 @@ class GLEU:
         return 1.0 * self.all_rngrams_freq[n - 1][ngram] / len(self.rlens[0])
 
     def gleu_stats(self, i, r_ind=None):
-      """
-      Collect BLEU-relevant statistics for a single hypothesis/reference pair.
-      Return value is a generator yielding:
-      (c, r, numerator1, denominator1, ... numerator4, denominator4)
-      Summing the columns across calls to this function on an entire corpus
-      will produce a vector of statistics that can be used to compute GLEU
-      """
-      hlen = self.hlen
-      rlen = self.rlens[i][r_ind]
+        """
+        Collect BLEU-relevant statistics for a single hypothesis/reference pair.
+        Return value is a generator yielding:
+        (c, r, numerator1, denominator1, ... numerator4, denominator4)
+        Summing the columns across calls to this function on an entire corpus
+        will produce a vector of statistics that can be used to compute GLEU
+        """
+        hlen = self.hlen
+        rlen = self.rlens[i][r_ind]
 
-      yield rlen
-      yield hlen
+        yield rlen
+        yield hlen
 
-      for n in xrange(1, self.order + 1):
-        h_ngrams = self.this_h_ngrams[n - 1]
-        s_ngrams = self.all_s_ngrams[i][n - 1]
-        r_ngrams = self.get_ngram_counts(self.refs[i][r_ind], n)
+        for n in xrange(1, self.order + 1):
+            h_ngrams = self.this_h_ngrams[n - 1]
+            s_ngrams = self.all_s_ngrams[i][n - 1]
+            r_ngrams = self.get_ngram_counts(self.refs[i][r_ind], n)
 
-        s_ngram_diff = self.get_ngram_diff(s_ngrams, r_ngrams)
+            s_ngram_diff = self.get_ngram_diff(s_ngrams, r_ngrams)
 
-        yield max(
-            [sum((h_ngrams & r_ngrams).values()) - sum((h_ngrams & s_ngram_diff).values()), 0])
+            yield max(
+                [sum((h_ngrams & r_ngrams).values()) - sum((h_ngrams & s_ngram_diff).values()), 0])
 
-        yield max([hlen + 1 - n, 0])
+            yield max([hlen + 1 - n, 0])
 
     def gleu(self, stats, smooth=False):
         """Compute GLEU from collected statistics obtained by call(s) to gleu_stats"""

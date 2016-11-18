@@ -1,5 +1,9 @@
-# Grammaticality metrics used in the EMNLP 2016 paper [_There’s No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction_](https://www.aclweb.org/anthology/D/D16/D16-1228.pdf).
+# Metrics for evaluating grammatical error corrections
 
+These metrics were used in
+[Courtney Napoles, Keisuke Sakaguchi, and Joel Tetreault. _There's No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction_. EMNLP 2016](https://www.aclweb.org/anthology/D/D16/D16-1228.pdf)
+
+If you use this code or the accompanying CodaLab evaluation, please cite:
 ```
 @InProceedings{napoles-sakaguchi-tetreault:2016:EMNLP2016,
   author    = {Napoles, Courtney  and  Sakaguchi, Keisuke  and  Tetreault, Joel},
@@ -14,9 +18,12 @@
 }
 ```
 
-This repository contains two metrics:
+## Contents
 
-1. A linguistic feature-based model: a slightly modified implementation of Heilman et al. (2014), [*Predicting Grammaticality on an Ordinal Scale*](http://www.aclweb.org/anthology/P14-2029).
-
-2. An error-count method using [Language Tool](https://languagetool.org/).
-
+1. `codalab/`
+   - Code for evaluating GEC output of the CoNLL 2014 test set using combination of metrics and reference sets.
+   - The platform for scoring output can be found at https://competitions.codalab.org/competitions/12731
+   - This contains the an error-count method using [Language Tool](https://languagetool.org/) and interpolations of LT with existing GEC metrics GLEU, I-measure, and M2.
+2. `heilman-et-al/`
+   -  A linguistic feature-based model
+   - a slightly modified implementation of Heilman et al. (2014), [*Predicting Grammaticality on an Ordinal Scale*](http://www.aclweb.org/anthology/P14-2029).
