@@ -1,0 +1,65 @@
+<p>This platform evaluates gramamtical error corrections of the CoNLL 2014 Shared Task test set <a href="#1">[1]</a>, and is released to accompany the following paper:</p>
+<p>Courtney Napoles, Keisuke Sakaguchi, and Joel Tetreault<br /> <a href="https://aclweb.org/anthology/D16-1228" target="_blank"><em>There&rsquo;s No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction</em></a><br /> EMNLP 2016</p>
+<p>Please include the following citation if you use this toolkit.</p>
+<pre><code class="(null)">@InProceedings{napoles-sakaguchi-tetreault:2016:EMNLP2016,
+  author    = {Napoles, Courtney  and  Sakaguchi, Keisuke  and  Tetreault, Joel},
+  title     = {There's No Comparison: Reference-less Evaluation Metrics in Grammatical Error Correction},
+  booktitle = {Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing},
+  month     = {November},
+  year      = {2016},
+  address   = {Austin, Texas},
+  publisher = {Association for Computational Linguistics},
+  pages     = {2109--2115},
+  url       = {https://aclweb.org/anthology/D16-1228}
+}</code></pre>
+<p>The code for executing this evaluation program is also available from our git repository: <a href="https://github.com/cnap/grammaticality-metrics" target="_blank">https://github.com/cnap/grammaticality-metrics</a></p>
+<hr />
+<h2>Data</h2>
+<p>The CoNLL 2014 test set can be obtained from the official shared task website:</p>
+<p><a title="http://www.comp.nus.edu.sg/~nlp/conll14st.html" href="http://www.comp.nus.edu.sg/~nlp/conll14st.html" target="_blank">http://www.comp.nus.edu.sg/~nlp/conll14st.html</a></p>
+<p>This following metrics and reference sets are supported in this competition:</p>
+<h2 id="metrics">Metrics</h2>
+<ul>
+<li>Reference-based metrics (RBMs)
+<ul>
+<li>GLEU <a href="#2">[2]</a></li>
+<li>I-measure <a href="#3">[3]</a>&nbsp;** Not supported in CodaLab</li>
+<li>M2 <a href="#4">[4]</a></li>
+</ul>
+</li>
+<li>Grammaticality-based metrics (GBM)
+<ul>
+<li>LT</li>
+</ul>
+</li>
+<li>Interpolated metrics
+<ul>
+<li>LT interpolated with each RBM</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference-sets">Reference sets</h2>
+<ul>
+<li>NUCLE references <a href="#1">[1]</a></li>
+<li>non-expert fluency edits <a href="#5">[5]</a></li>
+<li>non-expert minimal edits <a href="#5">[5]</a></li>
+<li>expert fluency edits <a href="#5">[5]</a></li>
+<li>expert minimal edits <a href="#5">[5]</a></li>
+</ul>
+<h2 id="contents">Credits</h2>
+<ul>
+<li>LanguageTool-3.1 from <a title="https://languagetool.org/" href="https://languagetool.org/" target="_blank">https://languagetool.org/</a></li>
+<li>gleu.py from <a title="https://github.com/cnap/gec-ranking" href="https://github.com/cnap/gec-ranking" target="_blank">https://github.com/cnap/gec-ranking</a></li>
+<li>imeasure/ adapted from <a title="https://github.com/mfelice/imeasure" href="https://github.com/mfelice/imeasure" target="_blank">https://github.com/mfelice/imeasure</a></li>
+<li>m2scorer/ adapted from <a title="http://www.comp.nus.edu.sg/~nlp/conll14st.html" href="http://www.comp.nus.edu.sg/~nlp/conll14st.html" target="_blank">http://www.comp.nus.edu.sg/~nlp/conll14st.html</a></li>
+</ul>
+<p>The scripts for calculating GLEU, I-measure, and M2 were modified to return sentence-level scores and so that they can be called by an external program. At this date, CodaLab does not support Java 8, so we are using the most recent version of LanguageTool that supports Java 7 (v3.1). I-measure takes several minutes to run and exceeds the time limit imposed by CodaLab on scoring programs. Therefore, it is not enabled in the online CodaLab competition, but you can run it from the original repository (<a href="https://github.com/mfelice/imeasure" target="_blank">https://github.com/mfelice/imeasure</a>) or our git repository (<a href="https://github.com/cnap/grammaticality-metrics" target="_blank">https://github.com/cnap/grammaticality-metrics</a>).</p>
+<hr />
+<h1 id="references">References</h1>
+<p><a name="1"></a>1. Ng et al. The CoNLL-2014 Shared Task on grammatical error correction. In <em>Proceedings of CoNLL, 2014</em>.<br /> <a name="2"></a>2. Napoles et al. Ground truth for grammatical error correction metrics. In <em>Proceedings of ACL, 2015</em>.<br /> <a name="3"></a>3. Felice and Briscoe. Towards a standard evaluation method for grammatical error detection and correction. In <em>Proceedings of NAACL, 2015</em>.<br /> <a name="4"></a>4. Dahlmeier and Ng. Better evaluation for grammatical error correction. In <em>Proceedings of NAACL, 2012</em>.<br /> <a name="5"></a>5. Sakaguchi et al. Reassessing the goals of grammatical error correction: Fluency instead of grammaticality. <em>TACL, 2016</em>.</p>
+<hr />
+<h2 id="references">Misc.</h2>
+<p>In the future, we hope to expand the evaluation to include new data, references, and metrics. Feel free to contact us with any suggestions, questions, or comments.</p>
+<hr />
+<p>Courtney Napoles (<a href="mailto:napoles@cs.jhu.edu">napoles@cs.jhu.edu</a>)</p>
+<p>2016-11-16</p>

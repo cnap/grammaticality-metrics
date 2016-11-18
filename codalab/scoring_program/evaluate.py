@@ -1,16 +1,13 @@
 #!/usr/bin/env python2
 """
-A scoring program for evaluating GEC system output on the CoNLL-2014 Shared Task test set.
-"""
-__author__ = 'Courtney Napoles'
-__date__ = '2016-11-16'
-__email__ = 'napoles@cs.jhu.edu'
-__usage__ = 'python evaluate.py input-dir output-dir [--im] [-d] ' \
-            '[--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL]'
+a scoring program for evaluating GEC system output on the CoNLL-2014 Shared Task test set
 
+contact: Courtney Napoles (napoles@cs.jhu.edu)
+"""
 import sys
 import os
 import codecs
+import argparse
 import numpy as np
 from subprocess import Popen, PIPE
 import m2scorer.scripts.levenshtein as ld
@@ -18,14 +15,7 @@ from gleu import GLEU
 from m2scorer.m2scorer import load_annotation as load_m2_annotation
 from imeasure.ieval import IMeasure
 
-use_im = False
-debug = False
-
 cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
-if debug:
-    sys.stderr.write('PATH: %s\n' % sys.path)
-    sys.stderr.write('SCRIPT DIR: %s\n' % cwd)
-    sys.stderr.write('CONTENTS SCRIPT DIR: %s\n' % os.listdir(cwd))
 
 # GLOBAL VARIABLES
 REF_NAMES = ['ALL']
@@ -60,7 +50,7 @@ def compute_m2(reference, predictions):
     return np.array(m2)
 
 
-def compute_im(reference, prediction_path):
+def compute_im(reference, prediction_path, debug=False):
     """get sentence-level im scores (im-correction)"""
     sys.stderr.write('Running I-measure (note that this may take several minutes)...\n')
     im = IMeasure()
@@ -74,7 +64,7 @@ def compute_im(reference, prediction_path):
     return np.array(im_result)
 
 
-def call_lt(sentences):
+def call_lt(sentences, debug=False):
     """counts errors with an external call to LanguageTool"""
     sys.stderr.write('Running LanguageTool...\n')
     if debug:
@@ -99,40 +89,42 @@ def call_lt(sentences):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        sys.stderr.write('Usage: python evaluate.py input-dir output-dir [--im] '
-                         '[--ref:NUCLE|EXPFLUENT|EXPMIN|TURKFLUENT|TURKMIN|BN|ALL] '
-                         '[-d]\n')
-        sys.exit(0)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input_dir',
+                        help='required argument pointing to the codalab input dir')
+    parser.add_argument('output_dir',
+                        help='required argument pointing to the codalab output dir')
+    parser.add_argument('--im', dest='use_im', default=False, action='store_true',
+                        help='score using I-measure (default False)')
+    parser.add_argument('--ref', nargs='*', default=['ALL'],
+                        help='reference set(s) to use. options: ALL, BN, EXPFLUENT, EXPMIN, NUCLE, '
+                        'TURKMIN, TURKFLUENT. default: ALL')
+    parser.add_argument('-d', '--debug', default=False, action='store_true',
+                        help='print debugging messages')
+    args = parser.parse_args()
+
+    if args.debug:
+        sys.stderr.write('PATH: %s\n' % sys.path)
+        sys.stderr.write('SCRIPT DIR: %s\n' % cwd)
+        sys.stderr.write('CONTENTS SCRIPT DIR: %s\n' % os.listdir(cwd))
+
+    use_refs = args.ref
 
     # set paths and load predictions
-    input_dir = sys.argv[1]
-    output_dir = sys.argv[2]
-
-    use_refs = REF_NAMES
-
-    if len(sys.argv) > 3:
-        for arg in sys.argv[3:]:
-            if arg == '--im':
-                use_im = True
-            elif arg.startswith('--ref'):
-                use_refs = [arg.split(':')[1]]
-            elif arg == '-d':
-                debug = True
-
-    prediction_path = os.path.join(input_dir, 'res/answer.txt')
-    reference_dir = os.path.join(input_dir, 'ref')
+    prediction_path = os.path.join(args.input_dir, 'res/answer.txt')
+    reference_dir = os.path.join(args.input_dir, 'ref')
 
     with codecs.open(prediction_path, 'r', 'utf-8') as fin:
         predictions = [l.strip() for l in fin]
 
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    if not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir)
 
     # call metrics and collect scores
     scores = []
-    lt_score = call_lt(predictions)
-    if debug:
+    lt_score = call_lt(predictions, debug=args.debug)
+    if args.debug:
         sys.stderr.write('Reference dir: %s\n' % str([o for o in os.walk(reference_dir)]))
 
     for ref in use_refs:
@@ -145,9 +137,10 @@ if __name__ == '__main__':
                 reference_files.append(f)
             elif f.startswith(ref):
                 reference_files.append(f)
-        if use_im:
+        if args.use_im:
             im = compute_im(os.path.join(reference_dir, ref + '.m2.ieval.xml'),
-                            prediction_path)
+                            prediction_path,
+                            debug=args.debug)
             scores.append(('I-measure', ref, im))
         gleu = compute_gleu(os.path.join(reference_dir, 'source'),
                             [os.path.join(reference_dir, f) for f in reference_files],
@@ -157,18 +150,18 @@ if __name__ == '__main__':
                         predictions)
         scores.append(('M2', ref, m2))
 
-    with open(os.path.join(output_dir, 'scores.txt'), 'wb') as fout:
+    with open(os.path.join(args.output_dir, 'scores.txt'), 'wb') as fout:
         outstr = 'LT:%f' % np.mean(lt_score)
         fout.write(outstr + '\n')
         print(outstr)
         for metric_name, reference_name, sentence_scores in scores:
-            outstr = '%s,%s:%f' % (metric_name, reference_name, np.mean(sentence_scores))
+            outstr = '%s_%s:%f' % (metric_name, reference_name, np.mean(sentence_scores))
             fout.write(outstr + '\n')
             print(outstr)
             for r, opt_metric in enumerate(['rho', 'r']):
                 intpl_scores = (LAMBDAS[metric_name][r] * sentence_scores +
                                 (1 - LAMBDAS[metric_name][r]) * lt_score)
-                outstr = 'LT+%s,%s,%s:%f' % (metric_name, reference_name, opt_metric,
+                outstr = 'LT_%s_%s_%s:%f' % (metric_name, reference_name, opt_metric,
                                              np.mean(intpl_scores))
                 print(outstr)
                 fout.write(outstr + '\n')

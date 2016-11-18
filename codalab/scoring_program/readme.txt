@@ -60,7 +60,6 @@ Reference sets:
 Contents:
 
 ├── LanguageTool-3.1/  from [https://languagetool.org/]
-├── detokenize.py      from [https://github.com/ufal/mtmonkey]
 ├── evaluate.py        evaluation script
 ├── gleu.py            adapted from https://github.com/cnap/gec-ranking]
 ├── imeasure/          adapted from [https://github.com/mfelice/imeasure]
