@@ -5,7 +5,7 @@ has_registration: False
 html:
     overview: overview.html
     evaluation: evaluation.html
-    terms: empty.html
+    terms: terms.html
     data: data.html
 phases:
     1:
