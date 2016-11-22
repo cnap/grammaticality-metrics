@@ -8,25 +8,26 @@ if [ -z $STANFORDHOME ]; then
     exit
 fi
 
-usage="./pipeline.sh sentences [-n native.kenlm] [-l learner.kenlm] [-w working/dir]"
+usage="./pipeline.sh [sentences.txt] [-n native.kenlm] [-l learner.kenlm] [-w working/dir]
+  sentences.txt -- file containing tokenized sentences for testing, one sentence per line
+  native.kenlm -- native English LM
+  learner.kenlm -- learner English LM
+  working/dir -- directory to store generated model files"
 
-if [ $# -lt 1 ]; then
-    echo $usage
-    exit
-fi
 
 # set variables
 homedir="$(cd "$(dirname "$0")"; pwd)"
 wkdir=`pwd`
 learnerlm="$wkdir/learner.kenlm"
 nativelm="$wkdir/native.kenlm"
-test_sentences="$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+test=""
 shift
 
 while [ $# -gt 0 ]; do
     case "$1" in
 	-l) learnerlm="$2"; shift;;
 	-n) nativelm="$2"; shift;;
+	-t) test="$(cd "$(dirname "$2")"; pwd)/$(basename "$2")"; shift;;
 	-w) wkdir="$(cd $2; pwd)"; shift;;
 	-h) echo $usage; exit 0;;
 	*) echo "Invalid option"; echo $usage; exit 1;;
@@ -63,7 +64,11 @@ feat_cmd="python $homedir/feature_extractor.py \
 mkdir $wkdir/parsed 2> /dev/null
 mkdir $wkdir/features 2> /dev/null
 
-for f in "$wkdir/gug-data/gug_sentences.txt" "$test_sentences"; do
+for f in "$wkdir/gug-data/gug_sentences.txt" "$test"; do
+	if [ "x$f" == "x" ]; then
+		continue
+	fi
+
     bn=`basename $f`
     # parse
     if [ ! -s $wkdir/parsed/$bn.stp ]; then
@@ -80,11 +85,15 @@ for f in "$wkdir/gug-data/gug_sentences.txt" "$test_sentences"; do
 done
 
 #### Train/classify ####
-bn=`basename $test_sentences`
 mkdir $wkdir/model 2> /dev/null
 echo "Running model..."
+test_opt=""
+if [ "x$test" != "x" ]; then
+	bn=`basename $test`
+	test_opt="-t $wkdir/features/$bn.json"
+fi
+echo $test_opt
 python $homedir/grammatical_model.py -f $wkdir/features/gug_sentences.txt.json \
        -s $homedir/gug-data/gug_annotations.tsv \
-       -t $wkdir/features/$bn.json \
-       -d $wkdir/model
+       -d $wkdir/model $test_opt
 echo "Done. Model and predictions saved to $wkdir/model"

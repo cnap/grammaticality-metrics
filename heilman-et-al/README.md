@@ -27,7 +27,7 @@ Note that this implementation differs from the original: it does not include the
 - Stanford Parser (3.5.2) (http://nlp.stanford.edu/software/lex-parser.shtml)
 - ~~PET parser (http://moin.delph-in.net/PetTop)~~
 
-The model is trained on the GUG dataset (https://github.com/EducationalTestingService/gug-data).
+The model is trained on the train/dev portions of the GUG dataset (https://github.com/EducationalTestingService/gug-data). Running the pipeline will automatically train the model and report results on the GUG test set and (optionally) user-supplied sentences.
 
 ## Instructions
 
@@ -36,7 +36,7 @@ The model is trained on the GUG dataset (https://github.com/EducationalTestingSe
 *  Change `LINKDIR` in `linkparser.py` to point to the link grammar parent directory
 *  Run pipeline:
    ```
-   sh pipeline.sh test-sentences \
+   sh pipeline.sh [-t test-sentences.txt] \
        [-n native_english.kenlm] \
        [-l learner_english.kenlm] \
        [-w working/directory]
