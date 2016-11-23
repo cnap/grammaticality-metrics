@@ -1,7 +1,7 @@
 ---
 title: Evaluating grammatical error corrections
 description: This "competition" contains different evaluation metrics commonly used for GEC and allows users to score their systems with these metrics on a common dataset.
-has_registration: False
+has_registration: True
 html:
     overview: overview.html
     evaluation: evaluation.html
@@ -14,6 +14,8 @@ phases:
         start_date: 2016-11-02
         reference_data: reference.zip
         scoring_program: program.zip
+        description: Evaluate corrections of the CoNLL-2014 shared task test set with GLEU, GLEU interpolated with LT (lambda optimized to Spearman's rho), and M2. GLEU and M2 are calculated using all available references. View the scoring output log to see the scores from other metrics and reference sets.
+
 
 leaderboard:
     leaderboards:

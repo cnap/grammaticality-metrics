@@ -22,7 +22,7 @@ If you use this code or the accompanying CodaLab evaluation, please cite:
 
 1. `codalab/`
    - Code for evaluating GEC output of the CoNLL 2014 test set using combination of metrics and reference sets.
-   - The platform for scoring output can be found at https://competitions.codalab.org/competitions/12731
+   - The platform for scoring output can be found at https://competitions.codalab.org/competitions/15475
    - This contains the an error-count method using [Language Tool](https://languagetool.org/) and interpolations of LT with existing GEC metrics GLEU, I-measure, and M2.
 2. `heilman-et-al/`
    -  A linguistic feature-based model
