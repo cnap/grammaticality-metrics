@@ -17,6 +17,11 @@ If you use this code or the accompanying CodaLab evaluation, please cite:
   url       = {https://aclweb.org/anthology/D16-1228}
 }
 ```
+## Online evaluation
+
+The CodaLab evaluation can be used for to evaluate grammatical error correcions of the CoNLL-2014 shared task test set.
+
+https://competitions.codalab.org/competitions/15475
 
 ## Contents
 
