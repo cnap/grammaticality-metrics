@@ -80,13 +80,15 @@ def call_lt(sentences, debug=False):
     ret = process.communicate(input=('\n'.join(sentences)).encode('utf-8'))
     if debug:
         sys.stderr.write('LT out: %s\n' % str(ret))
-    counts = [0] * len(sentences)
+    error_counts = [0] * len(sentences)
     for l in ret[0].split('\n'):
         if 'Rule ID' in l:
             ll = l.split()
             ind = (int(ll[2][:-1]) - 1)
-            counts[ind] += 1
-    return np.array(counts)
+            error_counts[ind] += 1
+    token_counts = np.array([len(s.split()) for s in sentences], dtype=float)
+    error_counts = np.array(error_counts, dtype=float)
+    return 1 - np.divide(error_counts, token_counts)
 
 
 if __name__ == '__main__':
