@@ -34,8 +34,8 @@ def compute_gleu(source, references, prediction_path):
     num_iterations = 200
     gleu_calculator.load_references(references)
     return np.array(
-        [float(g[0]) for g in gleu_calculator.run_iterations(num_iterations,
-                                                             len(references),
+        [float(g[0]) for g in gleu_calculator.run_iterations(num_iterations=num_iterations,
+                                                             num_references=len(references),
                                                              source=source,
                                                              hypothesis=prediction_path,
                                                              per_sent=True)])
@@ -102,7 +102,15 @@ if __name__ == '__main__':
                         help='reference set(s) to use. options: ' + ', '.join(LEGAL_REFERENCE_NAMES))
     parser.add_argument('-d', '--debug', default=False, action='store_true',
                         help='print debugging messages')
+    parser.add_argument('--metrics', nargs='*', default=['LT', 'M2', 'GLEU'],
+                        help='which metrics to use (default: LT M2 GLEU)')
+    parser.add_argument('-f', help='input file (overrides answer.txt in input_dir)')
+
     args = parser.parse_args()
+
+    use_metrics = set([m.lower() for m in args.metrics])
+    if args.use_im:
+        use_metrics.add('im')
 
     if args.debug:
         sys.stderr.write('PATH: %s\n' % sys.path)
@@ -113,8 +121,21 @@ if __name__ == '__main__':
 
     # set paths and load predictions
     prediction_path = os.path.join(args.input_dir, 'res/answer.txt')
+    if args.f:
+        prediction_path = args.f
     reference_dir = os.path.join(args.input_dir, 'ref')
 
+    if not os.path.exists(prediction_path):
+        sys.stderr.write('Error: submitted zip file does not contain answer.txt\n')
+        prediction_path = None
+        for fname in os.listdir(os.path.join(args.input_dir, 'res')):
+            if fname.endswith('.txt'):
+                prediction_path = os.path.join(args.input_dir, 'res/' + fname)
+                sys.stderr.write('Found file ' + fname + '. Will try to evaluate ' + fname + '. If '
+                                 'this fails, please resubmit with the submission saved as '
+                                 'answer.txt.\n')
+        if prediction_path is None:
+            raise IOError('answer.txt not found')
     with codecs.open(prediction_path, 'r', 'utf-8') as fin:
         predictions = [l.strip() for l in fin]
 
@@ -123,7 +144,7 @@ if __name__ == '__main__':
 
     # call metrics and collect scores
     scores = []
-    lt_score = call_lt(predictions, debug=args.debug)
+    lt_score = call_lt(predictions, debug=args.debug) if 'lt' in use_metrics else -1
     if args.debug:
         sys.stderr.write('Reference dir: %s\n' % str([o for o in os.walk(reference_dir)]))
 
@@ -138,31 +159,37 @@ if __name__ == '__main__':
                 reference_files.append(f)
             elif f.startswith(ref):
                 reference_files.append(f)
-        if args.use_im:
+        if args.debug:
+            sys.stderr.write('Using references: %s\n' % str(reference_files))
+        if 'im' in use_metrics:
             im = compute_im(os.path.join(reference_dir, ref + '.m2.ieval.xml'),
                             prediction_path,
                             debug=args.debug)
             scores.append(('I-measure', ref, im))
-        gleu = compute_gleu(os.path.join(reference_dir, 'source'),
-                            [os.path.join(reference_dir, f) for f in reference_files],
-                            prediction_path)
-        scores.append(('GLEU', ref, gleu))
-        m2 = compute_m2(os.path.join(reference_dir, ref + '.m2'),
-                        predictions)
-        scores.append(('M2', ref, m2))
+        if 'gleu' in use_metrics:
+            gleu = compute_gleu(os.path.join(reference_dir, 'source'),
+                                [os.path.join(reference_dir, f) for f in reference_files],
+                                prediction_path)
+            scores.append(('GLEU', ref, gleu))
+        if 'm2' in use_metrics:
+            m2 = compute_m2(os.path.join(reference_dir, ref + '.m2'),
+                            predictions)
+            scores.append(('M2', ref, m2))
 
     with open(os.path.join(args.output_dir, 'scores.txt'), 'wb') as fout:
-        outstr = 'LT:%f' % np.mean(lt_score)
-        fout.write(outstr + '\n')
-        print(outstr)
+        if 'lt' in use_metrics:
+            outstr = 'LT:%f' % np.mean(lt_score)
+            fout.write(outstr + '\n')
+            print(outstr)
         for metric_name, reference_name, sentence_scores in scores:
             outstr = '%s_%s:%f' % (metric_name, reference_name, np.mean(sentence_scores))
             fout.write(outstr + '\n')
             print(outstr)
-            for r, opt_metric in enumerate(['rho', 'r']):
-                intpl_scores = (LAMBDAS[metric_name][r] * sentence_scores +
-                                (1 - LAMBDAS[metric_name][r]) * lt_score)
-                outstr = 'LT_%s_%s_%s:%f' % (metric_name, reference_name, opt_metric,
-                                             np.mean(intpl_scores))
-                print(outstr)
-                fout.write(outstr + '\n')
+            if 'lt' in use_metrics:
+                for r, opt_metric in enumerate(['rho', 'r']):
+                    intpl_scores = (LAMBDAS[metric_name][r] * sentence_scores +
+                                    (1 - LAMBDAS[metric_name][r]) * lt_score)
+                    outstr = 'LT_%s_%s_%s:%f' % (metric_name, reference_name, opt_metric,
+                                                 np.mean(intpl_scores))
+                    print(outstr)
+                    fout.write(outstr + '\n')

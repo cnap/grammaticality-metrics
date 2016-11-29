@@ -126,7 +126,7 @@ class GLEU:
         return math.exp(min([0, 1 - float(r) / c]) + log_gleu_prec)
 
     def get_gleu_stats(self, scores):
-        """calculae mean and conference interval from all GLEU iterations"""
+        """calculate mean and confidence interval from all GLEU iterations"""
         mean = np.mean(scores)
         std = np.std(scores)
         ci = scipy.stats.norm.interval(0.95, loc=mean, scale=std)

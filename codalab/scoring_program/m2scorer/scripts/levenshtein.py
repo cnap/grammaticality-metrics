@@ -99,7 +99,7 @@ def f1_suffstats(candidate, source, gold_edits, max_unchanged_words=2, ignore_wh
         print "-------------------------------------------"
     return (stat_correct, stat_proposed, stat_gold)
 
-def batch_multi_pre_rec_f1(candidates, sources, gold_edits, max_unchanged_words=2, beta=0.5, ignore_whitespace_casing= False, verbose=False, very_verbose=False):
+def batch_multi_pre_rec_f1(candidates, sources, gold_edits, max_unchanged_words=2, beta=0.5, ignore_whitespace_casing= False, verbose=False, very_verbose=False, sentence_level=True):
     assert len(candidates) == len(sources) == len(gold_edits)
     stat_correct = 0.0
     stat_proposed = 0.0
@@ -187,7 +187,8 @@ def batch_multi_pre_rec_f1(candidates, sources, gold_edits, max_unchanged_words=
                 print "recall        :", r_local
                 print "f_%.1f         :" % beta, f1_local
                 print "-------------------------------------------"
-        yield f1_max
+        if sentence_level:
+            yield f1_max
         if verbose:
             print ">> Chosen Annotator for line", i, ":", chosen_ann
             print ""
@@ -215,10 +216,13 @@ def batch_multi_pre_rec_f1(candidates, sources, gold_edits, max_unchanged_words=
         print "P =", p
         print "R =", r
         print "F_%.1f =" % beta, f1
-    #return (p, r, f1)
+    if not sentence_level:
+        yield p
+        yield r
+        yield f1
 
 
-def batch_pre_rec_f1(candidates, sources, gold_edits, max_unchanged_words=2, beta=0.5, ignore_whitespace_casing= False, verbose=False, very_verbose=False):
+def batch_pre_rec_f1(candidates, sources, gold_edits, max_unchanged_words=2, beta=0.5, ignore_whitespace_casing=False, verbose=False, very_verbose=False):
     assert len(candidates) == len(sources) == len(gold_edits)
     stat_correct = 0.0
     stat_proposed = 0.0

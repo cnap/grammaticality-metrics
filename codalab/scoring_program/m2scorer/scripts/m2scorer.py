@@ -15,8 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # file: m2scorer.py
-# 
-# score a system's output against a gold reference 
+#
+# score a system's output against a gold reference
 #
 # Usage: m2scorer.py [OPTIONS] proposed_sentences source_gold
 # where
@@ -134,9 +134,8 @@ fin = smart_open(system_file, 'r')
 system_sentences = [line.decode("utf8").strip() for line in fin.readlines()]
 fin.close()
 
-p, r, f1 = levenshtein.batch_multi_pre_rec_f1(system_sentences, source_sentences, gold_edits, max_unchanged_words, beta, ignore_whitespace_casing, verbose, very_verbose)
+p, r, f1 = levenshtein.batch_multi_pre_rec_f1(system_sentences, source_sentences, gold_edits, max_unchanged_words, beta, ignore_whitespace_casing, verbose, very_verbose, sentence_level=False)
 
 print "Precision   : %.4f" % p
 print "Recall      : %.4f" % r
 print "F_%.1f       : %.4f" % (beta, f1)
-

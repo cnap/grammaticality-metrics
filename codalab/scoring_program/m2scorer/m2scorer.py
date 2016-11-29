@@ -134,11 +134,12 @@ if __name__ == '__main__':
     system_sentences = [line.decode("utf8").strip() for line in fin.readlines()]
     fin.close()
 
-    p, r, f1 = levenshtein.batch_multi_pre_rec_f1(system_sentences, source_sentences,
+    ret = levenshtein.batch_multi_pre_rec_f1(system_sentences, source_sentences,
                                                   gold_edits,
                                                   max_unchanged_words,
                                                   beta, ignore_whitespace_casing, verbose,
                                                   very_verbose)
+    p, r, f1 = ret
 
     print "Precision   : %.4f" % p
     print "Recall      : %.4f" % r
