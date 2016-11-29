@@ -45,6 +45,7 @@ class GLEU:
         """load n-grams for all references"""
         self.refs = [[] for i in range(len(self.all_s_ngrams))]
         self.rlens = [[] for i in range(len(self.all_s_ngrams))]
+        self.num_refs = len(rpaths)
         for rpath in rpaths:
             for i, line in enumerate(open(rpath)):
                 self.refs[i].append(line.split())
@@ -135,7 +136,6 @@ class GLEU:
                 '(%.3f,%.3f)' % (ci[0], ci[1])]
 
     def run_iterations(self, num_iterations=500, n=4, source='source.text',
-                       num_references=2,
                        hypothesis='answer.txt',
                        debug=False, per_sent=True):
         """run specified number of iterations of GLEU, choosing a reference
@@ -149,7 +149,7 @@ class GLEU:
         indices = []
         for j in range(num_iterations):
             random.seed(j * 101)
-            indices.append([random.randint(0, num_references - 1)
+            indices.append([random.randint(0, self.num_refs - 1)
                             for i in range(len(hyp))])
 
         if debug:
@@ -164,7 +164,7 @@ class GLEU:
             # we are going to store the score of this sentence for each ref
             # so we don't have to recalculate them 500 times
 
-            stats_by_ref = [None for r in range(num_references)]
+            stats_by_ref = [None for r in range(self.num_refs)]
 
             for j in range(num_iterations):
                 ref = indices[j][i]
@@ -179,7 +179,7 @@ class GLEU:
             if debug or per_sent:
                 # sentence-level GLEU is the mean GLEU of the hypothesis
                 # compared to each reference
-                for r in range(num_references):
+                for r in range(self.num_refs):
                     if stats_by_ref[r] is None:
                         stats_by_ref[r] = [s for s in self.gleu_stats(i, r_ind=r)]
                 if debug:

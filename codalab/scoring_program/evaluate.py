@@ -35,7 +35,7 @@ def compute_gleu(source, references, prediction_path):
     gleu_calculator.load_references(references)
     return np.array(
         [float(g[0]) for g in gleu_calculator.run_iterations(num_iterations=num_iterations,
-                                                             num_references=len(references),
+                                                             #num_references=len(references),
                                                              source=source,
                                                              hypothesis=prediction_path,
                                                              per_sent=True)])

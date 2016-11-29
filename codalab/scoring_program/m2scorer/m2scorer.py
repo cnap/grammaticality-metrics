@@ -135,11 +135,11 @@ if __name__ == '__main__':
     fin.close()
 
     ret = levenshtein.batch_multi_pre_rec_f1(system_sentences, source_sentences,
-                                                  gold_edits,
-                                                  max_unchanged_words,
-                                                  beta, ignore_whitespace_casing, verbose,
-                                                  very_verbose)
-    p, r, f1 = ret
+                                             gold_edits,
+                                             max_unchanged_words,
+                                             beta, ignore_whitespace_casing, verbose,
+                                             very_verbose, sentence_level=False)
+    p, r, f1 = [r for r in ret]
 
     print "Precision   : %.4f" % p
     print "Recall      : %.4f" % r
