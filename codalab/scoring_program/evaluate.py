@@ -86,8 +86,11 @@ def call_lt(sentences, debug=False):
             ll = l.split()
             ind = (int(ll[2][:-1]) - 1)
             error_counts[ind] += 1
-    token_counts = np.array([len(s.split()) for s in sentences], dtype=float)
+    _token_counts = [len(s.split()) for s in sentences]
+    token_counts = np.array([num_toks if num_toks > 0 else 1 for num_toks in _token_counts],
+                            dtype=float)
     error_counts = np.array(error_counts, dtype=float)
+
     return 1 - np.divide(error_counts, token_counts)
 
 
