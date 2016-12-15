@@ -59,12 +59,13 @@ Reference sets:
 
 Contents:
 
-├── LanguageTool-3.1/  from [https://languagetool.org/]
-├── evaluate.py        evaluation script
-├── gleu.py            adapted from https://github.com/cnap/gec-ranking]
-├── imeasure/          adapted from [https://github.com/mfelice/imeasure]
-├── m2scorer/          adapted from [http://www.comp.nus.edu.sg/~nlp/conll14st.html]
+├── LanguageTool-3.1/   from [https://languagetool.org/]
+├── evaluate.py         evaluation script
+├── gleu.py             adapted from https://github.com/cnap/gec-ranking]
+├── imeasure/           adapted from [https://github.com/mfelice/imeasure]
+├── m2scorer/           adapted from [http://www.comp.nus.edu.sg/~nlp/conll14st.html]
 ├── metadata
+├── sentence_scores.py  print sentence-level scores for metrics. cannot be run within CodaLab
 └── readme.txt
 
 The scripts for calculating GLEU, I-measure, and M2 were modified to return sentence-level
