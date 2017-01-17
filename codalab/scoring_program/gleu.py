@@ -27,7 +27,7 @@ from collections import Counter
 class GLEU:
 
     def __init__(self, n=4):
-        self.order = 4
+        self.order = n
 
     def load_hypothesis_sentence(self, hypothesis):
         """load ngrams for a single sentence"""
@@ -123,7 +123,7 @@ class GLEU:
             return 0
         (c, r) = stats[:2]
         log_gleu_prec = sum([math.log(float(x) / y)
-                             for x, y in zip(stats[2::2], stats[3::2])]) / 4
+                             for x, y in zip(stats[2::2], stats[3::2])]) / self.order
         return math.exp(min([0, 1 - float(r) / c]) + log_gleu_prec)
 
     def get_gleu_stats(self, scores):
