@@ -99,8 +99,8 @@ class GLEU:
         hlen = self.hlen
         rlen = self.rlens[i][r_ind]
 
-        yield rlen
         yield hlen
+        yield rlen
 
         for n in xrange(1, self.order + 1):
             h_ngrams = self.this_h_ngrams[n - 1]
