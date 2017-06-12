@@ -21,6 +21,7 @@ import numpy as np
 import scipy.stats
 import sys
 import random
+import argparse
 from collections import Counter
 
 
@@ -99,8 +100,8 @@ class GLEU:
         hlen = self.hlen
         rlen = self.rlens[i][r_ind]
 
-        yield rlen
         yield hlen
+        yield rlen
 
         for n in xrange(1, self.order + 1):
             h_ngrams = self.this_h_ngrams[n - 1]
@@ -190,3 +191,25 @@ class GLEU:
                                            for stats in stats_by_ref])
         if not per_sent:
             yield self.get_gleu_stats([self.gleu(stats) for stats in iter_stats])
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--ref', '-r', nargs='*', required=True, help='ref file(s)')
+    parser.add_argument('--src', '-s', required=True, help='src file')
+    parser.add_argument('--hyp', nargs='*', required=True, help='hyp file(s)')
+    parser.add_argument('-n', default=4, help='n-gram order')
+    parser.add_argument('--iter', default=500, help='number of GLEU iterations')
+    args = parser.parse_args()
+
+    """get sentence-level gleu scores"""
+    sys.stderr.write('Running GLEU...\n')
+    gleu_calculator = GLEU(args.n)
+    gleu_calculator.load_sources(args.src)
+    gleu_calculator.load_references(args.ref)
+    for hpath in args.hyp:
+        print hpath
+        print [g for g in gleu_calculator.run_iterations(num_iterations=args.iter,
+                                                         source=args.src,
+                                                         hypothesis=hpath,
+                                                         per_sent=False)]

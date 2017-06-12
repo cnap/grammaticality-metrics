@@ -26,28 +26,37 @@ LAMBDAS = {'GLEU': (0.04, 0.09),
            'M2': (0, 0)}
 
 
-def compute_gleu(source, references, prediction_path):
+def compute_gleu(source, references, prediction_path, debug=False):
     """get sentence-level gleu scores"""
     sys.stderr.write('Running GLEU...\n')
     gleu_calculator = GLEU(4)
     gleu_calculator.load_sources(source)
     num_iterations = 200
     gleu_calculator.load_references(references)
+    if debug:
+        print gleu_calculator.run_iterations(num_iterations=num_iterations,
+                                             source=source,
+                                             hypothesis=prediction_path,
+                                             per_sent=False,
+                                             debug=debug)
     return np.array(
         [float(g[0]) for g in gleu_calculator.run_iterations(num_iterations=num_iterations,
                                                              #num_references=len(references),
                                                              source=source,
                                                              hypothesis=prediction_path,
-                                                             per_sent=True)])
+                                                             per_sent=True,
+                                                             debug=debug)])
 
 
-def compute_m2(reference, predictions):
+
+def compute_m2(reference, predictions, debug=False):
     """get sentence-level m2 scores"""
     sys.stderr.write('Running M2...\n')
     source_sentences, gold_edits = load_m2_annotation(reference)
     m2 = [l for l in ld.batch_multi_pre_rec_f1(predictions,
                                                source_sentences,
-                                               gold_edits)]
+                                               gold_edits,
+                                               verbose=debug)]
     return np.array(m2)
 
 
@@ -143,7 +152,8 @@ if __name__ == '__main__':
             raise IOError('answer.txt not found')
     with codecs.open(prediction_path, 'r', 'utf-8') as fin:
         predictions = [l.strip() for l in fin]
-
+    # for l in predictions:
+    #     print l
     if not os.path.exists(args.output_dir):
         os.makedirs(args.output_dir)
 
@@ -174,11 +184,13 @@ if __name__ == '__main__':
         if 'gleu' in use_metrics:
             gleu = compute_gleu(os.path.join(reference_dir, 'source'),
                                 [os.path.join(reference_dir, f) for f in reference_files],
-                                prediction_path)
+                                prediction_path,
+                                debug=args.debug)
             scores.append(('GLEU', ref, gleu))
         if 'm2' in use_metrics:
             m2 = compute_m2(os.path.join(reference_dir, ref + '.m2'),
-                            predictions)
+                            predictions,
+                            debug=args.debug)
             scores.append(('M2', ref, m2))
 
     with open(os.path.join(args.output_dir, 'scores.txt'), 'wb') as fout:
@@ -187,6 +199,8 @@ if __name__ == '__main__':
             fout.write(outstr + '\n')
             print(outstr)
         for metric_name, reference_name, sentence_scores in scores:
+            if args.debug:
+                print sentence_scores
             outstr = '%s_%s:%f' % (metric_name, reference_name, np.mean(sentence_scores))
             fout.write(outstr + '\n')
             print(outstr)
